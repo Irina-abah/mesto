@@ -1,0 +1,37 @@
+.profile {
+    display: grid;
+    grid-template-columns: 150px auto 150px;
+    margin: 0 0 50px;
+}
+
+.profile__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+}
+
+.profile__avatar {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 30px;
+}
+
+.profile__full-name {
+    margin: 0 17px 16px 0;
+    font-size: 42px;
+    line-height: 1.33;
+    font-weight: 500;
+}
+
+.profile__title {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.21;
+    font-weight: normal;
+}
+
+.profile__bio {
+    display: flex;
+}
