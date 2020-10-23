@@ -1,11 +1,17 @@
 .elements {
+    margin: 0 0 66px;
+    width: 100%;
+    
+}
+
+.elements__list {
+    list-style: none;
     display: grid;
     row-gap: 21px;
     column-gap: 18px;
     grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
-    margin: 0 0 66px;
+    grid-template-rows: auto;
     padding: 0;
-    max-width: 100%;
     min-height: 744px;
-    
+    margin: 0;
 }
