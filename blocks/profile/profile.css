@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: 150px auto 150px;
     margin: 0 0 50px;
+    align-items: center;
 }
 
 .profile__info {
@@ -34,4 +35,5 @@
 
 .profile__bio {
     display: flex;
+    align-items: center;
 }
