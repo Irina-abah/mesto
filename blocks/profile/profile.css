@@ -8,7 +8,7 @@
 .profile__info {
     display: flex;
     flex-direction: column;
-    justify-content: left;
+    justify-content: flex-start;
 }
 
 .profile__avatar {
@@ -20,14 +20,15 @@
 }
 
 .profile__full-name {
-    margin: 0 17px 16px 0;
+    margin: 0 17px 0 0;
     font-size: 42px;
     line-height: 1.33;
     font-weight: 500;
+    padding: 0;
 }
 
 .profile__title {
-    margin: 0;
+    margin: 16px 0 0;
     font-size: 18px;
     line-height: 1.21;
     font-weight: normal;
@@ -35,5 +36,6 @@
 
 .profile__bio {
     display: flex;
-    align-items: center;
+    align-items: baseline;
+    
 }
