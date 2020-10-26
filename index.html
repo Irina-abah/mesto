@@ -21,12 +21,12 @@
                     <img class="profile__avatar" src="./images/Avatar.jpg" alt="Фотография Жака-Ива Кусто">
                     <div class="profile__info">
                         <div class="profile__bio">
-                            <h1 class="profile__full-name">Жак-Ив Кусто</h1>
-                            <button class="button button_type_edit" type="button" aria-label="edit"></button>
+                            <h1 class="profile__name">Жак-Ив Кусто</h1>
+                            <button class="button button_type_edit" aria-label="edit"></button>
                         </div>
                         <p class="profile__title">Исследователь океана</p>
                     </div>
-                    <button class="button button_type_add" type="button" aria-label="add"></button>
+                    <button class="button button_type_add" aria-label="add"></button>
                 </section>
 
                 <section class="elements">
@@ -35,7 +35,7 @@
                             <img class="element__image" src="./images/grid-great-barrier-reef-australia.jpg" alt="Большой Корраловый Риф">
                             <div class="element__info">
                                 <h2 class="element__title">Большой Корраловый Риф</h2>
-                                <button class="button button_type_like" type="button" aria-label="like"></button>
+                                <button class="button button_type_like" aria-label="like"></button>
                             </div>
                         </li>
                        
@@ -43,35 +43,35 @@
                             <img class="element__image" src="./images/grid-budva-montenegro.jpg" alt="Вид моря в Будве">
                             <div class="element__info">
                                 <h2 class="element__title">Будва</h2>
-                                <button class="button button_type_like" type="button" aria-label="like"></button>
+                                <button class="button button_type_like" aria-label="like"></button>
                             </div>
                         </li>
                         <li class="element">
                             <img class="element__image" src="./images/grid-chamonix-france.jpg" alt="Заснеженные горы в Шамони">
                             <div class="element__info">
                                 <h2 class="element__title">Шамони</h2>
-                                <button class="button button_type_like" type="button" aria-label="like"></button>
+                                <button class="button button_type_like" aria-label="like"></button>
                             </div>
                         </li>
                         <li class="element">
                             <img class="element__image" src="./images/grid-kotor-montenegro.jpg" alt="Вид сверху на бухту города Котор">
                             <div class="element__info">
                                 <h2 class="element__title">Котор</h2>
-                                <button class="button button_type_like" type="button" aria-label="like"></button>
+                                <button class="button button_type_like" aria-label="like"></button>
                             </div>
                         </li>
                         <li class="element">
                             <img class="element__image" src="./images/grid-seljalandsfoss-iceland.jpg" alt="Вид на водопад Селйяландсфосс">
                             <div class="element__info">
                                 <h2 class="element__title">Исландия</h2>
-                                <button class="button button_type_like" type="button" aria-label="like"></button>
+                                <button class="button button_type_like" aria-label="like"></button>
                             </div>
                         </li>
                         <li class="element">
                             <img class="element__image" src="./images/grid-twelve-apostles-australia.jpg" alt="Пляж Двенадцать Апостолов в Австралии">
                             <div class="element__info">
                                 <h2 class="element__title">12 Апостолов</h2>
-                                <button class="button button_type_like" type="button" aria-label="like"></button>
+                                <button class="button button_type_like" aria-label="like"></button>
                             </div>
                         </li>
                     </ul>
@@ -87,16 +87,15 @@
 
 </html>
 
-<div class="popup">
+<div class="popup popup_opened">
     <div class="popup__container">
+        <button type="button" class="button button_type_reset" aria-label="close"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <fieldset class="popup__input-conainer">
-            <label for="name">Имя</label>
-            <input class="popup__name" type="text" id="name" name="name">
-            <label for="profile-title">О себе</label>
-            <input class="popup__profile-title" type="text" id="profile-title" name="profile-title">
-        </fieldset>
-        <input type="submit" class="button button_type_submit" value="Сохранить">
-
+        <form class="popup__input-container">
+            <input type="text" class="popup__input popup__input_type_name" id="name" name="name" placeholder="ira">
+            <input type="text" class="popup__input popup__input_type_profile-title" id="profile-title" name="profile-title" placeholder="ira">
+            <button type="submit" class="button button_type_submit">Сохранить</button>
+        </form>
+     
     </div>
 </div>
