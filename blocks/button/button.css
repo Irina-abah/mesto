@@ -27,7 +27,7 @@
     height: 50px;
 }
 
-.button_type_reset {
+.button_type_close {
     background: url(../../images/Close\ Icon.svg) center;
     width: 40px;
     height: 40px;
@@ -46,4 +46,9 @@
     font-size: 18px;
     line-height: 1.21;
     font-weight: normal;
+}
+
+.button_type_submit:hover {
+    opacity: 0.8;
+    transition: all 0.7s ease;
 }
