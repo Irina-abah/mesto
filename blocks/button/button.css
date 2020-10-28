@@ -8,6 +8,11 @@
     transition: all 0.7s ease;
 }
 
+.button:focus {
+    outline: 0;
+    box-shadow: none;
+}
+
 .button_type_edit {
     background: url(../../images/Edit\ Button.svg);
     background-repeat: no-repeat;
