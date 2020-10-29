@@ -1,7 +1,7 @@
 .element {
     color: #000;
-    position: relative;
-    display: block;
+    display: flex;
+    flex-direction: column;
 }
 
 .element__image {
@@ -17,7 +17,6 @@
     background-color: #fff;
     padding: 0 21px;
     height: 79px;
-    position: absolute;
     bottom: 0;
     right: 0;
     width: 100%;

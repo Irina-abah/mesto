@@ -1,6 +1,7 @@
 .button {
     cursor: pointer;
     border: none;
+    padding: 0;
 }
 
 .button:hover {
@@ -14,10 +15,18 @@
 }
 
 .button_type_edit {
-    background: url(../../images/Edit\ Button.svg);
-    background-repeat: no-repeat;
+    background: url(../../images/Edit\ Button.svg) center no-repeat;
     width: 24px;
     height: 24px;
+    border: 1px solid #fff;
+}
+
+@media (max-width: 767px) {
+    .button_type_edit {
+        width: 18px;
+        height: 18px;
+    }
+
 }
 
 .button_type_like {
@@ -27,9 +36,17 @@
 }
 
 .button_type_add {
-    background: url(../../images/Add\ Button.svg) no-repeat;
+    background: url(../../images/Add\ Button.svg) center no-repeat;
     width: 150px;
     height: 50px;
+    border: 2px solid #fff;
+}
+
+@media (max-width: 767px) {
+    .button_type_add {
+        width: 100%;
+    }
+
 }
 
 .button_type_close {

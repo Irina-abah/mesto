@@ -4,6 +4,13 @@
     
 }
 
+@media (max-width: 767px) {
+    .elements {
+        margin: 0 0 48px;
+    }
+
+}
+
 .elements__list {
     list-style: none;
     display: grid;
