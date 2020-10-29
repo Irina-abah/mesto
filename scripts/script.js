@@ -9,7 +9,6 @@ popupCloseButton.addEventListener('click', closePopup);
 
 function openPopup() {
     popup.classList.add('popup_opened');
-    // popup.removeEventListener('click', openPopup);
 }
 
 function closePopup() {
@@ -17,23 +16,23 @@ function closePopup() {
 }
 
 // редактирование формы
+
+const formElement = document.querySelector('.popup__input-container');
 let profileName = document.querySelector('.profile__name');
 let profileTitle = document.querySelector('.profile__title');
-const formElement = document.querySelector('.popup__input-container');
 let inputName = document.querySelector('#profile-name');
 let inputTitle = document.querySelector('#profile-title');
-const submitForm = document.querySelector('.button_type_submit');
-
 
 inputName.value = profileName.textContent;
 inputTitle.value = profileTitle.textContent;
 
-
-function formSubmitHandler (evt) {
+function formSubmit (evt) {
     evt.preventDefault();
+    closePopup();
+
+    profileName.textContent = inputName.value;
+    profileTitle.textContent = inputTitle.value;
 }
 
-profileName.textContent = inputName.value;
-profileTitle.textContent = inputTitle.value;
+formElement.addEventListener('submit', formSubmit);
 
-formElement.addEventListener('submit', formSubmitHandler);
