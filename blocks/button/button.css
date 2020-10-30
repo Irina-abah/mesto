@@ -21,7 +21,7 @@
     border: 1px solid #fff;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 775px) {
     .button_type_edit {
         width: 18px;
         height: 18px;
@@ -42,7 +42,7 @@
     border: 2px solid #fff;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 424px) {
     .button_type_add {
         width: 100%;
     }
@@ -50,7 +50,8 @@
 }
 
 .button_type_close {
-    background: url(../../images/Close\ Icon.svg) center;
+    background: url(../../images/Close\ Icon.svg) center no-repeat;
+    background-size: 40px 40px;
     width: 40px;
     height: 40px;
     position: absolute;
@@ -58,6 +59,17 @@
     right: -40px;
     padding: 0;
     margin: 0;
+}
+
+@media (max-width: 775px) {
+    .button_type_close {
+        width: 26px;
+        height: 26px;
+        top: -46px;
+        right: 7px;
+        ;
+    }
+
 }
 
 .button_type_submit {
@@ -73,4 +85,13 @@
 .button_type_submit:hover {
     opacity: 0.8;
     transition: all 0.7s ease;
+}
+
+
+@media (max-width: 767px) {
+    .button_type_submit {
+        margin: 45px 0 0;
+        font-size: 14px;
+        height: 46px;
+    }
 }

@@ -22,6 +22,16 @@
     position: relative;
 }
 
+@media (max-width: 775px) {
+    .popup__container {
+        width: calc(100% - 19px*2);
+        margin: 0 auto;
+        padding: 25px 22px;
+        min-height: 322px;
+    }
+
+}
+
 .popup__input-container {
     display: flex;
     flex-direction: column;
@@ -39,6 +49,14 @@
     color: #000;
     margin: 0 0 54px;
     height: 23px;
+}
+
+@media (max-width: 775px) {
+    .popup__title {
+        font-size: 18px;
+        margin: 0 0 75px;
+    }
+
 }
 
 .popup__input {

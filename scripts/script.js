@@ -1,8 +1,8 @@
 // открытие и закрытие попапа
-const popup = document.querySelector('.popup');
-const popupOpened = document.querySelector('.popup_opened');
-const popupEditButton = document.querySelector('.button_type_edit');
-const popupCloseButton = document.querySelector('.button_type_close');
+let popup = document.querySelector('.popup');
+let popupOpened = document.querySelector('.popup_opened');
+let popupEditButton = document.querySelector('.button_type_edit');
+let popupCloseButton = document.querySelector('.button_type_close');
 
 popupEditButton.addEventListener('click', openPopup);
 popupCloseButton.addEventListener('click', closePopup);
@@ -17,7 +17,7 @@ function closePopup() {
 
 // редактирование формы
 
-const formElement = document.querySelector('.popup__input-container');
+let formElement = document.querySelector('.popup__input-container');
 let profileName = document.querySelector('.profile__name');
 let profileTitle = document.querySelector('.profile__title');
 let inputName = document.querySelector('#profile-name');

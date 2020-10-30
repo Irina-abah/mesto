@@ -4,7 +4,7 @@
     
 }
 
-@media (max-width: 767px) {
+@media (max-width: 775px) {
     .elements {
         margin: 0 0 48px;
     }
@@ -21,4 +21,11 @@
     padding: 0;
     min-height: 744px;
     margin: 0;
+}
+
+@media (max-width: 775px) {
+    .elements__list {
+        row-gap: 20px;
+    }
+
 }
