@@ -22,11 +22,11 @@
                     <div class="profile__info">
                         <div class="profile__bio">
                             <h1 class="profile__name">Жак-Ив Кусто</h1>
-                            <button class="button button_type_edit" aria-label="edit"></button>
+                            <button class="button button_type_edit" type="button" aria-label="edit"></button>
                         </div>
                         <p class="profile__title">Исследователь океана</p>
                     </div>
-                    <button class="button button_type_add" aria-label="add"></button>
+                    <button class="button button_type_add" type="button" aria-label="add"></button>
                 </section>
                 <section class="elements">
                     <ul class="elements__list">
@@ -76,13 +76,13 @@
                 </section>
             </main>
             <footer class="footer">
-                <p class="copyright">© 2020 Mesto Russia</p>
+                <p class="footer__copyright">© 2020 Mesto Russia</p>
             </footer>
             <div class="popup">
                 <div class="popup__container">
                     <button type="button" class="button button_type_close" aria-label="close"></button>
                     <h2 class="popup__title">Редактировать профиль</h2>
-                    <form class="popup__input-container">
+                    <form class="popup__input-container" name="popup-input-container">
                         <input type="text" class="popup__input popup__input_type_name" id="profile-name" name="name">
                         <input type="text" class="popup__input popup__input_type_profile-title" id="profile-title" name="profile-title">
                         <button type="submit" class="button button_type_submit">Сохранить</button>

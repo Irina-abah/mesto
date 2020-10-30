@@ -1,13 +1,9 @@
 .element__info {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: auto 21px;
     align-items: center;
     background-color: #fff;
-    padding: 0 21px;
-    height: 79px;
-    bottom: 0;
-    right: 0;
-    width: 100%;
+    padding: 28px 21px;
     box-sizing: border-box;
     border-radius: 0 0 10px 10px;
 }

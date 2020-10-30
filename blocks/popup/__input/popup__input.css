@@ -6,8 +6,7 @@
     line-height: 1.21;
     font-weight: normal;
     color: #000;
-    padding: 0;
-    height: 27px;
+    padding: 0 0 13px;
 }
 
 .popup__input:focus {

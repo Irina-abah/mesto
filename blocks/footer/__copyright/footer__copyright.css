@@ -1,4 +1,4 @@
-.copyright {
+.footer__copyright {
     font-size: 18px;
     line-height: 1.21;
     font-weight: normal;
@@ -7,7 +7,7 @@
 }
 
 @media (max-width: 775px) {
-    .copyright {
+    .footer__copyright {
         font-size: 14px;
     }
 
