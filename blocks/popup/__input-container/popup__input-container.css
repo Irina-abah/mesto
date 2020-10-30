@@ -1,5 +1,5 @@
-.element {
-    color: #000;
+.popup__input-container {
     display: flex;
     flex-direction: column;
+    margin: 0 auto;
 }

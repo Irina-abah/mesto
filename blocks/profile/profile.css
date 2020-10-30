@@ -6,82 +6,19 @@
 
 }
 
-@media (max-width: 480px) {
-    .profile {
-        margin: 0 0 36px;
-    }
-}
-
-.profile__info {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-.profile__avatar {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 50%;
-    margin-right: 30px;
-}
-
-.profile__name {
-    margin: 0 17px 0 0;
-    font-size: 42px;
-    line-height: 1.143;
-    font-weight: 500;
-    padding: 0;
-}
-
-@media (max-width: 480px) {
-    .profile__name {
-        font-size: 27px;
-        line-height: 1.21;
-        margin: 0 10px 0 0;
-    }
-}
-
-.profile__title {
-    margin: 16px 0 0;
-    font-size: 18px;
-    line-height: 1.21;
-    font-weight: normal;
-}
-
-@media (max-width: 480px) {
-    .profile__title {
-        font-size: 14px;
-    }
-
-}
-
-.profile__bio {
-        display: flex;
-        align-items: baseline; 
-}
-
-/* Добавила отдельное правило, поскольку свойство baseline работает некорректно в FF и ломает верстку */
-
-@-moz-document url-prefix() {
-    .profile__bio {
-        align-items: center;
-    }
-}
-
 @media (max-width: 1054px) {
+
     .profile {
         display: flex;
         flex-direction: column;
     }
 
-    .profile__title {
-        margin: 14px 0 36px;
-        align-self: center;
-    }
+}
 
-    .profile__avatar {
-        margin: 0 0 24px 0;
+@media (max-width: 480px) {
+
+    .profile {
+        margin: 0 0 36px;
     }
 
 }

@@ -1,0 +1,13 @@
+.profile__bio {
+    display: flex;
+    align-items: baseline; 
+}
+
+/* Добавила отдельное правило, поскольку свойство baseline работает некорректно в FF и ломает верстку */
+@-moz-document url-prefix() {
+
+    .profile__bio {
+        align-items: center;
+    }
+    
+}

@@ -1,0 +1,4 @@
+.header__link:hover {
+    opacity: 0.6;
+    transition: all 0.7s ease;
+}
