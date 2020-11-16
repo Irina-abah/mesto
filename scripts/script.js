@@ -93,3 +93,37 @@ function closePopup() {
 };
    
 closePopup();
+
+// рендеринг карточек
+
+const initialCards = [
+    {
+        name: 'Корраловый Риф',
+        link: './images/grid-great-barrier-reef-australia.jpg'
+    },
+    {
+        name: 'Будва',
+        link: './images/grid-budva-montenegro.jpg'
+    },
+    {
+        name: 'Шамони',
+        link: './images/grid-chamonix-france.jpg'
+    },
+    {
+        name: 'Котор',
+        link: './images/grid-kotor-montenegro.jpg'
+    },
+    {
+        name: 'Исландия',
+        link: './images/grid-seljalandsfoss-iceland.jpg'
+    },
+    {
+        name: '12 Апостолов',
+        link: './images/grid-twelve-apostles-australia.jpg'
+    }
+]; 
+
+
+const renderCard = 
+
+initialCards.forEach(addCard);
