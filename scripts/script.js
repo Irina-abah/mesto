@@ -115,7 +115,7 @@ const addCards = (card) => {
     const cardTitle = cardElement.querySelector('.element__title').textContent = card.name;
     const cardImage = cardElement.querySelector('.element__image').src = card.link;
     const cardDeleteButton = cardElement.querySelector('.button_type_delete');
-    const cardLikeButton = cardElement.querySelector('.button_type_like');
+    const cardLikeButton = cardElement.querySelector('.element__like');
 
     cardDeleteButton.addEventListener('click', function(evt) {
         evt.preventDefault();
@@ -123,7 +123,9 @@ const addCards = (card) => {
         deletedCard.remove();
             });
 
-    cardLikeButton.addEventListener('click', function(evt))
+    cardLikeButton.addEventListener('click', function(evt) {
+        evt.target.classList.toggle('element__like_active');
+    });
 
         cards.prepend(cardElement);
         };
