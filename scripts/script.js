@@ -1,9 +1,10 @@
 // кнопки
 
-addconst popupEditButton = document.querySelector('.button_type_edit');
+const popupEditButton = document.querySelector('.button_type_edit');
 const popupAddButton = document.querySelector('.button_type_add');
 
 const editFormElement = document.querySelector('.popup__input-container_type_edit');
+const addFormElement = document.querySelector('.popup__input-container_type_add');
 const cardTitleInput = document.querySelector('.popup__input_type_element-title');
 const cardImageInput = document.querySelector('.popup__input_type_element-image');
 
@@ -109,11 +110,12 @@ const initialCards = [
     }
 ]; 
 
-const getCards = (card) => {
+const addCards = (card) => {
     const cardElement = document.querySelector('.element-template').content.cloneNode(true);
     const cardTitle = cardElement.querySelector('.element__title').textContent = card.name;
     const cardImage = cardElement.querySelector('.element__image').src = card.link;
     const cardDeleteButton = cardElement.querySelector('.button_type_delete');
+    const cardLikeButton = cardElement.querySelector('.button_type_like');
 
     cardDeleteButton.addEventListener('click', function(evt) {
         evt.preventDefault();
@@ -121,51 +123,27 @@ const getCards = (card) => {
         deletedCard.remove();
             });
 
-        cards.append(cardElement);
+    cardLikeButton.addEventListener('click', function(evt))
+
+        cards.prepend(cardElement);
         };
 
-const addFormElement = document.querySelector('.popup__input-container_type_add');
+
+
 
 addFormElement.addEventListener('submit', function (evt) {
                 evt.preventDefault();
                 
-                const newCard = getCards({
+                const newCard = addCards({
                     name: cardTitleInput.value, 
                     link: cardImageInput.value
                 })
                 addFormElement.reset();
     })
-
-// function addCard (card) {
-//     const cardElement = document.querySelector('.element-template').content.cloneNode(true);
-//     const cardTitle = cardElement.querySelector('.element__title').textContent = card.name;
-//     const cardImage = cardElement.querySelector('.element__image').src = card.link;
-
-//     cards.prepend(cardElement);
-// }
-//     addFormElement.addEventListener('submit', function (evt) {
-//             evt.preventDefault();
-//             const newCard = addCard({
-//                 name: cardTitleInput.value, 
-//                 link: cardImageInput.value
-//             })
     
-//             cards.prepend(newCard);
-//             addFormElement.reset();
-// })
-    
-
-
-
-
-// cardElement.querySelector('.button_type_delete').addEventListener('click', (evt) => {
-//     evt.preventDefault;
-
-//     const deletedCard = evt.target.closest('element');
-//     deleteCard(deletedCard);
 
 initialCards.forEach((card) => {
-    getCards(card);
+    addCards(card);
 }
 );
 
