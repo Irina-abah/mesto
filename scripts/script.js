@@ -42,29 +42,6 @@ editFormElement.addEventListener('submit', (evt) => {
         
 });
 
-// добавление карточки
-
-function openAddCardPopup() {
-    addCardPopup.classList.add('popup_opened');
-    }
-
-function addCard(cardTitle, cardImage) {
-    const cardElement = document.querySelector('.element-template').content.cloneNode(true);
-    cardElement.querySelector('.element__title').textContent = cardTitle;
-    cardElement.querySelector('.element__image').src = cardImage;
-
-    cards.prepend(cardElement);
-}
-
-addFormElement.addEventListener('submit', function (evt) {
-    evt.preventDefault();
-
-    addCard(elementTitle.value, elementImage.value);
-
-    addFormElement.reset();
-})
-
-popupAddButton.addEventListener('click', openAddCardPopup);
 popupEditButton.addEventListener('click', openEditProfilePopup);
 
 // закрыть попап при нажатии на крестик и при сабмите
@@ -94,6 +71,35 @@ function closePopup() {
    
 closePopup();
 
+// добавление карточки
+
+function openAddCardPopup() {
+    addCardPopup.classList.add('popup_opened');
+    }
+
+function addCard(card) {
+    const cardElement = document.querySelector('.element-template').content.cloneNode(true);
+    const cardTitle = cardElement.querySelector('.element__title').textContent = card.name;
+    const cardImage = cardElement.querySelector('.element__image').src = card.link;
+
+    cards.append(cardElement);
+
+addFormElement.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    
+    const cardTitleInput = document.querySelector('.popup__input_type_element-title');
+    const cardImageInput = document.querySelector('.popup__input_type_element-image');
+    
+    card.name = cardTitleInput.value;
+    card.link = cardImage.value;
+
+    addFormElement.reset();
+})
+
+}
+
+popupAddButton.addEventListener('click', openAddCardPopup);
+
 // рендеринг карточек
 
 const initialCards = [
@@ -122,8 +128,24 @@ const initialCards = [
         link: './images/grid-twelve-apostles-australia.jpg'
     }
 ]; 
-
-
-const renderCard = 
-
 initialCards.forEach(addCard);
+
+
+// function deleteCard() {
+// const cardDeleteButton = cardElement.querySelector('.button_type_delete');
+
+// cardDeleteButton.addEventListener('click', function(evt) {
+//     evt.preventDefault();
+//     const deletedCard = evt.target.closest('.element');
+//     deletedCard.remove();
+//         });
+//     };
+
+    // cardElement.querySelector('.button_type_delete').addEventListener('click', evt => {
+    //     const deletedCard = evt.target.closest('.element');
+
+    //     if (deletedCard) {
+    //         deletedCard.remove()
+    //     }
+    // })
+
