@@ -1,7 +1,7 @@
 .profile__bio {
     display: grid;
     grid-template-columns: minmax(min-content, max-content) 24px;
-    align-items: baseline; 
+    align-items: baseline;
     padding-right: 30px;
 }
 
