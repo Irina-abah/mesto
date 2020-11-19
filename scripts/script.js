@@ -75,29 +75,29 @@ const initialCards = [
     },
     {
         name: 'Исландия',
-        link: './images/grid-seljalandsfoss-iceland.jpg',
+        link: './images/grid-seljalandsfoss-iceland.jpg'
         alt: 'Вид на водопад Селйяландсфосс'
     },
     {
         name: 'Котор',
-        link: './images/grid-kotor-montenegro.jpg',
+        link: './images/grid-kotor-montenegro.jpg'
         alt: 'Вид сверху на бухту города Котор'
     },
     {
         
         name: 'Шамони',
-        link: './images/grid-chamonix-france.jpg',
+        link: './images/grid-chamonix-france.jpg'
         alt: 'Заснеженные горы в Шамони'
     },
     {
         
         name: 'Будва',
-        link: './images/grid-budva-montenegro.jpg',
+        link: './images/grid-budva-montenegro.jpg'
         alt: 'Вид моря в Будве'
     },
     {
         name: 'Корраловый Риф',
-        link: './images/grid-great-barrier-reef-australia.jpg',
+        link: './images/grid-great-barrier-reef-australia.jpg'
         alt: 'Большой Корраловый Риф'
     }
 ]; 
