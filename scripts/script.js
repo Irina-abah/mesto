@@ -1,22 +1,24 @@
-// кнопки
-
 const popupEditButton = document.querySelector('.button_type_edit');
 const popupAddButton = document.querySelector('.button_type_add');
 
 const editFormElement = document.querySelector('.popup__input-container_type_edit');
 const addFormElement = document.querySelector('.popup__input-container_type_add');
+
 const profileName = document.querySelector('.profile__name');
 const profileTitle = document.querySelector('.profile__title');
-
 const inputName = document.querySelector('#profile-name');
 const inputTitle = document.querySelector('#profile-title');
 
 const editProfilePopup = document.querySelector('.popup_type_edit');
 const addCardPopup = document.querySelector('.popup_type_add');
-const previewPopap = document.querySelector('.popup_type_preview');
+const previewPopup = document.querySelector('.popup_type_preview');
+
+const popupImage = document.querySelector('.popup__image');
+const popupImageTitle = document.querySelector('.popup__image-title');
+const cardTemplate = document.querySelector('.element-template').content;
+const cards = document.querySelector('.elements__list');
 
 const root = document.querySelector('.root');
-
 
 // редактирование профиля
 
@@ -34,8 +36,6 @@ editFormElement.addEventListener('submit', (evt) => {
         profileTitle.textContent = inputTitle.value;
         
 });
-
-popupEditButton.addEventListener('click', openEditProfilePopup);
 
 // закрыть любой попап при нажатии на крестик и при сабмите
 
@@ -96,10 +96,7 @@ const initialCards = [
     }
 ]; 
 
-const popapImage = document.querySelector('.popup__image');
-const popapImageTitle = document.querySelector('.popup__image-title');
-const cardTemplate = document.querySelector('.element-template').content;
-const cards = document.querySelector('.elements__list');
+
 
 
 function deleteCard(evt) {
@@ -112,17 +109,14 @@ function likeCard(evt) {
     evt.target.classList.toggle('element__like_active');
 }
 
-// function addCardContainer(card) {
-//     cards.prepend(card);
-// }
-
 function previewImage(evt) {
-    previewPopap.classList.add('popup_opened');
-    // const openElement = evt.target.closest('.element');
+    previewPopup.classList.add('popup_opened');
+    const openedElement = evt.target.closest('.element');
+    // return openedElement;
 
-    // console.log(openElement);
-    // popapImage = openPhoto.src;
-    // popapImageTitle= openTitle.textContent;
+    console.log(openedElement);
+    popupImage.src = openedElement.querySelector('.element__image').src;
+    popupImageTitle.innerHTML = openedElement.querySelector('.element__title').textContent;
 }
 
 
@@ -130,11 +124,11 @@ function createCard(card) {
     const cardElement = cardTemplate.cloneNode(true);
     const cardDeleteButton = cardElement.querySelector('.button_type_delete');
     const cardLikeButton = cardElement.querySelector('.element__like');
-    cardDeleteButton.addEventListener('click', deleteCard);
-    cardLikeButton.addEventListener('click', likeCard);
     const templateCardName = cardElement.querySelector('.element__title');
     const templateCardImage = cardElement.querySelector('.element__image');
-    templateCardImage.addEventListener('click', previewImage)
+    templateCardImage.addEventListener('click', previewImage);
+    cardDeleteButton.addEventListener('click', deleteCard);
+    cardLikeButton.addEventListener('click', likeCard);
   
     templateCardName.textContent = card.name;
     templateCardImage.src = card.link;
@@ -142,14 +136,15 @@ function createCard(card) {
     cards.prepend(cardElement);
 }; 
 
-// добавление новой карточки
+initialCards.forEach(createCard);
+
+// открытие попапа добавления карточки
 
 function openAddCardPopup() {
     addCardPopup.classList.add('popup_opened');
 }
 
-popupAddButton.addEventListener('click', openAddCardPopup);
-
+// добавить карточку из попапа
 function addNewCard() {
     const templateCardName = addFormElement.querySelector('.popup__input_type_element-title').value;
     const templateCardImage = addFormElement.querySelector('.popup__input_type_element-image').value;
@@ -161,6 +156,6 @@ function addNewCard() {
         addFormElement.reset();
 }
 
-addFormElement.addEventListener('submit', addNewCard)
-
-initialCards.forEach(createCard);
+popupAddButton.addEventListener('click', openAddCardPopup);
+popupEditButton.addEventListener('click', openEditProfilePopup);
+addFormElement.addEventListener('submit', addNewCard);

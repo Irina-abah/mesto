@@ -1,7 +1,6 @@
-.popap__image {
+.popup__image {
     object-fit: cover;
     margin-bottom: 10px;
-    position: relative;
     width: 100%;
     height: 100%;
 }

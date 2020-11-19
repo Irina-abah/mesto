@@ -10,7 +10,7 @@ LINK TO GITHUB: https://irina-abah.github.io/mesto/index.html
 
 **Intro**
 
-This is Sprint 4 learning project from **Yandex Praktikum**, created to practice primarily JavaScript but also adaptive and responsive behaivour of elements. Represented as interactive page where a user can add images, delete and like them. Fully done by a stydent Iryna Abah.
+This is Sprint 4-5 learning project from **Yandex Praktikum**, created to practice primarily JavaScript but also adaptive and responsive behaivour of elements. Represented as interactive page where a user can add images, delete and like them. Fully done by a stydent Iryna Abah.
 
 **Technologies**
 
@@ -32,9 +32,13 @@ The following main features of HTML and CSS were used:
 The following main features of JS were used:
 * function;
 * variables;
-* events.
+* events;
+* arrays and array methods;
+* adding elements to DOM tree using HTML template;
+* managing elements in DOM tree;
 
-Markup used: [Link to design](https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4)
+
+Markups used: [Link to design_sprint4](https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4) and [Link to design_sprint5](https://www.figma.com/file/nlYpT4VhFiwimn2YlncrcF/JavaScript.-Sprint-5)
 
 **Files structure and naming**
 
@@ -43,4 +47,5 @@ BEM - [**Block Element Modifier**"](https://en.bem.info/methodology/) - methodol
 **Future plans for development**
 
 1. Add more interactive elements and interaction with user on clicks and scroll.
-2. Add new sections.
+2. Add new sections;
+3. Optimize JS code.
