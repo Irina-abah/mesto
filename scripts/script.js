@@ -70,29 +70,35 @@ const initialCards = [
     {
         
         name: '12 Апостолов',
-        link: './images/grid-twelve-apostles-australia.jpg'
+        link: './images/grid-twelve-apostles-australia.jpg',
+        alt: 'Пляж Двенадцать Апостолов в Австралии'
     },
     {
         name: 'Исландия',
         link: './images/grid-seljalandsfoss-iceland.jpg'
+        alt: 'Вид на водопад Селйяландсфосс'
     },
     {
         name: 'Котор',
         link: './images/grid-kotor-montenegro.jpg'
+        alt: 'Вид сверху на бухту города Котор'
     },
     {
         
         name: 'Шамони',
         link: './images/grid-chamonix-france.jpg'
+        alt: 'Заснеженные горы в Шамони'
     },
     {
         
         name: 'Будва',
         link: './images/grid-budva-montenegro.jpg'
+        alt: 'Вид моря в Будве'
     },
     {
         name: 'Корраловый Риф',
         link: './images/grid-great-barrier-reef-australia.jpg'
+        alt: 'Большой Корраловый Риф'
     }
 ]; 
 
@@ -132,6 +138,7 @@ function createCard(card) {
   
     templateCardName.textContent = card.name;
     templateCardImage.src = card.link;
+    templateCardImage.alt = card.alt;
     
     cards.prepend(cardElement);
 }; 
