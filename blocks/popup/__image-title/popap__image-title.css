@@ -2,4 +2,6 @@
     font-size: 12px;
     line-height: 1.21;  
     font-weight: normal;
+    align-self: flex-start;
+    margin: 0;
 }

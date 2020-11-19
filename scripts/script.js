@@ -5,23 +5,15 @@ const popupAddButton = document.querySelector('.button_type_add');
 
 const editFormElement = document.querySelector('.popup__input-container_type_edit');
 const addFormElement = document.querySelector('.popup__input-container_type_add');
-const cardTitleInput = document.querySelector('.popup__input_type_element-title');
-const cardImageInput = document.querySelector('.popup__input_type_element-image');
-// const popapImage = document.querySelector('.popup__image');
-// const popapImageTitle = document.querySelector('.popup__image-title');
-
 const profileName = document.querySelector('.profile__name');
 const profileTitle = document.querySelector('.profile__title');
 
 const inputName = document.querySelector('#profile-name');
 const inputTitle = document.querySelector('#profile-title');
 
-const cards = document.querySelector('.elements__list');
-
 const editProfilePopup = document.querySelector('.popup_type_edit');
 const addCardPopup = document.querySelector('.popup_type_add');
 const previewPopap = document.querySelector('.popup_type_preview');
-// const popupTitles = document.querySelectorAll('.popup__title');
 
 const root = document.querySelector('.root');
 
@@ -76,93 +68,38 @@ closePopup();
 
 const initialCards = [
     {
-        name: 'Корраловый Риф',
-        link: './images/grid-great-barrier-reef-australia.jpg'
-    },
-    {
-        name: 'Будва',
-        link: './images/grid-budva-montenegro.jpg'
-    },
-    {
-        name: 'Шамони',
-        link: './images/grid-chamonix-france.jpg'
-    },
-    {
-        name: 'Котор',
-        link: './images/grid-kotor-montenegro.jpg'
+        
+        name: '12 Апостолов',
+        link: './images/grid-twelve-apostles-australia.jpg'
     },
     {
         name: 'Исландия',
         link: './images/grid-seljalandsfoss-iceland.jpg'
     },
     {
-        name: '12 Апостолов',
-        link: './images/grid-twelve-apostles-australia.jpg'
+        name: 'Котор',
+        link: './images/grid-kotor-montenegro.jpg'
+    },
+    {
+        
+        name: 'Шамони',
+        link: './images/grid-chamonix-france.jpg'
+    },
+    {
+        
+        name: 'Будва',
+        link: './images/grid-budva-montenegro.jpg'
+    },
+    {
+        name: 'Корраловый Риф',
+        link: './images/grid-great-barrier-reef-australia.jpg'
     }
 ]; 
 
-// const addCards = (card) => {
-//     const cardElement = document.querySelector('.element-template').content.cloneNode(true);
-//     const cardTitle = cardElement.querySelector('.element__title');
-//     const cardImage = cardElement.querySelector('.element__image');
-//     const cardDeleteButton = cardElement.querySelector('.button_type_delete');
-//     const cardLikeButton = cardElement.querySelector('.element__like');
-
-//     cardTitle.textContent = card.name;
-//     cardImage.src = card.link;
-    
-
-//     cardDeleteButton.addEventListener('click', function(evt) {
-//         evt.preventDefault();
-//         const deletedCard = evt.target.closest('.element');
-//         deletedCard.remove();
-//             });
-
-//     cardLikeButton.addEventListener('click', function(evt) {
-//         evt.target.classList.toggle('element__like_active');
-//     });
-
-
-//     cardImage.addEventListener('click', function (evt) {
-//         console.log(evt)
-//         previewPopap.classList.add('popup_opened');
-//         const popapImage = document.querySelector('.popup__image');
-//         const popapImageTitle = document.querySelector('.popup__image-title');
-
-//         const previewImage = evt.target.closest('.element');
-        
-//         popapImage.src = evt.target.src;
-//         popapImageTitle.textContent = card.name;
-
-        
-//     })
-//     cards.prepend(cardElement);   
-    
-// };
-
-// // добавление новой карточки
-
-// function openAddCardPopup() {
-//     addCardPopup.classList.add('popup_opened');
-//     }
-  
-// popupAddButton.addEventListener('click', openAddCardPopup);
-
-// addFormElement.addEventListener('submit', function (evt) {
-//                 evt.preventDefault();
-                
-//                 const newCard = addCards({
-//                     name: cardTitleInput.value, 
-//                     link: cardImageInput.value
-//                 })
-//                 addFormElement.reset();
-//     })
-    
-
-// initialCards.forEach((card) => {
-//     addCards(card);
-// }
-// );
+const popapImage = document.querySelector('.popup__image');
+const popapImageTitle = document.querySelector('.popup__image-title');
+const cardTemplate = document.querySelector('.element-template').content;
+const cards = document.querySelector('.elements__list');
 
 
 function deleteCard(evt) {
@@ -175,48 +112,55 @@ function likeCard(evt) {
     evt.target.classList.toggle('element__like_active');
 }
 
-function addCardContainer(card) {
-    cards.prepend(card);
-}
+// function addCardContainer(card) {
+//     cards.prepend(card);
+// }
 
-function previewImagePopap(evt) {
+function previewImage(evt) {
     previewPopap.classList.add('popup_opened');
+    // const openElement = evt.target.closest('.element');
+
+    // console.log(openElement);
+    // popapImage = openPhoto.src;
+    // popapImageTitle= openTitle.textContent;
 }
 
-const popapImage = document.querySelector('.popup__image');
-const popapImageTitle = document.querySelector('.popup__image-title');
-const cardItem = document.querySelector('.element-template');
 
-function addCard(card) {
-    const cardElement = cardItem.cloneNode(true).content;
-    cardElement.querySelector('.element__title').textContent = card.name;
-    cardElement.querySelector('.element__image').src = card.link;
+function createCard(card) {
+    const cardElement = cardTemplate.cloneNode(true);
     const cardDeleteButton = cardElement.querySelector('.button_type_delete');
     const cardLikeButton = cardElement.querySelector('.element__like');
     cardDeleteButton.addEventListener('click', deleteCard);
     cardLikeButton.addEventListener('click', likeCard);
-
-    cards.append(cardElement);
-};
+    const templateCardName = cardElement.querySelector('.element__title');
+    const templateCardImage = cardElement.querySelector('.element__image');
+    templateCardImage.addEventListener('click', previewImage)
+  
+    templateCardName.textContent = card.name;
+    templateCardImage.src = card.link;
+    
+    cards.prepend(cardElement);
+}; 
 
 // добавление новой карточки
 
 function openAddCardPopup() {
     addCardPopup.classList.add('popup_opened');
 }
-popupAddButton.addEventListener('click', openAddCardPopup)
 
-function submitCard() {
-    const newCard = addCardContainer({
-        name: cardTitleInput.value, 
-        link: cardImageInput.value
-    })
-        cards.prepend(newCard);
+popupAddButton.addEventListener('click', openAddCardPopup);
+
+function addNewCard() {
+    const templateCardName = addFormElement.querySelector('.popup__input_type_element-title').value;
+    const templateCardImage = addFormElement.querySelector('.popup__input_type_element-image').value;
+
+    const newCard = createCard ({
+            name: templateCardName, 
+            link: templateCardImage
+        }); 
         addFormElement.reset();
 }
-addFormElement.addEventListener('submit', submitCard);
 
-    
-initialCards.forEach((card) => {
-        addCard(card);
-    });
+addFormElement.addEventListener('submit', addNewCard)
+
+initialCards.forEach(createCard);
