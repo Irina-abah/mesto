@@ -39,7 +39,7 @@ editFormElement.addEventListener('submit', (evt) => {
 
 // закрыть любой попап при нажатии на крестик и при сабмите
 
-function closePopup() {
+function setClosePopupListeners() {
    
    const popupCloseButtons = document.querySelectorAll('.button_type_close');
    const inputForms = root.querySelectorAll('.popup__input-container');
