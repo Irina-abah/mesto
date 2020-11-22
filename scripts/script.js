@@ -172,6 +172,8 @@ const popupAddButton = document.querySelector('.button_type_add');
 
 const editFormElement = document.querySelector('.popup__input-container_type_edit');
 const addFormElement = document.querySelector('.popup__input-container_type_add');
+const placeInputTitle = addFormElement.querySelector('.popup__input_type_place-title');
+const placeInputLink = addFormElement.querySelector('.popup__input_type_place-image');
 
 const profileName = document.querySelector('.profile__name');
 const profileTitle = document.querySelector('.profile__title');
@@ -180,13 +182,13 @@ const inputTitle = document.querySelector('#profile-title');
 
 const allPopups = document.querySelectorAll('.popup');
 const editProfilePopup = document.querySelector('.popup_type_edit');
-const addCardPopup = document.querySelector('.popup_type_add');
+const addPlacePopup = document.querySelector('.popup_type_add');
 const previewPopup = document.querySelector('.popup_type_preview');
 
 const popupImage = document.querySelector('.popup__image');
 const popupImageTitle = document.querySelector('.popup__image-title');
-const cardTemplate = document.querySelector('.element-template').content;
-const cards = document.querySelector('.elements__list');
+const cardTemplate = document.querySelector('.place-template').content;
+const cards = document.querySelector('.places__list');
 
 const root = document.querySelector('.root');
 
@@ -199,6 +201,7 @@ function openPopup(popup) {
 // редактирование профиля
 
 function editProfile() {
+    openPopup(editProfilePopup);
     inputName.value = profileName.textContent;
     inputTitle.value = profileTitle.textContent;
     }
@@ -210,9 +213,12 @@ editFormElement.addEventListener('submit', (evt) => {
         profileTitle.textContent = inputTitle.value;
         
 });
-editProfile();
 
 // закрыть любой попап при нажатии на крестик и при сабмите
+
+function closePopup(popup) {
+    popup.classList.remove('popup_opened');
+}
 
 function setClosePopupListeners() {
    
@@ -223,7 +229,7 @@ function setClosePopupListeners() {
             btn.addEventListener('click', function(evt) {
                 evt.preventDefault();
                 const popup = evt.target.closest('.popup');
-                popup.classList.remove('popup_opened');
+                closePopup(popup);
         });
     });
 
@@ -231,7 +237,7 @@ function setClosePopupListeners() {
         btn.addEventListener('submit', function(evt) {
             evt.preventDefault();
             const popup = evt.target.closest('.popup');
-            popup.classList.remove('popup_opened');
+            closePopup(popup);
     });
 });
 
@@ -244,14 +250,19 @@ setClosePopupListeners();
 const initialCards = [
     {
         
-        name: '12 Апостолов',
-        link: './images/grid-twelve-apostles-australia.jpg',
-        alt: 'Пляж Двенадцать Апостолов в Австралии'
+        name: 'Корраловый Риф',
+        link: './images/grid-great-barrier-reef-australia.jpg',
+        alt: 'Большой Корраловый Риф'
     },
     {
-        name: 'Исландия',
-        link: './images/grid-seljalandsfoss-iceland.jpg',
-        alt: 'Вид на водопад Селйяландсфосс'
+        name: 'Будва',
+        link: './images/grid-budva-montenegro.jpg',
+        alt: 'Вид моря в Будве'
+    },
+    {
+        name: 'Шамони',
+        link: './images/grid-chamonix-france.jpg',
+        alt: 'Заснеженные горы в Шамони'
     },
     {
         name: 'Котор',
@@ -260,53 +271,42 @@ const initialCards = [
     },
     {
         
-        name: 'Шамони',
-        link: './images/grid-chamonix-france.jpg',
-        alt: 'Заснеженные горы в Шамони'
+        name: 'Исландия',
+        link: './images/grid-seljalandsfoss-iceland.jpg',
+        alt: 'Вид на водопад Селйяландсфосс'
     },
     {
-        
-        name: 'Будва',
-        link: './images/grid-budva-montenegro.jpg',
-        alt: 'Вид моря в Будве'
-    },
-    {
-        name: 'Корраловый Риф',
-        link: './images/grid-great-barrier-reef-australia.jpg',
-        alt: 'Большой Корраловый Риф'
+        name: '12 Апостолов',
+        link: './images/grid-twelve-apostles-australia.jpg',
+        alt: 'Пляж Двенадцать Апостолов в Австралии'
     }
 ]; 
 
 
-
-
 function deleteCard(evt) {
     evt.preventDefault();
-    const deletedCard = evt.target.closest('.element');
+    const deletedCard = evt.target.closest('.place');
     deletedCard.remove();
 }
 
 function likeCard(evt) {
-    evt.target.classList.toggle('element__like_active');
+    evt.target.classList.toggle('place__like_active');
 }
 
-function previewImage(evt) {
-    previewPopup.classList.add('popup_opened');
-    const openedElement = evt.target.closest('.element');
-
-    console.log(openedElement);
-    popupImage.src = openedElement.querySelector('.element__image').src;
-    popupImageTitle.innerHTML = openedElement.querySelector('.element__title').textContent;
+function previewImage(card) {
+    openPopup(previewPopup);
+    popupImage.src = card.link;
+    popupImageTitle.textContent = card.name;
 }
 
-
-function createCard(card) {
+function createNewCard(card) {
     const cardElement = cardTemplate.cloneNode(true);
     const cardDeleteButton = cardElement.querySelector('.button_type_delete');
-    const cardLikeButton = cardElement.querySelector('.element__like');
-    const templateCardName = cardElement.querySelector('.element__title');
-    const templateCardImage = cardElement.querySelector('.element__image');
-    templateCardImage.addEventListener('click', previewImage);
+    const cardLikeButton = cardElement.querySelector('.place__like');
+    const templateCardName = cardElement.querySelector('.place__title');
+    const templateCardImage = cardElement.querySelector('.place__image');
+    templateCardImage.addEventListener('click', () => 
+    previewImage(card));
     cardDeleteButton.addEventListener('click', deleteCard);
     cardLikeButton.addEventListener('click', likeCard);
   
@@ -314,33 +314,40 @@ function createCard(card) {
     templateCardImage.src = card.link;
     templateCardImage.alt = card.alt;
     
-    cards.prepend(cardElement);
+    return cardElement;
 }; 
 
-initialCards.forEach(createCard);
+initialCards.forEach((item) => {
+    const newCard = createNewCard(item)
+    cards.append(newCard);
+});
 
-// открытие попапа добавления карточки
-
-function openAddCardPopup() {
-    addCardPopup.classList.add('popup_opened');
-}
 
 // добавить карточку из попапа
-function addNewCard() {
-    const templateCardName = addFormElement.querySelector('.popup__input_type_element-title').value;
-    const templateCardImage = addFormElement.querySelector('.popup__input_type_element-image').value;
+function addNewCard(cardElement) {
+    openPopup(addPlacePopup);
 
-    const newCard = createCard ({
+    addFormElement.addEventListener('submit', function(evt) {
+        
+        const templateCardName = placeInputTitle.value;
+        const templateCardImage = placeInputLink.value;
+
+        const newCard = createNewCard ({
             name: templateCardName, 
             link: templateCardImage
         }); 
+        
+        cards.prepend(newCard);
         addFormElement.reset();
+    })
+        
 }
 
-popupAddButton.addEventListener('click', openAddCardPopup);
+popupAddButton.addEventListener('click', function () {
+    addNewCard();
+});
 
 popupEditButton.addEventListener('click', function () {
-    openPopup(editProfilePopup);
+    editProfile();
 });
-addFormElement.addEventListener('submit', addNewCard);
 
