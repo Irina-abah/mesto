@@ -167,10 +167,6 @@ addFormElement.addEventListener('submit', function(evt) {
     })
 
 popupAddButton.addEventListener('click', function () {
-    addNewCard();
-});
-
-popupAddButton.addEventListener('click', function () {
     openPopup(addPlacePopup);
 });
 
