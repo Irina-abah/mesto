@@ -70,8 +70,17 @@ function setClosePopupListeners() {
             const popup = evt.target.closest('.popup');
             closePopup(popup);
     });
-});
 
+    
+    root.addEventListener('mousedown', function(evt) {
+        evt.preventDefault();
+        const popup = evt.target.closest('.popup');
+        if (evt.target.classList.contains('popup')) {
+            closePopup(popup);
+        }     
+    });
+    
+});
 };
    
 setClosePopupListeners();
