@@ -1,5 +1,6 @@
 const popupEditButton = document.querySelector('.button_type_edit');
 const popupAddButton = document.querySelector('.button_type_add');
+const popupCloseButtons = document.querySelectorAll('.button_type_close');
 
 const editFormElement = document.querySelector('.popup__input-container_type_edit');
 const addFormElement = document.querySelector('.popup__input-container_type_add');
@@ -22,6 +23,7 @@ const cardTemplate = document.querySelector('.place-template').content;
 const cards = document.querySelector('.places__list');
 
 const root = document.querySelector('.root');
+const inputForms = root.querySelectorAll('.popup__input-container');
 
 // открытие попапа
 
@@ -52,11 +54,8 @@ function closePopup(popup) {
 }
 
 function setClosePopupListeners() {
-   
-   const popupCloseButtons = document.querySelectorAll('.button_type_close');
-   const inputForms = root.querySelectorAll('.popup__input-container');
-        
-   popupCloseButtons.forEach(function(form) {
+       
+    popupCloseButtons.forEach(function(form) {
             form.addEventListener('click', function(evt) {
                 evt.preventDefault();
                 const popup = evt.target.closest('.popup');
@@ -64,34 +63,36 @@ function setClosePopupListeners() {
         });
     });
 
-    inputForms.forEach(function(form) {
+     inputForms.forEach(function(form) {
         form.addEventListener('submit', function(evt) {
             evt.preventDefault();
             const popup = evt.target.closest('.popup');
             closePopup(popup);
+        });
     });
 
-    allPopups.forEach(function(form) {
-        form.addEventListener('click', function(evt) {
+    allPopups.forEach(function(popup) {
+        popup.addEventListener('mousedown', function(evt) {
             evt.preventDefault();
+            // const popup = evt.target.closest('.popup');
             if (evt.target.classList.contains('popup')) {
-                closePopup(evt.target);
-            }     
+                closePopup(popup); 
+            };   
         });
-    })
+    });
+
     
     document.addEventListener('keydown', function(evt) {
         evt.preventDefault();
-
-        console.log(evt.target);
-        // const popup = evt.target.closest('.popup');
-        if (evt.target.classList.contains('popup') && evt.key === 'Escape') {
-            closePopup(evt.target);
-        }     
+        if (evt.key === 'Escape') {
+            allPopups.forEach((popup) => {
+                closePopup(popup);
+            })
+        };    
     });
  
-});
 };
+
    
 setClosePopupListeners();
 
