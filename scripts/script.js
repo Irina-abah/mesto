@@ -190,3 +190,47 @@ popupEditButton.addEventListener('click', function () {
     editProfile();
 });
 
+// validation
+
+function showInputError(form, input, config) {
+    const errorElement = form.querySelector(`#${input.id}-error`);
+    errorElement.textContent = input.validationMessage;
+    input.classList.add(config.inputValidationClass);
+}
+
+function hideInputError(form, input, config) {
+    const errorElement = form.querySelector(`#${input.id}-error`);
+    errorElement.textContent = '';
+    input.classList.remove(config.inputValidationClass);
+}
+
+function checkInputValidity(form, input, config) {
+    if (!input.validity.valid) {
+        showInputError(form, input, config);
+    } else {
+        hideInputError(form, input, config);
+    }
+}
+
+function enableValidation(config) {
+    const forms = Array.from(document.querySelectorAll(config.formSelector));
+    forms.forEach((form) => {
+        setEventListener(form, config);
+
+        form.addEventListener('submit', (evt) => {
+            evt.preventDefault();
+        });
+
+        const submitButton = document.querySelectorAll(config.submitButtonSelector);
+        setButtonState(submitButton, form.checkInputValidity(), config)
+    });
+}
+
+const validationConfig = {
+    formSelector: '.popup__input-container',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.button_type_submit',
+    inactiveButtonClass: 'popup__button_disabled',
+    inputErrorClass: 'popup__input_state_invalid',
+    errorClass: 'input__error_visible'
+  };
