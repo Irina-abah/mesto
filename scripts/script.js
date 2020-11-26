@@ -57,7 +57,6 @@ function setClosePopupListeners() {
        
     popupCloseButtons.forEach(function(form) {
             form.addEventListener('click', function(evt) {
-                evt.preventDefault();
                 const popup = evt.target.closest('.popup');
                 closePopup(popup);
         });
@@ -73,8 +72,6 @@ function setClosePopupListeners() {
 
     allPopups.forEach(function(popup) {
         popup.addEventListener('mousedown', function(evt) {
-            evt.preventDefault();
-            // const popup = evt.target.closest('.popup');
             if (evt.target.classList.contains('popup')) {
                 closePopup(popup); 
             };   
@@ -83,7 +80,6 @@ function setClosePopupListeners() {
 
     
     document.addEventListener('keydown', function(evt) {
-        evt.preventDefault();
         if (evt.key === 'Escape') {
             allPopups.forEach((popup) => {
                 closePopup(popup);
