@@ -3,6 +3,8 @@
     line-height: 1.21;
     color: #FF0000;
     box-sizing: border-box;
-    opacity: 0;
+    display: none;
+    margin: 5px 0 0 0;
+    height: 30px;
 
 }
