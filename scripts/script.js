@@ -312,14 +312,12 @@ function validateOpenedPopup(popup) {
 function showInputError(form, input, config) {
     const error = form.querySelector(`#${input.id}-error`);
     error.textContent = input.validationMessage;
-    // error.classList.add(config.errorClass);
     input.classList.add(config.inputErrorClass);
 }
 
 function hideInputError(form, input, config) {
     const error = form.querySelector(`#${input.id}-error`);
     error.textContent = '';
-    // error.classList.remove(config.errorClass);
     input.classList.remove(config.inputErrorClass);
 }
 
@@ -345,7 +343,7 @@ function setEventListeners(form, config) {
     const inputList = form.querySelectorAll(config.inputSelector);
     const submitButton = form.querySelector(config.submitButtonSelector);
 
-    Array.from(inputList).forEach((input) => {
+    inputList.forEach((input) => {
         input.addEventListener('input', () => {
             checkInputValidity(form, input, config);
             toggleButtonState(submitButton, form.checkValidity(), config);
@@ -356,30 +354,25 @@ function setEventListeners(form, config) {
 
 function enableValidation(config) {
     const allInputForms = document.querySelectorAll(config.formSelector);
-    Array.from(allInputForms).forEach((form) => {
+    allInputForms.forEach((form) => {
         setEventListeners(form, config);
 
         form.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            form.reset();
         });
 
-        const submitButton = form.querySelectorAll(config.submitButtonSelector);
+        const submitButton = form.querySelector(config.submitButtonSelector);
         toggleButtonState(submitButton, form.checkValidity(), config)
     });
 }
 
-// function validateOnSubmit() {
-
-// }
-
-const validationConfig = {
+const config = {
     formSelector: '.popup__input-container',
     inputSelector: '.popup__input',
     inputErrorClass: 'popup__input_state_invalid',
     submitButtonSelector: '.button_type_submit',
-    inactiveButtonClass: 'button_disabled',
-    errorClass: 'input__error_active'
+    inactiveButtonClass: 'button_type_submit-disabled',
+    errorClass: '.input__error'
   };
 
-  enableValidation(validationConfig);
+  enableValidation(config);
