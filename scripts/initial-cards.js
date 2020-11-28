@@ -75,6 +75,8 @@ addFormElement.addEventListener('submit', function(evt) {
         
         const templateCardName = placeInputTitle.value;
         const templateCardImage = placeInputLink.value;
+        const popup = evt.target.closest('.popup');
+        const submitButton = addFormElement.querySelector(validationConfig.submitButtonSelector);
 
         const newCard = createNewCard ({
             name: templateCardName, 
@@ -82,6 +84,8 @@ addFormElement.addEventListener('submit', function(evt) {
         }); 
         
         cards.prepend(newCard);
+        toggleButtonState(submitButton, false, validationConfig);
+        closePopup(popup);
         addFormElement.reset();
     })
 

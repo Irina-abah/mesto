@@ -42,12 +42,15 @@ function setEventListeners(form, config) {
 };
 
 function enableValidation(config) {
-    const allInputForms = document.querySelectorAll(config.formSelector);
+    const allInputForms = document.querySelectorAll(config.formSelector);   
     allInputForms.forEach((form) => {
         setEventListeners(form, config);
 
         form.addEventListener('submit', (evt) => {
             evt.preventDefault();
+            const popup = evt.target.closest('.popup');
+            closePopup(popup);
+            
         });
 
         const submitButton = form.querySelector(config.submitButtonSelector);

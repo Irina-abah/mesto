@@ -25,33 +25,43 @@ const cards = document.querySelector('.places__list');
 const root = document.querySelector('.root');
 const inputForms = root.querySelectorAll('.popup__input-container');
 
-// открытие попапа
+// открытие и закрытие попапа
 
 function openPopup(popup) {
     popup.classList.add('popup_opened');
+    document.addEventListener('keydown', closeByEscape);
+}
+
+function closePopup(popup) {
+    popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', closeByEscape);
 }
 
 // редактирование профиля
 
 function editProfile() {
     openPopup(editProfilePopup);
+    
     inputName.value = profileName.textContent;
     inputTitle.value = profileTitle.textContent;
     }
 
 editFormElement.addEventListener('submit', (evt) => {
-        evt.preventDefault();
         
         profileName.textContent = inputName.value;
         profileTitle.textContent = inputTitle.value;
         
 });
 
-// закрыть любой попап при нажатии на крестик и при сабмите
+// закрыть по событиям: нажать на крестик, клавишу esc и клику вне области
 
-function closePopup(popup) {
-    popup.classList.remove('popup_opened');
-    
+function closeByEscape(evt) {
+    const escapeKey = 'Escape';
+    const popupOpened = document.querySelector('.popup_opened');
+    if(evt.key === escapeKey) {  
+        closePopup(popupOpened);
+        
+    }
 }
 
 function setClosePopupListeners() {
@@ -63,14 +73,6 @@ function setClosePopupListeners() {
         });
     });
 
-     inputForms.forEach(function(form) {
-        form.addEventListener('submit', function(evt) {
-            evt.preventDefault();
-            const popup = evt.target.closest('.popup');
-            closePopup(popup);
-        });
-    });
-
     allPopups.forEach(function(popup) {
         popup.addEventListener('mousedown', function(evt) {
             if (evt.target.classList.contains('popup')) {
@@ -79,17 +81,7 @@ function setClosePopupListeners() {
             };   
         });
     });
-
-    
-    document.addEventListener('keydown', function(evt) {
-        if (evt.key === 'Escape') {
-            allPopups.forEach((popup) => {
-                closePopup(popup);
-            })
-        };    
-    });
  
 };
-
-   
+  
 setClosePopupListeners();
