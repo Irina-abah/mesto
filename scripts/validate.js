@@ -55,7 +55,7 @@ function enableValidation(config) {
     });
 }
 
-const config = {
+const validationConfig = {
     formSelector: '.popup__input-container',
     inputSelector: '.popup__input',
     inputErrorClass: 'popup__input_state_invalid',
@@ -64,4 +64,4 @@ const config = {
     errorClass: '.input__error'
   };
 
-  enableValidation(config);
+  enableValidation(validationConfig);
