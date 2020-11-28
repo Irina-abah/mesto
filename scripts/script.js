@@ -29,7 +29,6 @@ const inputForms = root.querySelectorAll('.popup__input-container');
 
 function openPopup(popup) {
     popup.classList.add('popup_opened');
-    validateOpenedPopup(popup);
 }
 
 // редактирование профиля
@@ -76,6 +75,7 @@ function setClosePopupListeners() {
         popup.addEventListener('mousedown', function(evt) {
             if (evt.target.classList.contains('popup')) {
                 closePopup(popup); 
+                
             };   
         });
     });
@@ -130,7 +130,6 @@ const initialCards = [
         alt: 'Пляж Двенадцать Апостолов в Австралии'
     }
 ]; 
-
 
 function deleteCard(evt) {
     const deletedCard = evt.target.closest('.place');
@@ -194,140 +193,25 @@ popupEditButton.addEventListener('click', function () {
 
 // validation
 
-// function validateOpenedPopup(popup) {
-//     const allInputs = popup.querySelectorAll('.popup__input');
-
-//     allInputs.forEach((input) => {
-//         if(input.validity.valid) {
-//             input.classList.remove('popup__input_state_invalid');
-//             const error = popup.querySelector(`#${input.id}-error`);
-//             error.classList.remove('input-error_active');
-//             error.textContent = '';
-
-//         }
-//     })
-// }
-
-// function showInputError(form, input, errorMessage) {
-//    const error = form.querySelector(`#${input.id}-error`);
-//    error.textContent = input.validationMessage;
-//    error.classList.add('input-error_active');
-//    input.classList.add('popup__input_state_invalid');
-// }
-
-// function hideInputError(form, input) {
-//    const error = form.querySelector(`#${input.id}-error`);
-//    error.textContent = '';
-//    error.classList.remove('input-error_active');
-//    input.classList.remove('popup__input_state_invalid');
-// }
-
-// function checkInputValidity(form, input) {
-//     if (!input.validity.valid) {
-//         showInputError(form, input, input.validationMessage);
-//     } else {
-//         hideInputError(form, input);
-//     }
-// }
-
-// function isInvalidInput(inputList) {
-//     return inputList.some((input) => {
-//         return !input.validity.valid;
-//     })
-// }
-
-// function toggleButtonState(inputList, button) {
-//      if(isInvalidInput(inputList)) {
-//          button.classList.add('button_disabled');
-//      } else {
-//         button.classList.remove('button_disabled');
-//      }
-// }
-
-
-// function setEventListeners(form) {
-//     const inputList = Array.from(form.querySelectorAll('.popup__input'));
-//     const button = form.querySelector('.button_type_submit');
-
-//     toggleButtonState(inputList, button);
-
-//     inputList.forEach((input) => {
-//         input.addEventListener('input', () => {
-//             checkInputValidity(form, input);
-//             toggleButtonState(inputList, button);
-//         })
-//     })
-        
-//     };
-
-// function enableValidation() {
-//     Array.from(inputForms).forEach((form) => {
-//         setEventListeners(form);
-
-//         form.addEventListener('submit', (evt) => {
-//             evt.preventDefault();
-//         });
-
-//         // const submitButton = document.querySelectorAll(config.submitButtonSelector);
-//         // setButtonState(submitButton, form.checkInputValidity(), config)
-//    });
-// }
-
-// enableValidation();
-
-// // function validateOnSubmit() {
-
-// // }
-
-// // const validationConfig = {
-// //     formSelector: '.popup__input-container',
-// //     inputSelector: '.popup__input',
-// //     submitButtonSelector: '.button_type_submit',
-// //     inactiveButtonClass: 'button_disabled',
-// //     inputErrorClass: 'popup__input_state_invalid',
-// //     errorClass: 'input__error_visible'
-// //   };
- 
-  
-
-
-
-
-function validateOpenedPopup(popup) {
-    const allInputs = popup.querySelectorAll('.popup__input');
-
-    allInputs.forEach((input) => {
-        if(input.validity.valid) {
-            input.classList.remove('popup__input_state_invalid');
-            const error = popup.querySelector(`#${input.id}-error`);
-            error.classList.remove('input-error_active');
-            error.textContent = '';
-
-        }
-    })
-}
-
-
-
 function showInputError(form, input, config) {
     const error = form.querySelector(`#${input.id}-error`);
     error.textContent = input.validationMessage;
     input.classList.add(config.inputErrorClass);
-}
+};
 
 function hideInputError(form, input, config) {
     const error = form.querySelector(`#${input.id}-error`);
     error.textContent = '';
     input.classList.remove(config.inputErrorClass);
-}
+};
 
 function checkInputValidity(form, input, config) {
     if (!input.validity.valid) {
         showInputError(form, input, config);
     } else {
         hideInputError(form, input, config);
-    }
-}
+    };
+};
 
 function toggleButtonState(button, isActive, config) {
      if(!isActive) {
@@ -336,8 +220,8 @@ function toggleButtonState(button, isActive, config) {
      } else {
         button.classList.remove(config.inactiveButtonClass);
         button.disabled = false;
-     }
-}
+     };
+};
 
 function setEventListeners(form, config) {
     const inputList = form.querySelectorAll(config.inputSelector);
@@ -347,8 +231,8 @@ function setEventListeners(form, config) {
         input.addEventListener('input', () => {
             checkInputValidity(form, input, config);
             toggleButtonState(submitButton, form.checkValidity(), config);
-        })
-    })
+        });
+    });
         
 };
 
@@ -362,7 +246,7 @@ function enableValidation(config) {
         });
 
         const submitButton = form.querySelector(config.submitButtonSelector);
-        toggleButtonState(submitButton, form.checkValidity(), config)
+        toggleButtonState(submitButton, form.checkValidity(), config);
     });
 }
 
