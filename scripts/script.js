@@ -21,6 +21,7 @@ const popupImage = document.querySelector('.popup__image');
 const popupImageTitle = document.querySelector('.popup__image-title');
 const cardTemplate = document.querySelector('.place-template').content;
 const cards = document.querySelector('.places__list');
+const ESCAPE_KEY = 'Escape';
 
 const root = document.querySelector('.root');
 const inputForms = root.querySelectorAll('.popup__input-container');
@@ -44,7 +45,7 @@ function editProfile() {
     
     inputName.value = profileName.textContent;
     inputTitle.value = profileTitle.textContent;
-    }
+}
 
 editFormElement.addEventListener('submit', (evt) => {
         
@@ -56,9 +57,8 @@ editFormElement.addEventListener('submit', (evt) => {
 // закрыть по событиям: нажать на крестик, клавишу esc и клику вне области
 
 function closeByEscape(evt) {
-    const escapeKey = 'Escape';
     const popupOpened = document.querySelector('.popup_opened');
-    if(evt.key === escapeKey) {  
+    if(evt.key === ESCAPE_KEY) {  
         closePopup(popupOpened);
         
     }
@@ -85,3 +85,12 @@ function setClosePopupListeners() {
 };
   
 setClosePopupListeners();
+
+popupAddButton.addEventListener('click', function () {
+    openPopup(addPlacePopup);
+});
+
+popupEditButton.addEventListener('click', function () {
+    editProfile();
+});
+

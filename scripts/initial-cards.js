@@ -89,10 +89,3 @@ addFormElement.addEventListener('submit', function(evt) {
         addFormElement.reset();
     })
 
-popupAddButton.addEventListener('click', function () {
-    openPopup(addPlacePopup);
-});
-
-popupEditButton.addEventListener('click', function () {
-    editProfile();
-});
