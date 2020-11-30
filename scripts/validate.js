@@ -58,6 +58,15 @@ function enableValidation(config) {
     });
 }
 
+function disableValidation(form, config) {
+    form.reset();
+    const inputList = form.querySelectorAll(config.inputSelector);
+    inputList.forEach((input) => {
+        hideInputError(form, input, config);
+    }); 
+
+};
+
 const validationConfig = {
     formSelector: '.popup__input-container',
     inputSelector: '.popup__input',

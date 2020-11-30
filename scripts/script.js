@@ -26,12 +26,17 @@ const ESCAPE_KEY = 'Escape';
 const root = document.querySelector('.root');
 const inputForms = root.querySelectorAll('.popup__input-container');
 
+
 // открытие и закрытие попапа
 
 function openPopup(popup) {
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', closeByEscape);
-}
+
+    const form = popup.querySelector(validationConfig.formSelector);
+
+    disableValidation(form, validationConfig);
+};
 
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
@@ -40,11 +45,17 @@ function closePopup(popup) {
 
 // редактирование профиля
 
-function editProfile() {
+function editProfile(popup) {
     openPopup(editProfilePopup);
-    
+
     inputName.value = profileName.textContent;
     inputTitle.value = profileTitle.textContent;
+
+    const form = editProfilePopup.querySelector(validationConfig.formSelector);
+
+    const submitButton = editProfilePopup.querySelector(validationConfig.submitButtonSelector);
+   
+    toggleButtonState(submitButton, form.checkValidity(), validationConfig);
 }
 
 editFormElement.addEventListener('submit', (evt) => {
