@@ -64,7 +64,6 @@ function disableValidation(form, config) {
     inputList.forEach((input) => {
         hideInputError(form, input, config);
     }); 
-
 };
 
 const validationConfig = {

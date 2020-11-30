@@ -45,7 +45,7 @@ function closePopup(popup) {
 
 // редактирование профиля
 
-function editProfile(popup) {
+function editProfile() {
     openPopup(editProfilePopup);
 
     inputName.value = profileName.textContent;
@@ -71,9 +71,8 @@ function closeByEscape(evt) {
     const popupOpened = document.querySelector('.popup_opened');
     if(evt.key === ESCAPE_KEY) {  
         closePopup(popupOpened);
-        
-    }
-}
+    };
+};
 
 function setClosePopupListeners() {
        
