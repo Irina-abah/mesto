@@ -59,11 +59,13 @@ function enableValidation(config) {
 }
 
 function disableValidation(form, config) {
-    form.reset();
-    const inputList = form.querySelectorAll(config.inputSelector);
-    inputList.forEach((input) => {
+    if (form) {
+        form.reset();
+        const inputList = form.querySelectorAll(config.inputSelector);
+        inputList.forEach((input) => {
         hideInputError(form, input, config);
-    }); 
+        }); 
+    };
 };
 
 const validationConfig = {
