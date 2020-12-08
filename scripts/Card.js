@@ -1,92 +1,59 @@
-const initialCards = [
-    {
-        name: "Корраловый Риф",
-        link: "./images/grid-great-barrier-reef-australia.jpg",
-        alt: "Большой Корраловый Риф",
-    },
-    {
-        name: "Будва",
-        link: "./images/grid-budva-montenegro.jpg",
-        alt: "Вид моря в Будве",
-    },
-    {
-        name: "Шамони",
-        link: "./images/grid-chamonix-france.jpg",
-        alt: "Заснеженные горы в Шамони",
-    },
-    {
-        name: "Котор",
-        link: "./images/grid-kotor-montenegro.jpg",
-        alt: "Вид сверху на бухту города Котор",
-    },
-    {
-        name: "Исландия",
-        link: "./images/grid-seljalandsfoss-iceland.jpg",
-        alt: "Вид на водопад Селйяландсфосс",
-    },
-    {
-        name: "12 Апостолов",
-        link: "./images/grid-twelve-apostles-australia.jpg",
-        alt: "Пляж Двенадцать Апостолов в Австралии",
-    },
-];
+import { openPopup, previewImage } from "./script.js";
 
-class Card {
-    constructor(data, cardSelector) {
+export class Card {
+    constructor(data, templateSelector) {
         this._name = data.name;
         this._link = data.link;
         this._alt = data.alt;
-        this._cardSelector = cardSelector;
+        this._templateSelector = templateSelector;
     }
 
     _getTemplate() {
         const cardElement = document
-            .querySelector(this._cardSelector)
+            .querySelector(this._templateSelector)
             .content.querySelector(".place")
             .cloneNode(true);
 
         return cardElement;
     }
 
-    _setEventListeners() {}
-
     _setEventListeners() {
-        this._element
-            .querySelector(".button_type_delete")
-            .addEventListener("click", () => {
-                this._deleteCard();
-            });
+        this._deteleButton.addEventListener("click", () => {
+            this._deleteCard();
+        });
+        this._likeButton.addEventListener("click", () => {
+            this._likeCard();
+        });
+        this._link.addEventListener("click", () => {
+            this._previewImage(this._link);
+        });
     }
 
-    deleteCard(evt) {
-        this.
+    _likeCard() {
+        this._element.classList.toggle("place__like_active");
     }
 
-    templateCardImage.addEventListener("click", () => previewImage(card));
-    cardDeleteButton.addEventListener("click", deleteCard);
-    cardLikeButton.addEventListener("click", likeCard);
+    _deleteCard() {
+        this._deleteElement(this._element);
+    }
 
-    _handleMessageClick() {
-        this._element
-            .querySelector(".card__text")
-            .classList.toggle("card__text_is-active");
+    _deleteElement(element) {
+        element.remove();
+        element = null;
     }
 
     generateCard() {
         this._element = this._getTemplate();
         this._setEventListeners();
 
+        this._element.querySelector(".button_type_delete") = this._deteleButton;
+        this._element.querySelector(".place__like").src = this._likeButton;
         this._element.querySelector(".place__image").src = this._link;
         this._element.querySelector(".place__image").alt = this._alt;
         this._element.querySelector(".place__title").textContent = this._name;
 
         return this._element;
     }
+
+    createCustomCard() {}
 }
-
-initialCards.forEach((item) => {
-    const card = new Card(item, ".place-template_type_default");
-    const cardElement = card.generateCard();
-
-    document.body.append(cardElement);
-});

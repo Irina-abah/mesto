@@ -1,3 +1,38 @@
+import { Card } from "./Card.js";
+
+const initialCards = [
+    {
+        name: "Корраловый Риф",
+        link: "./images/grid-great-barrier-reef-australia.jpg",
+        alt: "Большой Корраловый Риф",
+    },
+    {
+        name: "Будва",
+        link: "./images/grid-budva-montenegro.jpg",
+        alt: "Вид моря в Будве",
+    },
+    {
+        name: "Шамони",
+        link: "./images/grid-chamonix-france.jpg",
+        alt: "Заснеженные горы в Шамони",
+    },
+    {
+        name: "Котор",
+        link: "./images/grid-kotor-montenegro.jpg",
+        alt: "Вид сверху на бухту города Котор",
+    },
+    {
+        name: "Исландия",
+        link: "./images/grid-seljalandsfoss-iceland.jpg",
+        alt: "Вид на водопад Селйяландсфосс",
+    },
+    {
+        name: "12 Апостолов",
+        link: "./images/grid-twelve-apostles-australia.jpg",
+        alt: "Пляж Двенадцать Апостолов в Австралии",
+    },
+];
+
 const popupEditButton = document.querySelector(".button_type_edit");
 const popupAddButton = document.querySelector(".button_type_add");
 const popupCloseButtons = document.querySelectorAll(".button_type_close");
@@ -36,7 +71,7 @@ const inputForms = root.querySelectorAll(".popup__input-container");
 
 // открытие и закрытие попапа
 
-function openPopup(popup) {
+export function openPopup(popup) {
     popup.classList.add("popup_opened");
     document.addEventListener("keydown", closeByEscape);
 
@@ -45,7 +80,7 @@ function openPopup(popup) {
     disableValidation(form, validationConfig);
 }
 
-function closePopup(popup) {
+export function closePopup(popup) {
     popup.classList.remove("popup_opened");
     document.removeEventListener("keydown", closeByEscape);
 }
@@ -108,49 +143,49 @@ popupEditButton.addEventListener("click", function () {
     editProfile();
 });
 
-const initialCards = [
-    {
-        name: "Корраловый Риф",
-        link: "./images/grid-great-barrier-reef-australia.jpg",
-        alt: "Большой Корраловый Риф",
-    },
-    {
-        name: "Будва",
-        link: "./images/grid-budva-montenegro.jpg",
-        alt: "Вид моря в Будве",
-    },
-    {
-        name: "Шамони",
-        link: "./images/grid-chamonix-france.jpg",
-        alt: "Заснеженные горы в Шамони",
-    },
-    {
-        name: "Котор",
-        link: "./images/grid-kotor-montenegro.jpg",
-        alt: "Вид сверху на бухту города Котор",
-    },
-    {
-        name: "Исландия",
-        link: "./images/grid-seljalandsfoss-iceland.jpg",
-        alt: "Вид на водопад Селйяландсфосс",
-    },
-    {
-        name: "12 Апостолов",
-        link: "./images/grid-twelve-apostles-australia.jpg",
-        alt: "Пляж Двенадцать Апостолов в Австралии",
-    },
-];
+// const initialCards = [
+//     {
+//         name: "Корраловый Риф",
+//         link: "./images/grid-great-barrier-reef-australia.jpg",
+//         alt: "Большой Корраловый Риф",
+//     },
+//     {
+//         name: "Будва",
+//         link: "./images/grid-budva-montenegro.jpg",
+//         alt: "Вид моря в Будве",
+//     },
+//     {
+//         name: "Шамони",
+//         link: "./images/grid-chamonix-france.jpg",
+//         alt: "Заснеженные горы в Шамони",
+//     },
+//     {
+//         name: "Котор",
+//         link: "./images/grid-kotor-montenegro.jpg",
+//         alt: "Вид сверху на бухту города Котор",
+//     },
+//     {
+//         name: "Исландия",
+//         link: "./images/grid-seljalandsfoss-iceland.jpg",
+//         alt: "Вид на водопад Селйяландсфосс",
+//     },
+//     {
+//         name: "12 Апостолов",
+//         link: "./images/grid-twelve-apostles-australia.jpg",
+//         alt: "Пляж Двенадцать Апостолов в Австралии",
+//     },
+// ];
 
-function deleteCard(evt) {
-    const deletedCard = evt.target.closest(".place");
-    deletedCard.remove();
-}
+// function deleteCard(evt) {
+//     const deletedCard = evt.target.closest(".place");
+//     deletedCard.remove();
+// }
 
-function likeCard(evt) {
-    evt.target.classList.toggle("place__like_active");
-}
+// function likeCard(evt) {
+//     evt.target.classList.toggle("place__like_active");
+// }
 
-function previewImage(card) {
+export function previewImage(card) {
     openPopup(previewPopup);
     popupImage.src = card.link;
     popupImageTitle.textContent = card.name;
@@ -193,4 +228,11 @@ addFormElement.addEventListener("submit", function (evt) {
 
     cards.prepend(newCard);
     toggleButtonState(submitButton, false, validationConfig);
+});
+
+initialCards.forEach((item) => {
+    const place = new Card(item, ".place-template_type_default");
+    const cardElement = place.generateCard();
+
+    cards.append(cardElement);
 });
