@@ -185,33 +185,33 @@ popupEditButton.addEventListener("click", function () {
 //     evt.target.classList.toggle("place__like_active");
 // }
 
-export function previewImage(card) {
+function previewImage(card) {
     openPopup(previewPopup);
     popupImage.src = card.link;
     popupImageTitle.textContent = card.name;
 }
 
-function createNewCard(card) {
-    const cardElement = cardTemplate.cloneNode(true);
-    const cardDeleteButton = cardElement.querySelector(".button_type_delete");
-    const cardLikeButton = cardElement.querySelector(".place__like");
-    const templateCardName = cardElement.querySelector(".place__title");
-    const templateCardImage = cardElement.querySelector(".place__image");
-    templateCardImage.addEventListener("click", () => previewImage(card));
-    cardDeleteButton.addEventListener("click", deleteCard);
-    cardLikeButton.addEventListener("click", likeCard);
+// function createNewCard(card) {
+//     const cardElement = cardTemplate.cloneNode(true);
+//     const cardDeleteButton = cardElement.querySelector(".button_type_delete");
+//     const cardLikeButton = cardElement.querySelector(".place__like");
+//     const templateCardName = cardElement.querySelector(".place__title");
+//     const templateCardImage = cardElement.querySelector(".place__image");
+//     templateCardImage.addEventListener("click", () => previewImage(card));
+//     cardDeleteButton.addEventListener("click", deleteCard);
+//     cardLikeButton.addEventListener("click", likeCard);
 
-    templateCardName.textContent = card.name;
-    templateCardImage.src = card.link;
-    templateCardImage.alt = card.alt;
+//     templateCardName.textContent = card.name;
+//     templateCardImage.src = card.link;
+//     templateCardImage.alt = card.alt;
 
-    return cardElement;
-}
+//     return cardElement;
+// }
 
-initialCards.forEach((item) => {
-    const newCard = createNewCard(item);
-    cards.append(newCard);
-});
+// initialCards.forEach((item) => {
+//     const newCard = createNewCard(item);
+//     cards.append(newCard);
+// });
 
 addFormElement.addEventListener("submit", function (evt) {
     const templateCardName = placeInputTitle.value;

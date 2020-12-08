@@ -1,5 +1,3 @@
-import { openPopup, previewImage } from "./script.js";
-
 export class Card {
     constructor(data, templateSelector) {
         this._name = data.name;
@@ -54,6 +52,4 @@ export class Card {
 
         return this._element;
     }
-
-    createCustomCard() {}
 }
