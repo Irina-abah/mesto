@@ -1,5 +1,5 @@
-import { enableValidation, disableValidation } from ".//FormValidator.js";
-// import { Card } from "./Card.js";
+import { enableValidation, disableValidation } from "./FormValidator.js";
+import { Card } from "./Card.js";
 
 // const initialCards = [
 //     {
@@ -78,6 +78,8 @@ const validationConfig = {
     inactiveButtonClass: "button_type_submit-disabled",
     errorClass: ".input__error",
 };
+
+enableValidation(validationConfig);
 
 // открытие и закрытие попапа
 
@@ -184,65 +186,63 @@ const initialCards = [
     },
 ];
 
-function deleteCard(evt) {
-    const deletedCard = evt.target.closest(".place");
-    deletedCard.remove();
-}
+// function deleteCard(evt) {
+//     const deletedCard = evt.target.closest(".place");
+//     deletedCard.remove();
+// }
 
-function likeCard(evt) {
-    evt.target.classList.toggle("place__like_active");
-}
+// function likeCard(evt) {
+//     evt.target.classList.toggle("place__like_active");
+// }
 
-function previewImage(card) {
-    openPopup(previewPopup);
-    popupImage.src = card.link;
-    popupImageTitle.textContent = card.name;
-}
+// function previewImage(card) {
+//     openPopup(previewPopup);
+//     popupImage.src = card.link;
+//     popupImageTitle.textContent = card.name;
+// }
 
-function createNewCard(card) {
-    const cardElement = cardTemplate.cloneNode(true);
-    const cardDeleteButton = cardElement.querySelector(".button_type_delete");
-    const cardLikeButton = cardElement.querySelector(".place__like");
-    const templateCardName = cardElement.querySelector(".place__title");
-    const templateCardImage = cardElement.querySelector(".place__image");
-    templateCardImage.addEventListener("click", () => previewImage(card));
-    cardDeleteButton.addEventListener("click", deleteCard);
-    cardLikeButton.addEventListener("click", likeCard);
+// function createNewCard(card) {
+//     const cardElement = cardTemplate.cloneNode(true);
+//     const cardDeleteButton = cardElement.querySelector(".button_type_delete");
+//     const cardLikeButton = cardElement.querySelector(".place__like");
+//     const templateCardName = cardElement.querySelector(".place__title");
+//     const templateCardImage = cardElement.querySelector(".place__image");
+//     templateCardImage.addEventListener("click", () => previewImage(card));
+//     cardDeleteButton.addEventListener("click", deleteCard);
+//     cardLikeButton.addEventListener("click", likeCard);
 
-    templateCardName.textContent = card.name;
-    templateCardImage.src = card.link;
-    templateCardImage.alt = card.alt;
+//     templateCardName.textContent = card.name;
+//     templateCardImage.src = card.link;
+//     templateCardImage.alt = card.alt;
 
-    return cardElement;
-}
-
-initialCards.forEach((item) => {
-    const newCard = createNewCard(item);
-    cards.append(newCard);
-});
-
-addFormElement.addEventListener("submit", function (evt) {
-    const templateCardName = placeInputTitle.value;
-    const templateCardImage = placeInputLink.value;
-
-    const submitButton = addFormElement.querySelector(
-        validationConfig.submitButtonSelector
-    );
-
-    const newCard = createNewCard({
-        name: templateCardName,
-        link: templateCardImage,
-    });
-
-    cards.prepend(newCard);
-    toggleButtonState(submitButton, false, validationConfig);
-});
-
-enableValidation(validationConfig);
+//     return cardElement;
+// }
 
 // initialCards.forEach((item) => {
-//     const place = new Card(item, ".place-template_type_default");
-//     const cardElement = place.generateCard();
-
-//     cards.append(cardElement);
+//     const newCard = createNewCard(item);
+//     cards.append(newCard);
 // });
+
+// addFormElement.addEventListener("submit", function (evt) {
+//     const templateCardName = placeInputTitle.value;
+//     const templateCardImage = placeInputLink.value;
+
+//     const submitButton = addFormElement.querySelector(
+//         validationConfig.submitButtonSelector
+//     );
+
+//     const newCard = createNewCard({
+//         name: templateCardName,
+//         link: templateCardImage,
+//     });
+
+//     cards.prepend(newCard);
+//     toggleButtonState(submitButton, false, validationConfig);
+// });
+
+initialCards.forEach((item) => {
+    const place = new Card(item, ".place-template_type_default");
+    const cardElement = place.generateCard();
+
+    cards.append(cardElement);
+});
