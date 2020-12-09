@@ -3,6 +3,9 @@
         "es6": true,
         "browser": true
     },
+    "parserOptions": {
+        "sourceType": "module",
+    },
     "rules": {
         "no-debugger": "off",
         "no-console": 0

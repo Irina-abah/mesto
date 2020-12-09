@@ -53,7 +53,7 @@ function closePopup(popup) {
     popup.classList.remove('popup_opened');
 }
 
-function setClosePopupListeners() {
+(function () {
     popupCloseButtons.forEach(function (form) {
         form.addEventListener('click', function (evt) {
             const popup = evt.target.closest('.popup');
@@ -73,9 +73,7 @@ function setClosePopupListeners() {
         popup.addEventListener('mousedown', function (evt) {
             if (evt.target.classList.contains('popup')) {
                 closePopup(popup);
-
             }
-            ;
         });
     });
 
@@ -86,19 +84,12 @@ function setClosePopupListeners() {
                 closePopup(popup);
             })
         }
-        ;
     });
-
-};
-
-
-setClosePopupListeners();
-
+})();
 // рендеринг карточек
 
 const initialCards = [
     {
-
         name: 'Корраловый Риф',
         link: './images/grid-great-barrier-reef-australia.jpg',
         alt: 'Большой Корраловый Риф'
@@ -170,7 +161,6 @@ initialCards.forEach((item) => {
 });
 
 addFormElement.addEventListener('submit', function (evt) {
-
     const templateCardName = placeInputTitle.value;
     const templateCardImage = placeInputLink.value;
 
@@ -193,61 +183,9 @@ popupEditButton.addEventListener('click', function () {
 
 // validation
 
-function showInputError(form, input, config) {
-    const error = form.querySelector(`#${input.id}-error`);
-    error.textContent = input.validationMessage;
-    input.classList.add(config.inputErrorClass);
-};
 
-function hideInputError(form, input, config) {
-    const error = form.querySelector(`#${input.id}-error`);
-    error.textContent = '';
-    input.classList.remove(config.inputErrorClass);
-};
 
-function checkInputValidity(form, input, config) {
-    if (!input.validity.valid) {
-        showInputError(form, input, config);
-    } else {
-        hideInputError(form, input, config);
-    }
-};
-
-function toggleButtonState(button, isActive, config) {
-    if (!isActive) {
-        button.classList.add(config.inactiveButtonClass);
-        button.disabled = true;
-    } else {
-        button.classList.remove(config.inactiveButtonClass);
-        button.disabled = false;
-    }
-};
-
-function setEventListeners(form, config) {
-    const inputList = form.querySelectorAll(config.inputSelector);
-    const submitButton = form.querySelector(config.submitButtonSelector);
-
-    inputList.forEach((input) => {
-        input.addEventListener('input', () => {
-            checkInputValidity(form, input, config);
-            toggleButtonState(submitButton, form.checkValidity(), config);
-        });
-    });
-};
-
-function enableValidation(config) {
-    const allInputForms = document.querySelectorAll(config.formSelector);
-    allInputForms.forEach((form) => {
-        setEventListeners(form, config);
-
-        form.addEventListener('submit', (evt) => {
-            evt.preventDefault();
-        });
-
-        const submitButton = form.querySelector(config.submitButtonSelector);
-        toggleButtonState(submitButton, form.checkValidity(), config);
-    });
-}
+import {enableValidation} from './validation.js';
 
 const config = {
     formSelector: '.popup__input-container',
