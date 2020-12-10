@@ -1,38 +1,38 @@
 import { enableValidation, disableValidation } from "./FormValidator.js";
 import { Card } from "./Card.js";
 
-// const initialCards = [
-//     {
-//         name: "Корраловый Риф",
-//         link: "./images/grid-great-barrier-reef-australia.jpg",
-//         alt: "Большой Корраловый Риф",
-//     },
-//     {
-//         name: "Будва",
-//         link: "./images/grid-budva-montenegro.jpg",
-//         alt: "Вид моря в Будве",
-//     },
-//     {
-//         name: "Шамони",
-//         link: "./images/grid-chamonix-france.jpg",
-//         alt: "Заснеженные горы в Шамони",
-//     },
-//     {
-//         name: "Котор",
-//         link: "./images/grid-kotor-montenegro.jpg",
-//         alt: "Вид сверху на бухту города Котор",
-//     },
-//     {
-//         name: "Исландия",
-//         link: "./images/grid-seljalandsfoss-iceland.jpg",
-//         alt: "Вид на водопад Селйяландсфосс",
-//     },
-//     {
-//         name: "12 Апостолов",
-//         link: "./images/grid-twelve-apostles-australia.jpg",
-//         alt: "Пляж Двенадцать Апостолов в Австралии",
-//     },
-// ];
+const initialCards = [
+    {
+        name: "Корраловый Риф",
+        image: "./images/grid-great-barrier-reef-australia.jpg",
+        alt: "Большой Корраловый Риф",
+    },
+    {
+        name: "Будва",
+        image: "./images/grid-budva-montenegro.jpg",
+        alt: "Вид моря в Будве",
+    },
+    {
+        name: "Шамони",
+        image: "./images/grid-chamonix-france.jpg",
+        alt: "Заснеженные горы в Шамони",
+    },
+    {
+        name: "Котор",
+        image: "./images/grid-kotor-montenegro.jpg",
+        alt: "Вид сверху на бухту города Котор",
+    },
+    {
+        name: "Исландия",
+        image: "./images/grid-seljalandsfoss-iceland.jpg",
+        alt: "Вид на водопад Селйяландсфосс",
+    },
+    {
+        name: "12 Апостолов",
+        image: "./images/grid-twelve-apostles-australia.jpg",
+        alt: "Пляж Двенадцать Апостолов в Австралии",
+    },
+];
 
 const popupEditButton = document.querySelector(".button_type_edit");
 const popupAddButton = document.querySelector(".button_type_add");
@@ -153,48 +153,6 @@ popupEditButton.addEventListener("click", function () {
     editProfile();
 });
 
-const initialCards = [
-    {
-        name: "Корраловый Риф",
-        link: "./images/grid-great-barrier-reef-australia.jpg",
-        alt: "Большой Корраловый Риф",
-    },
-    {
-        name: "Будва",
-        link: "./images/grid-budva-montenegro.jpg",
-        alt: "Вид моря в Будве",
-    },
-    {
-        name: "Шамони",
-        link: "./images/grid-chamonix-france.jpg",
-        alt: "Заснеженные горы в Шамони",
-    },
-    {
-        name: "Котор",
-        link: "./images/grid-kotor-montenegro.jpg",
-        alt: "Вид сверху на бухту города Котор",
-    },
-    {
-        name: "Исландия",
-        link: "./images/grid-seljalandsfoss-iceland.jpg",
-        alt: "Вид на водопад Селйяландсфосс",
-    },
-    {
-        name: "12 Апостолов",
-        link: "./images/grid-twelve-apostles-australia.jpg",
-        alt: "Пляж Двенадцать Апостолов в Австралии",
-    },
-];
-
-// function deleteCard(evt) {
-//     const deletedCard = evt.target.closest(".place");
-//     deletedCard.remove();
-// }
-
-// function likeCard(evt) {
-//     evt.target.classList.toggle("place__like_active");
-// }
-
 // function previewImage(card) {
 //     openPopup(previewPopup);
 //     popupImage.src = card.link;
@@ -218,31 +176,39 @@ const initialCards = [
 //     return cardElement;
 // }
 
-// initialCards.forEach((item) => {
-//     const newCard = createNewCard(item);
-//     cards.append(newCard);
-// });
+// addFormElement.addEventListener("submit", addCardFromPopup);
 
-// addFormElement.addEventListener("submit", function (evt) {
-//     const templateCardName = placeInputTitle.value;
-//     const templateCardImage = placeInputLink.value;
+function createCard(name, image, alt) {
+    const cardElement = new Card(image, name, alt).generateCard();
+
+    return cardElement;
+}
+
+initialCards.forEach((card) => {
+    cards.append(createCard(card.name, card.image, card.alt));
+});
+
+// function addCardFromPopup() {
+//     document.querySelector(".place__title").textContent = placeInputTitle.value;
+//     document.querySelector(".place__image").src = placeInputLink.value;
 
 //     const submitButton = addFormElement.querySelector(
 //         validationConfig.submitButtonSelector
 //     );
 
-//     const newCard = createNewCard({
-//         name: templateCardName,
-//         link: templateCardImage,
+//     // const newCard = generateCard({
+//     //     name: templateCardName,
+//     //     image: templateCardImage,
+//     // });
+
+//     const place = new Card(image, name, alt);
+//     const cardElement = place.generateCard({
+//         name: this._name,
+//         image: this._image,
 //     });
 
-//     cards.prepend(newCard);
+//     cards.prepend(cardElement);
+
+// cards.prepend(newCard);
 //     toggleButtonState(submitButton, false, validationConfig);
-// });
-
-initialCards.forEach((item) => {
-    const place = new Card(item, ".place-template_type_default");
-    const cardElement = place.generateCard();
-
-    cards.append(cardElement);
-});
+// }
