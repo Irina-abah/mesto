@@ -1,4 +1,4 @@
-import { enableValidation, disableValidation } from "./FormValidator.js";
+import { FormValidator } from "./FormValidator.js";
 import { Card } from "./Card.js";
 
 const initialCards = [
@@ -69,6 +69,9 @@ const ESCAPE_KEY = "Escape";
 
 const root = document.querySelector(".root");
 const inputForms = root.querySelectorAll(".popup__input-container");
+const editProfileForm = document.querySelector(
+    ".popup__input-container_type_edit"
+);
 
 const validationConfig = {
     formSelector: ".popup__input-container",
@@ -79,9 +82,23 @@ const validationConfig = {
     errorClass: ".input__error",
 };
 
-enableValidation(validationConfig);
+const profileFormValidation = new FormValidator(
+    editProfileForm,
+    validationConfig
+);
+profileFormValidation.enableValidation();
+
+// enableValidation(validationConfig);
 
 // открытие и закрытие попапа
+
+// inputForms.forEach((form) => {
+//     const validationHandler = new FormValidator(
+//         form,
+//         validationConfig.formSelector
+//     );
+//     validationHandler.enableValidation();
+// });
 
 function openPopup(popup) {
     popup.classList.add("popup_opened");
@@ -89,7 +106,8 @@ function openPopup(popup) {
 
     const form = popup.querySelector(validationConfig.formSelector);
 
-    disableValidation(form, validationConfig);
+    // const validationHandler = new FormValidator(form, validationConfig);
+    validationHandler.disableValidation();
 }
 
 function closePopup(popup) {
@@ -107,11 +125,14 @@ function editProfile() {
 
     const form = editProfilePopup.querySelector(validationConfig.formSelector);
 
-    const submitButton = editProfilePopup.querySelector(
-        validationConfig.submitButtonSelector
-    );
+    // new FormValidator(form, validationConfig).enableValidation;
 
-    toggleButtonState(submitButton, form.checkValidity(), validationConfig);
+    // const submitButton = editProfilePopup.querySelector(
+    //     validationConfig.submitButtonSelector
+    // );
+    // validationHandler.toggleButtonState(submitButton, form.checkValidity());
+
+    // toggleButtonState(submitButton, form.checkValidity(), validationConfig);
 }
 
 editFormElement.addEventListener("submit", (evt) => {
