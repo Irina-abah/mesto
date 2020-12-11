@@ -85,22 +85,22 @@ const validationConfig = {
 
 // применение валидации к формам
 
-// function validationHandler(form) {
-//     const applyValidation = new FormValidator(
-//         validationConfig,
-//         form
-//     ).enableValidation();
-// }
+function validationHandler(form) {
+    const applyValidation = new FormValidator(
+        validationConfig,
+        form
+    ).enableValidation();
+}
 
-// inputForms.forEach((form) => {
-//     validationHandler(form);
-// });
+inputForms.forEach((form) => {
+    validationHandler(form);
+});
 
-const editCardValidation = new FormValidator(validationConfig, editProfileForm);
-editCardValidation.enableValidation();
+// const editCardValidation = new FormValidator(validationConfig, editProfileForm);
+// editCardValidation.enableValidation();
 
-const addCardValidation = new FormValidator(validationConfig, addCardForm);
-addCardValidation.enableValidation();
+// const addCardValidation = new FormValidator(validationConfig, addCardForm);
+// addCardValidation.enableValidation();
 
 // открытие и закрытие попапа
 
@@ -199,4 +199,5 @@ initialCards.forEach((card) => {
 addFormElement.addEventListener("submit", (evt) => {
     evt.preventDefault();
     cards.prepend(createCard(placeInputTitle.value, placeInputLink.value));
+    addFormElement.reset();
 });
