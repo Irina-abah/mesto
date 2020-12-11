@@ -1,3 +1,10 @@
+import {
+    openPopup,
+    previewPopup,
+    popupImage,
+    popupImageTitle,
+} from "./script.js";
+
 export class Card {
     constructor(image, name, alt) {
         this._name = name;
@@ -21,9 +28,9 @@ export class Card {
         this._element
             .querySelector(".place__like")
             .addEventListener("click", this._handleClickLikeCard);
-        // this._element
-        //     .querySelector(".place__image")
-        //     .addEventListener("click", this._handleClickPreviewImage);
+        this._element
+            .querySelector(".place__image")
+            .addEventListener("click", this._handleClickPreviewImage);
     }
 
     _handleClickDeleteCard = (evt) => {
@@ -36,13 +43,13 @@ export class Card {
         evt.target.classList.toggle("place__like_active");
     };
 
-    // _handleClickPreviewImage = (evt) => {
-    //     openPopup(previewPopup);
-    //     popupImage.src = this._link;
-    //     popupImageTitle.textContent = this._name;
-    // };
+    _handleClickPreviewImage = () => {
+        openPopup(previewPopup);
+        popupImage.src = this._image;
+        popupImageTitle.textContent = this._name;
+    };
 
-    generateCard() {
+    generateCard = () => {
         this._element = this._getTemplate();
         this._setEventListeners();
         this._element.querySelector(".place__image").src = this._image;
@@ -50,5 +57,5 @@ export class Card {
         this._element.querySelector(".place__title").textContent = this._name;
 
         return this._element;
-    }
+    };
 }
