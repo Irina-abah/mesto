@@ -18,6 +18,10 @@ export class Card {
             .content.querySelector(".place")
             .cloneNode(true);
 
+        cardElement.querySelector(".place__image").src = this._image;
+        cardElement.querySelector(".place__image").alt = this._alt;
+        cardElement.querySelector(".place__title").textContent = this._name;
+        
         return cardElement;
     };
 
@@ -52,10 +56,7 @@ export class Card {
     generateCard = () => {
         this._element = this._getTemplate();
         this._setEventListeners();
-        this._element.querySelector(".place__image").src = this._image;
-        this._element.querySelector(".place__image").alt = this._alt;
-        this._element.querySelector(".place__title").textContent = this._name;
-
+    
         return this._element;
     };
 };
