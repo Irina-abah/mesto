@@ -10,7 +10,7 @@ export class Card {
         this._name = name;
         this._image = image;
         this._alt = alt;
-    }
+    };
 
     _getTemplate() {
         const cardElement = document
@@ -19,7 +19,7 @@ export class Card {
             .cloneNode(true);
 
         return cardElement;
-    }
+    };
 
     _setEventListeners() {
         this._element
@@ -31,7 +31,7 @@ export class Card {
         this._element
             .querySelector(".place__image")
             .addEventListener("click", this._handleClickPreviewImage);
-    }
+    };
 
     _handleClickDeleteCard = (evt) => {
         const deletedElement = evt.target.closest(".place");
@@ -58,4 +58,4 @@ export class Card {
 
         return this._element;
     };
-}
+};
