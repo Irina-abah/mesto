@@ -6,6 +6,12 @@ import {
 } from "./script.js";
 
 export class Card {
+    /**
+     * 
+     * @param {string} image
+     * @param {string} name
+     * @param {string} alt
+     */
     constructor(image, name, alt) {
         this._name = name;
         this._image = image;
@@ -49,6 +55,9 @@ export class Card {
         popupImageTitle.textContent = this._name;
     };
 
+    /**
+     * @return {null|Node}
+     */
     generateCard = () => {
         this._element = this._getTemplate();
         this._setEventListeners();
