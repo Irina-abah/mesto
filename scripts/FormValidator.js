@@ -1,6 +1,10 @@
-import { closePopup } from "./script.js";
+import {closePopup} from "./script.js";
 
 export class FormValidator {
+    /**
+     * @param {{inputSelector:string,inputErrorClass:string,inactiveButtonClass:string,submitButtonSelector:string}} config
+     * @param  {Element}  form
+     */
     constructor(config, form) {
         this._config = config;
         this._form = form;
@@ -23,7 +27,7 @@ export class FormValidator {
             this._showInputError(input);
         } else {
             this._hideInputError(input);
-        };
+        }
     };
 
     _toggleButtonState = (isActive) => {
@@ -33,7 +37,7 @@ export class FormValidator {
         } else {
             this._button.classList.remove(this._config.inactiveButtonClass);
             this._button.disabled = false;
-        };
+        }
     };
 
     _disableValidation() {
