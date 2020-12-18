@@ -1,0 +1,19 @@
+{
+  "name": "mesto",
+  "version": "0.0.1",
+  "description": "LINK TO GITHUB: https://irina-abah.github.io/mesto/index.html",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Irina-abah/mesto.git"
+  },
+  "author": "Iryna Abah",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Irina-abah/mesto/issues"
+  },
+  "homepage": "https://github.com/Irina-abah/mesto#readme"
+}
