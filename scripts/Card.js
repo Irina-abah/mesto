@@ -7,8 +7,8 @@ import {
 
 export class Card {
     constructor(image, name, alt) {
-        this._name = name;
         this._image = image;
+        this._name = name;
         this._alt = alt;
     };
 
@@ -19,9 +19,9 @@ export class Card {
             .cloneNode(true);
 
         cardElement.querySelector(".place__image").src = this._image;
-        cardElement.querySelector(".place__image").alt = this._alt;
         cardElement.querySelector(".place__title").textContent = this._name;
-        
+        cardElement.querySelector(".place__image").alt = this._alt;
+
         return cardElement;
     };
 
@@ -56,7 +56,7 @@ export class Card {
     generateCard = () => {
         this._element = this._getTemplate();
         this._setEventListeners();
-    
+
         return this._element;
     };
 };
