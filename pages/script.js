@@ -1,6 +1,6 @@
-import { FormValidator } from "./FormValidator.js";
-import { Card } from "./Card.js";
-import { initialCards } from "./initialCards.js";
+import { FormValidator } from "../components/FormValidator.js";
+import { Card } from "../components/Card.js";
+import { initialCards } from "../utils/initialCards.js";
 
 // попапы
 const allPopups = document.querySelectorAll(".popup");
@@ -107,16 +107,32 @@ popupEditButton.addEventListener("click", function () {
 
 // создание элемента карточки
 
-function createCard(name, image, alt) {
-    const cardElement = new Card(image, name, alt).generateCard();
+//function createCard(name, image, alt) {
+//  const cardElement = new Card(image, name, alt).generateCard();
+
+//  return cardElement;
+//};
+
+function createCard(card) {
+    const cardElement = new Card(card, '.place-template').generateCard();
 
     return cardElement;
 };
 // рендеринг карточек из массива и создание карточки из попапа
 
+//initialCards.forEach((card) => {
+//    cards.append(createCard(card.name, card.image, card.alt));
+// });
+
 initialCards.forEach((card) => {
-    cards.append(createCard(card.name, card.image, card.alt));
+    cards.append(createCard(card, '.place-template'));
 });
+
+// addFormElement.addEventListener("submit", (evt) => {
+//     evt.preventDefault();
+//     cards.prepend(createCard(placeInputTitle.value, placeInputLink.value));
+//     addFormElement.reset();
+// });
 
 addFormElement.addEventListener("submit", (evt) => {
     evt.preventDefault();

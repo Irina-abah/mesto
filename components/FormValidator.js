@@ -1,4 +1,4 @@
-import { closePopup } from "./script.js";
+import { closePopup } from "../pages/script.js";
 
 export class FormValidator {
     constructor(config, form) {

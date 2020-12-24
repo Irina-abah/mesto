@@ -3,13 +3,14 @@ import {
     previewPopup,
     popupImage,
     popupImageTitle,
-} from "./script.js";
+} from "../pages/script.js";
 
 export class Card {
-    constructor(image, name, alt) {
-        this._image = image;
-        this._name = name;
-        this._alt = alt;
+    constructor(data, templateSelector) {
+        this._image = data.image;
+        this._name = data.name;
+        this._alt = data.alt;
+        this._templateSelector = templateSelector
     };
 
     _getTemplate() {
