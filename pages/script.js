@@ -1,6 +1,7 @@
 import { FormValidator } from "../components/FormValidator.js";
 import { Card } from "../components/Card.js";
 import { initialCards } from "../utils/initialCards.js";
+import { Popup } from "../components/Popup.js";
 
 // попапы
 const allPopups = document.querySelectorAll(".popup");
