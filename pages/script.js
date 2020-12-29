@@ -4,6 +4,7 @@ import { PopupWithImage } from "../components/PopupWithImage.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { Section } from "../components/Section.js";
 import { UserInfo } from "../components/UserInfo.js";
+import { Popup } from "../components/Popup.js";
 
 export { allPopups, editProfilePopup, addPlacePopup, previewPopup, popupEditButton, popupAddButton, popupCloseButtons, editFormElement, addFormElement, placeInputTitle, placeInputLink, popupImage, popupImageTitle, profileName, profileTitle, inputName, inputTitle, cards, ESCAPE_KEY, validationConfig, initialCards } from "../utils/constants.js"
 
@@ -28,7 +29,7 @@ const profilePopup = new PopupWithForm({
     }
 })
 
-const submitCardPopup = new new PopupWithForm({
+const submitCardPopup = new PopupWithForm({
     popupSelector: ".popup_type_add",
     handleSubmitForm: (formData) => {
         userInfo.getUserInfo({
@@ -37,6 +38,30 @@ const submitCardPopup = new new PopupWithForm({
         })
     }
 })
+
+function createCard(card) {
+    const cardElement = new Card({
+        image: card.image,
+        name: card.name,
+        alt: card.alt
+    },
+        '.place-template',
+        () => {
+            PopupWithImage.open(card)
+        }).generateCard();
+
+    return cardElement;
+};
+
+const initialCards = new Section({
+    data: initialCards,
+    renderer: (item) => {
+        const card = createCard(item);
+        initialCards.addItem(card);
+    }
+});
+
+initialCards.renderItems();
 
 // открытие и закрытие попапа
 
@@ -100,28 +125,15 @@ popupEditButton.addEventListener("click", function () {
     editProfile();
 });
 
-// создание элемента карточки
-
-//function createCard(name, image, alt) {
-//  const cardElement = new Card(image, name, alt).generateCard();
-
-//  return cardElement;
-//};
-
-function createCard(card) {
-    const cardElement = new Card(card, '.place-template').generateCard();
-
-    return cardElement;
-};
 // рендеринг карточек из массива и создание карточки из попапа
 
 //initialCards.forEach((card) => {
 //    cards.append(createCard(card.name, card.image, card.alt));
 // });
 
-initialCards.forEach((card) => {
-    cards.append(createCard(card, '.place-template'));
-});
+// initialCards.forEach((card) => {
+//     cards.append(createCard(card, '.place-template'));
+// });
 
 // addFormElement.addEventListener("submit", (evt) => {
 //     evt.preventDefault();
