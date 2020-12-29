@@ -1,22 +1,16 @@
-import {
-    openPopup,
-    previewPopup,
-    popupImage,
-    popupImageTitle,
-} from "../pages/script.js";
-
-export class Card {
-    constructor(data, templateSelector) {
+export default class Card {
+    constructor(data, templateSelector, handleCardClick) {
         this._image = data.image;
         this._name = data.name;
         this._alt = data.alt;
-        this._templateSelector = templateSelector
+        this._templateSelector = templateSelector;
+        this._handleCardClick = handleCardClick
     };
 
     _getTemplate() {
         const cardElement = document
-            .querySelector(".place-template")
-            .content.querySelector(".place")
+            .querySelector(this._templateSelector)
+            .content
             .cloneNode(true);
 
         cardElement.querySelector(".place__image").src = this._image;
@@ -35,7 +29,7 @@ export class Card {
             .addEventListener("click", this._handleClickLikeCard);
         this._element
             .querySelector(".place__image")
-            .addEventListener("click", this._handleClickPreviewImage);
+            .addEventListener("click", this._handleCardClick());
     };
 
     _handleClickDeleteCard = (evt) => {
@@ -46,12 +40,6 @@ export class Card {
 
     _handleClickLikeCard = (evt) => {
         evt.target.classList.toggle("place__like_active");
-    };
-
-    _handleClickPreviewImage = () => {
-        openPopup(previewPopup);
-        popupImage.src = this._image;
-        popupImageTitle.textContent = this._name;
     };
 
     generateCard = () => {

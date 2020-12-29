@@ -1,67 +1,61 @@
 import { FormValidator } from "../components/FormValidator.js";
 import { Card } from "../components/Card.js";
-import { initialCards } from "../utils/initialCards.js";
-import { Popup } from "../components/Popup.js";
+import { PopupWithImage } from "../components/PopupWithImage.js";
+import { PopupWithForm } from "../components/PopupWithForm.js";
+import { Section } from "../components/Section.js";
+import { UserInfo } from "../components/UserInfo.js";
 
-// попапы
-const allPopups = document.querySelectorAll(".popup");
-const editProfilePopup = document.querySelector(".popup_type_edit");
-const addPlacePopup = document.querySelector(".popup_type_add");
-export const previewPopup = document.querySelector(".popup_type_preview");
+export { allPopups, editProfilePopup, addPlacePopup, previewPopup, popupEditButton, popupAddButton, popupCloseButtons, editFormElement, addFormElement, placeInputTitle, placeInputLink, popupImage, popupImageTitle, profileName, profileTitle, inputName, inputTitle, cards, ESCAPE_KEY, validationConfig, initialCards } from "../utils/constants.js"
 
-// кнопки попапов
-const popupEditButton = document.querySelector(".button_type_edit");
-const popupAddButton = document.querySelector(".button_type_add");
-const popupCloseButtons = document.querySelectorAll(".button_type_close");
-
-// поля попапов
-const editFormElement = document.querySelector(".popup__input-container_type_edit");
-const addFormElement = document.querySelector(".popup__input-container_type_add");
-const placeInputTitle = addFormElement.querySelector(".popup__input_type_place-title");
-const placeInputLink = addFormElement.querySelector(".popup__input_type_place-image");
-export const popupImage = document.querySelector(".popup__image");
-export const popupImageTitle = document.querySelector(".popup__image-title");
-
-const profileName = document.querySelector(".profile__name");
-const profileTitle = document.querySelector(".profile__title");
-const inputName = document.querySelector("#profile-name");
-const inputTitle = document.querySelector("#profile-title");
-
-const cards = document.querySelector(".places__list");
-
-const ESCAPE_KEY = "Escape";
-
-// валидация
-const validationConfig = {
-    formSelector: ".popup__input-container",
-    inputSelector: ".popup__input",
-    inputErrorClass: "popup__input_state_invalid",
-    submitButtonSelector: ".button_type_submit",
-    inactiveButtonClass: "button_type_submit-disabled",
-    errorClass: ".input__error",
-};
 
 const editCardValidation = new FormValidator(validationConfig, editFormElement);
 const addCardValidation = new FormValidator(validationConfig, addFormElement);
 
+const imagePreview = new PopupWithImage(".popup_type_preview");
+
+const userInfo = new UserInfo({
+    profileNameSelector: ".profile__name",
+    profileTitleSelector: ".profile__title"
+});
+
+const profilePopup = new PopupWithForm({
+    popupSelector: ".popup_type_edit",
+    handleSubmitForm: (formData) => {
+        userInfo.getUserInfo({
+            name: formData.name,
+            title: formData.title
+        })
+    }
+})
+
+const submitCardPopup = new new PopupWithForm({
+    popupSelector: ".popup_type_add",
+    handleSubmitForm: (formData) => {
+        userInfo.getUserInfo({
+            name: formData.name,
+            title: formData.title
+        })
+    }
+})
+
 // открытие и закрытие попапа
 
-export function openPopup(popup) {
-    popup.classList.add("popup_opened");
-    document.addEventListener("keydown", closeByEscape);
-};
+// export function openPopup(popup) {
+//     popup.classList.add("popup_opened");
+//     document.addEventListener("keydown", closeByEscape);
+// };
 
-export function closePopup(popup) {
-    popup.classList.remove("popup_opened");
-    document.removeEventListener("keydown", closeByEscape);
-};
+// export function closePopup(popup) {
+//     popup.classList.remove("popup_opened");
+//     document.removeEventListener("keydown", closeByEscape);
+// };
 
-function closeByEscape(evt) {
-    const popupOpened = document.querySelector(".popup_opened");
-    if (evt.key === ESCAPE_KEY) {
-        closePopup(popupOpened)
-    };
-};
+// function closeByEscape(evt) {
+//     const popupOpened = document.querySelector(".popup_opened");
+//     if (evt.key === ESCAPE_KEY) {
+//         closePopup(popupOpened)
+//     };
+// };
 
 // редактирование профиля
 

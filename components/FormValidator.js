@@ -1,9 +1,8 @@
-import { closePopup } from "../pages/script.js";
-
 export class FormValidator {
-    constructor(config, form) {
+    constructor(config, form, close) {
         this._config = config;
         this._form = form;
+        this._close = close;
     };
 
     _showInputError = (input) => {
@@ -55,7 +54,7 @@ export class FormValidator {
         this._form.addEventListener("submit", (evt) => {
             evt.preventDefault();
             const popup = evt.target.closest(".popup");
-            closePopup(popup);
+            this._close(popup);
         });
     };
 
