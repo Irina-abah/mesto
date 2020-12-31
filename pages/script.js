@@ -6,13 +6,16 @@ import { Section } from "../components/Section.js";
 import { UserInfo } from "../components/UserInfo.js";
 import { Popup } from "../components/Popup.js";
 
-export { allPopups, editProfilePopup, addPlacePopup, previewPopup, popupEditButton, popupAddButton, popupCloseButtons, editFormElement, addFormElement, placeInputTitle, placeInputLink, popupImage, popupImageTitle, profileName, profileTitle, inputName, inputTitle, cards, ESCAPE_KEY, validationConfig, initialCards } from "../utils/constants.js"
+import { allPopups, editProfilePopup, addPlacePopup, previewPopup, popupEditButton, popupAddButton, popupCloseButtons, editFormElement, addFormElement, placeInputTitle, placeInputLink, popupImage, popupImageTitle, profileName, profileTitle, inputName, inputTitle, cards, ESCAPE_KEY, validationConfig, initialCards } from "../utils/constants.js"
 
 
 const editCardValidation = new FormValidator(validationConfig, editFormElement);
 const addCardValidation = new FormValidator(validationConfig, addFormElement);
 
-const imagePreview = new PopupWithImage(".popup_type_preview");
+editCardValidation.enableValidation();
+addCardValidation.enableValidation();
+
+const imagePreviewPopup = new PopupWithImage(".popup_type_preview");
 
 const userInfo = new UserInfo({
     profileNameSelector: ".profile__name",
@@ -31,11 +34,9 @@ const profilePopup = new PopupWithForm({
 
 const submitCardPopup = new PopupWithForm({
     popupSelector: ".popup_type_add",
-    handleSubmitForm: (formData) => {
-        userInfo.getUserInfo({
-            name: formData.name,
-            title: formData.title
-        })
+    handleSubmitForm: (item) => {
+        const card = createCard(item);
+        allCards.addItem(card);
     }
 })
 
@@ -47,21 +48,21 @@ function createCard(card) {
     },
         '.place-template',
         () => {
-            PopupWithImage.open(card)
+            imagePreviewPopup.open(card)
         }).generateCard();
 
     return cardElement;
 };
 
-const initialCards = new Section({
+const allCards = new Section({
     data: initialCards,
     renderer: (item) => {
         const card = createCard(item);
-        initialCards.addItem(card);
+        allCards.addItem(card);
     }
 });
 
-initialCards.renderItems();
+allCards.renderItems();
 
 // открытие и закрытие попапа
 
@@ -84,46 +85,46 @@ initialCards.renderItems();
 
 // редактирование профиля
 
-function editProfile() {
-    openPopup(editProfilePopup);
-    editCardValidation.enableValidation();
+// function editProfile() {
+//     openPopup(editProfilePopup);
+//     editCardValidation.enableValidation();
 
-    inputName.value = profileName.textContent;
-    inputTitle.value = profileTitle.textContent;
-};
+//     inputName.value = profileName.textContent;
+//     inputTitle.value = profileTitle.textContent;
+// };
 
-editFormElement.addEventListener("submit", (evt) => {
-    profileName.textContent = inputName.value;
-    profileTitle.textContent = inputTitle.value;
-});
+// editFormElement.addEventListener("submit", (evt) => {
+//     profileName.textContent = inputName.value;
+//     profileTitle.textContent = inputTitle.value;
+// });
 
 // слушатели
 
-(function () {
-    popupCloseButtons.forEach(function (form) {
-        form.addEventListener("click", function (evt) {
-            const popup = evt.target.closest(".popup");
-            closePopup(popup);
-        });
-    });
+// (function () {
+//     popupCloseButtons.forEach(function (form) {
+//         form.addEventListener("click", function (evt) {
+//             const popup = evt.target.closest(".popup");
+//             closePopup(popup);
+//         });
+//     });
 
-    allPopups.forEach(function (popup) {
-        popup.addEventListener("mousedown", function (evt) {
-            if (evt.target.classList.contains("popup")) {
-                closePopup(popup);
-            };
-        });
-    });
-})();
+//     allPopups.forEach(function (popup) {
+//         popup.addEventListener("mousedown", function (evt) {
+//             if (evt.target.classList.contains("popup")) {
+//                 closePopup(popup);
+//             };
+//         });
+//     });
+// })();
 
 popupAddButton.addEventListener("click", function () {
     openPopup(addPlacePopup);
     addCardValidation.enableValidation();
 });
 
-popupEditButton.addEventListener("click", function () {
-    editProfile();
-});
+// popupEditButton.addEventListener("click", function () {
+//     editProfile();
+// });
 
 // рендеринг карточек из массива и создание карточки из попапа
 
@@ -140,9 +141,3 @@ popupEditButton.addEventListener("click", function () {
 //     cards.prepend(createCard(placeInputTitle.value, placeInputLink.value));
 //     addFormElement.reset();
 // });
-
-addFormElement.addEventListener("submit", (evt) => {
-    evt.preventDefault();
-    cards.prepend(createCard(placeInputTitle.value, placeInputLink.value));
-    addFormElement.reset();
-});
