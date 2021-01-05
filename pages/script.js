@@ -8,12 +8,15 @@ import { Popup } from "../components/Popup.js";
 
 import { allPopups, editProfilePopup, addPlacePopup, previewPopup, popupEditButton, popupAddButton, popupCloseButtons, editFormElement, addFormElement, placeInputTitle, placeInputLink, popupImage, popupImageTitle, profileName, profileTitle, inputName, inputTitle, cards, ESCAPE_KEY, validationConfig, initialCards } from "../utils/constants.js"
 
+// валидация
 
 const editCardValidation = new FormValidator(validationConfig, editFormElement);
 const addCardValidation = new FormValidator(validationConfig, addFormElement);
 
 editCardValidation.enableValidation();
 addCardValidation.enableValidation();
+
+// попап с картинкой
 
 const imagePreviewPopup = new PopupWithImage(".popup_type_preview");
 
@@ -54,15 +57,46 @@ function createCard(card) {
     return cardElement;
 };
 
+// рендеринг всех картинок 
+
 const allCards = new Section({
     data: initialCards,
     renderer: (item) => {
         const card = createCard(item);
         allCards.addItem(card);
     }
-});
+}, cards);
 
 allCards.renderItems();
+
+popupAddButton.addEventListener("click", () => {
+    addCardValidation.enableValidation();
+    submitCardPopup.open();
+});
+
+popupEditButton.addEventListener("click", () => {
+    editCardValidation.enableValidation();
+
+    const userProfile = userInfo.getUserInfo();
+    inputName.value = userProfile.name;
+    inputTitle.value = userProfile.title;
+
+    profilePopup.open();
+});
+
+
+// function editProfile() {
+//     openPopup(editProfilePopup);
+//     editCardValidation.enableValidation();
+
+//     inputName.value = profileName.textContent;
+//     inputTitle.value = profileTitle.textContent;
+// };
+
+// editFormElement.addEventListener("submit", (evt) => {
+//     profileName.textContent = inputName.value;
+//     profileTitle.textContent = inputTitle.value;
+// });
 
 // открытие и закрытие попапа
 
@@ -83,21 +117,6 @@ allCards.renderItems();
 //     };
 // };
 
-// редактирование профиля
-
-// function editProfile() {
-//     openPopup(editProfilePopup);
-//     editCardValidation.enableValidation();
-
-//     inputName.value = profileName.textContent;
-//     inputTitle.value = profileTitle.textContent;
-// };
-
-// editFormElement.addEventListener("submit", (evt) => {
-//     profileName.textContent = inputName.value;
-//     profileTitle.textContent = inputTitle.value;
-// });
-
 // слушатели
 
 // (function () {
@@ -116,11 +135,6 @@ allCards.renderItems();
 //         });
 //     });
 // })();
-
-popupAddButton.addEventListener("click", function () {
-    openPopup(addPlacePopup);
-    addCardValidation.enableValidation();
-});
 
 // popupEditButton.addEventListener("click", function () {
 //     editProfile();
