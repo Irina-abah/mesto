@@ -28,7 +28,7 @@ const userInfo = new UserInfo({
 const profilePopup = new PopupWithForm({
     popupSelector: ".popup_type_edit",
     handleSubmitForm: (formData) => {
-        userInfo.getUserInfo({
+        userInfo.setUserInfo({
             name: formData.name,
             title: formData.title
         })
@@ -138,20 +138,4 @@ popupEditButton.addEventListener("click", () => {
 
 // popupEditButton.addEventListener("click", function () {
 //     editProfile();
-// });
-
-// рендеринг карточек из массива и создание карточки из попапа
-
-//initialCards.forEach((card) => {
-//    cards.append(createCard(card.name, card.image, card.alt));
-// });
-
-// initialCards.forEach((card) => {
-//     cards.append(createCard(card, '.place-template'));
-// });
-
-// addFormElement.addEventListener("submit", (evt) => {
-//     evt.preventDefault();
-//     cards.prepend(createCard(placeInputTitle.value, placeInputLink.value));
-//     addFormElement.reset();
 // });

@@ -51,11 +51,11 @@ export class FormValidator {
                 this._toggleButtonState(this._form.checkValidity());
             });
         });
-        this._form.addEventListener("submit", (evt) => {
-            evt.preventDefault();
-            const popup = evt.target.closest(".popup");
-            this._close(popup);
-        });
+        // this._form.addEventListener("submit", (evt) => {
+        //     evt.preventDefault();
+        //     const popup = evt.target.closest(".popup");
+        //     this._close(popup);
+        // });
     };
 
     enableValidation = () => {

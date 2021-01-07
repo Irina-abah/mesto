@@ -16,7 +16,7 @@ export class PopupWithForm extends Popup {
         return this._formValues;
     }
 
-    setEventListeners = () => {
+    _setEventListeners = () => {
         super.setEventListeners();
 
         this._form.addEventListener("submit", (evt) => {
@@ -28,7 +28,7 @@ export class PopupWithForm extends Popup {
     }
 
     close = () => {
-        super.close();
+        // super.close();
         this._form.reset();
     }
 
