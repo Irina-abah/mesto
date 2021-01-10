@@ -18,6 +18,7 @@ addCardValidation.enableValidation();
 // попап с картинкой
 
 const imagePreviewPopup = new PopupWithImage(".popup_type_preview");
+imagePreviewPopup.setEventListeners();
 
 // пользователь
 
@@ -26,30 +27,35 @@ const userInfo = new UserInfo({
     profileTitleSelector: ".profile__title"
 });
 
-// const profilePopup = new PopupWithForm({
-//     popupSelector: ".popup_type_edit",
-//     handleSubmitForm: (formData) => {
-//         userInfo.setUserInfo({
-//             name: formData.name,
-//             title: formData.title
-//         })
-//     }
-// })
-
 const profilePopup = new PopupWithForm({
     popupSelector: ".popup_type_edit",
     handleSubmitForm: (formData) => {
-        userInfo.setUserInfo(formData)
+        userInfo.setUserInfo({
+            name: formData.name,
+            title: formData.title
+        })
     }
 })
 
 profilePopup.setEventListeners();
 
+// карточки - рендеринг и добавление новой
+
+const allCards = new Section({
+    data: initialCards,
+    renderer: (card) => {
+        const cardElement = createCard(card);
+        allCards.addItem(cardElement);
+    }
+}, cards);
+
+allCards.renderItems();
+
 const submitCardPopup = new PopupWithForm({
     popupSelector: ".popup_type_add",
-    handleSubmitForm: (item) => {
-        const card = createCard(item);
-        allCards.addItem(card);
+    handleSubmitForm: (card) => {
+        const cardElement = createCard(card);
+        allCards.addItem(cardElement);
     }
 })
 
@@ -66,20 +72,12 @@ function createCard(card) {
             imagePreviewPopup.open(card)
         }).generateCard();
 
+    // console.log(card)
+
     return cardElement;
 };
 
-// рендеринг всех картинок 
-
-const allCards = new Section({
-    data: initialCards,
-    renderer: (item) => {
-        const card = createCard(item);
-        allCards.addItem(card);
-    }
-}, cards);
-
-allCards.renderItems();
+// слушатели
 
 popupAddButton.addEventListener("click", () => {
     addCardValidation.enableValidation();

@@ -29,7 +29,7 @@ export class Card {
             .addEventListener("click", this._handleClickLikeCard);
         this._element
             .querySelector(".place__image")
-            .addEventListener("click", this._handleCardClick());
+            .addEventListener("click", this._handleCardClick);
     };
 
     _handleClickDeleteCard = (evt) => {
