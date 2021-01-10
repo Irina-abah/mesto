@@ -5,9 +5,10 @@ export class PopupWithForm extends Popup {
         this._handleSubmitForm = handleSubmitForm;
         this._form = this._popup.querySelector(".popup__input-container");
         this._inputList = this._form.querySelectorAll(".popup__input");
+        // this.setEventListeners = this.setEventListeners.bind(this);
     }
 
-    _getInputValues = () => {
+    _getInputValues() {
         this._formValues = {};
         this._inputList.forEach((input) => {
             this._formValues[input.name] = input.value;
@@ -16,19 +17,19 @@ export class PopupWithForm extends Popup {
         return this._formValues;
     }
 
-    _setEventListeners = () => {
+    setEventListeners() {
         super.setEventListeners();
 
         this._form.addEventListener("submit", (evt) => {
             evt.preventDefault();
             this._handleSubmitForm(this._getInputValues());
-            this._close();
+            this.close();
         })
 
     }
 
-    close = () => {
-        // super.close();
+    close() {
+        super.close();
         this._form.reset();
     }
 
