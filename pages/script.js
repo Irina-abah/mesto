@@ -27,39 +27,28 @@ const userInfo = new UserInfo({
     profileTitleSelector: ".profile__title"
 });
 
+// const profilePopup = new PopupWithForm({
+//     popupSelector: ".popup_type_edit",
+//     handleSubmitForm: (formData) => {
+//         userInfo.setUserInfo({
+//             name: formData.name,
+//             title: formData.title
+//         })
+//     }
+// })
+
 const profilePopup = new PopupWithForm({
     popupSelector: ".popup_type_edit",
     handleSubmitForm: (formData) => {
-        userInfo.setUserInfo({
-            name: formData.name,
-            title: formData.title
-        })
+        formData.name = inputName.value;
+        formData.title = inputTitle.value;
+        userInfo.setUserInfo(formData)
     }
 })
 
 profilePopup.setEventListeners();
 
 // карточки - рендеринг и добавление новой
-
-const allCards = new Section({
-    data: initialCards,
-    renderer: (card) => {
-        const cardElement = createCard(card);
-        allCards.addItem(cardElement);
-    }
-}, cards);
-
-allCards.renderItems();
-
-const submitCardPopup = new PopupWithForm({
-    popupSelector: ".popup_type_add",
-    handleSubmitForm: (card) => {
-        const cardElement = createCard(card);
-        allCards.addItem(cardElement);
-    }
-})
-
-submitCardPopup.setEventListeners();
 
 function createCard(card) {
     const cardElement = new Card({
@@ -72,10 +61,31 @@ function createCard(card) {
             imagePreviewPopup.open(card)
         }).generateCard();
 
-    // console.log(card)
-
     return cardElement;
 };
+
+const allCards = new Section({
+    data: initialCards,
+    renderer: (card) => {
+        const cardElement = createCard(card);
+        allCards.renderItem(cardElement);
+    }
+}, cards);
+
+allCards.renderItems();
+
+const submitCardPopup = new PopupWithForm({
+    popupSelector: ".popup_type_add",
+    handleSubmitForm: (card) => {
+        card.image = placeInputLink.value;
+        card.name = placeInputTitle.value;
+        card.alt = placeInputTitle.value;
+        const cardElement = createCard(card);
+        allCards.addNewItem(cardElement);
+    }
+});
+
+submitCardPopup.setEventListeners();
 
 // слушатели
 
@@ -93,17 +103,3 @@ popupEditButton.addEventListener("click", () => {
 
     profilePopup.open();
 });
-
-
-// function editProfile() {
-//     openPopup(editProfilePopup);
-//     editCardValidation.enableValidation();
-
-//     inputName.value = profileName.textContent;
-//     inputTitle.value = profileTitle.textContent;
-// };
-
-// editFormElement.addEventListener("submit", (evt) => {
-//     profileName.textContent = inputName.value;
-//     profileTitle.textContent = inputTitle.value;
-// });

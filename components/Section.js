@@ -10,7 +10,11 @@ export class Section {
             this._renderer(item))
     }
 
-    addItem(item) {
-        this._container.append(item);
+    renderItem(element) {
+        this._container.append(element);
+    }
+
+    addNewItem(element) {
+        this._container.prepend(element);
     }
 }
