@@ -1,26 +1,15 @@
-export { allPopups, editProfilePopup, addPlacePopup, previewPopup, popupEditButton, popupAddButton, popupCloseButtons, editFormElement, addFormElement, placeInputTitle, placeInputLink, popupImage, popupImageTitle, profileName, profileTitle, inputName, inputTitle, cards, ESCAPE_KEY, validationConfig, initialCards }
-
-// попапы
-const allPopups = document.querySelectorAll(".popup");
-const editProfilePopup = document.querySelector(".popup_type_edit");
-const addPlacePopup = document.querySelector(".popup_type_add");
-const previewPopup = document.querySelector(".popup_type_preview");
+export { popupEditButton, popupAddButton, editFormElement, addFormElement, placeInputTitle, placeInputLink, inputName, inputTitle, cards, ESCAPE_KEY, validationConfig, initialCards }
 
 // кнопки попапов
 const popupEditButton = document.querySelector(".button_type_edit");
 const popupAddButton = document.querySelector(".button_type_add");
-const popupCloseButtons = document.querySelectorAll(".button_type_close");
 
 // поля попапов
 const editFormElement = document.querySelector(".popup__input-container_type_edit");
 const addFormElement = document.querySelector(".popup__input-container_type_add");
 const placeInputTitle = addFormElement.querySelector(".popup__input_type_place-title");
 const placeInputLink = addFormElement.querySelector(".popup__input_type_place-image");
-const popupImage = document.querySelector(".popup__image");
-const popupImageTitle = document.querySelector(".popup__image-title");
 
-const profileName = document.querySelector(".profile__name");
-const profileTitle = document.querySelector(".profile__title");
 const inputName = document.querySelector("#profile-name");
 const inputTitle = document.querySelector("#profile-title");
 

@@ -5,7 +5,19 @@ import { PopupWithForm } from "../components/PopupWithForm.js";
 import { Section } from "../components/Section.js";
 import { UserInfo } from "../components/UserInfo.js";
 
-import { allPopups, editProfilePopup, addPlacePopup, previewPopup, popupEditButton, popupAddButton, popupCloseButtons, editFormElement, addFormElement, placeInputTitle, placeInputLink, popupImage, popupImageTitle, profileName, profileTitle, inputName, inputTitle, cards, ESCAPE_KEY, validationConfig, initialCards } from "../utils/constants.js";
+import {
+    popupEditButton,
+    popupAddButton,
+    editFormElement,
+    addFormElement,
+    placeInputTitle,
+    placeInputLink,
+    inputName,
+    inputTitle,
+    cards,
+    validationConfig,
+    initialCards
+} from "../utils/constants.js";
 
 // валидация
 
@@ -27,22 +39,12 @@ const userInfo = new UserInfo({
     profileTitleSelector: ".profile__title"
 });
 
-// const profilePopup = new PopupWithForm({
-//     popupSelector: ".popup_type_edit",
-//     handleSubmitForm: (formData) => {
-//         userInfo.setUserInfo({
-//             name: formData.name,
-//             title: formData.title
-//         })
-//     }
-// })
-
 const profilePopup = new PopupWithForm({
     popupSelector: ".popup_type_edit",
     handleSubmitForm: (formData) => {
         formData.name = inputName.value;
         formData.title = inputTitle.value;
-        userInfo.setUserInfo(formData)
+        userInfo.setUserInfo(formData);
     }
 })
 
@@ -90,16 +92,17 @@ submitCardPopup.setEventListeners();
 // слушатели
 
 popupAddButton.addEventListener("click", () => {
-    addCardValidation.enableValidation();
+
     submitCardPopup.open();
 });
 
 popupEditButton.addEventListener("click", () => {
-    editCardValidation.enableValidation();
+
+    profilePopup.open();
 
     const userProfile = userInfo.getUserInfo();
     inputName.value = userProfile.name;
     inputTitle.value = userProfile.title;
 
-    profilePopup.open();
+    editCardValidation.resetForm();
 });
