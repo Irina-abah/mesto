@@ -4,7 +4,7 @@ export class Card {
         this._name = name;
         this._alt = alt;
         this._templateSelector = templateSelector;
-        this._handleCardClick = handleCardClick
+        this._handleCardClick = handleCardClick;
     };
 
     _getTemplate() {
@@ -48,4 +48,5 @@ export class Card {
 
         return this._element;
     };
+
 };

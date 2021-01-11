@@ -46,7 +46,7 @@ const profilePopup = new PopupWithForm({
         formData.title = inputTitle.value;
         userInfo.setUserInfo(formData);
     }
-})
+});
 
 profilePopup.setEventListeners();
 
@@ -94,6 +94,7 @@ submitCardPopup.setEventListeners();
 popupAddButton.addEventListener("click", () => {
 
     submitCardPopup.open();
+    editCardValidation.resetForm();
 });
 
 popupEditButton.addEventListener("click", () => {
