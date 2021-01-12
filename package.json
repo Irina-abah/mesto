@@ -1,19 +1,32 @@
 {
-  "name": "mesto",
-  "version": "0.0.1",
-  "description": "LINK TO GITHUB: https://irina-abah.github.io/mesto/index.html",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Irina-abah/mesto.git"
-  },
-  "author": "Iryna Abah",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Irina-abah/mesto/issues"
-  },
-  "homepage": "https://github.com/Irina-abah/mesto#readme"
+    "name": "mesto",
+    "version": "0.0.1",
+    "description": "LINK TO GITHUB: https://irina-abah.github.io/mesto/index.html",
+    "main": "index.js",
+    "scripts": {
+        "build": "rimraf dist && webpack --mode production",
+        "dev": "webpack serve"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Irina-abah/mesto.git"
+    },
+    "author": "Iryna Abah",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Irina-abah/mesto/issues"
+    },
+    "homepage": "https://github.com/Irina-abah/mesto#readme",
+    "devDependencies": {
+        "@babel/core": "^7.12.10",
+        "babel-loader": "^8.2.2",
+        "html-webpack-plugin": "^4.5.1",
+        "webpack": "^5.13.0",
+        "webpack-cli": "^4.3.1",
+        "webpack-dev-server": "^3.11.1"
+    },
+    "dependencies": {
+        "core-js": "^3.8.2",
+        "rimraf": "^3.0.2"
+    }
 }
