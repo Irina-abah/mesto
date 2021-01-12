@@ -1,5 +1,13 @@
 export { popupEditButton, popupAddButton, editFormElement, addFormElement, placeInputTitle, placeInputLink, inputName, inputTitle, cards, ESCAPE_KEY, validationConfig, initialCards }
 
+// картинки
+const greatBarrier = new URL("../images/grid-great-barrier-reef-australia.jpg", import.meta.url);
+const budva = new URL("../images/grid-budva-montenegro.jpg", import.meta.url);
+const chamonix = new URL("../images/grid-chamonix-france.jpg", import.meta.url);
+const kotor = new URL("../images/grid-kotor-montenegro.jpg", import.meta.url);
+const seljalandsfoss = new URL("../images/grid-seljalandsfoss-iceland.jpg", import.meta.url);
+const twelveApostles = new URL("../images/grid-twelve-apostles-australia.jpg", import.meta.url);
+
 // кнопки попапов
 const popupEditButton = document.querySelector(".button_type_edit");
 const popupAddButton = document.querySelector(".button_type_add");
@@ -31,32 +39,32 @@ const validationConfig = {
 const initialCards = [
     {
         name: "Корраловый Риф",
-        image: "./images/grid-great-barrier-reef-australia.jpg",
+        image: greatBarrier,
         alt: "Большой Корраловый Риф",
     },
     {
         name: "Будва",
-        image: "./images/grid-budva-montenegro.jpg",
+        image: budva,
         alt: "Вид моря в Будве",
     },
     {
         name: "Шамони",
-        image: "./images/grid-chamonix-france.jpg",
+        image: chamonix,
         alt: "Заснеженные горы в Шамони",
     },
     {
         name: "Котор",
-        image: "./images/grid-kotor-montenegro.jpg",
+        image: kotor,
         alt: "Вид сверху на бухту города Котор",
     },
     {
         name: "Исландия",
-        image: "./images/grid-seljalandsfoss-iceland.jpg",
+        image: seljalandsfoss,
         alt: "Вид на водопад Селйяландсфосс",
     },
     {
         name: "12 Апостолов",
-        image: "./images/grid-twelve-apostles-australia.jpg",
+        image: twelveApostles,
         alt: "Пляж Двенадцать Апостолов в Австралии",
     },
 ];

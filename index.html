@@ -8,7 +8,6 @@
         content="Проектная работа Ирины Абах 4 спринта - сервисо Mesto: интерактивная страница, куда можно добавлять фотографии, удалять их и ставить лайки." />
     <meta name="keywords" content="Путешествия, горы, фотоальбом, море, отпуск" />
     <meta name="author" content="Ирина Абах" />
-    <link rel="stylesheet" href="./pages/index.css" />
     <title>Mesto</title>
 </head>
 
@@ -16,12 +15,13 @@
     <div class="root">
         <header class="header">
             <a class="header__link" href="#" target="_blank">
-                <img class="header__logo" src="./images/logo.svg" alt="Логотип портала Mesto" />
+                <img class="header__logo" src="<%=require('../images/logo.svg')%>" alt="Логотип портала Mesto" />
             </a>
         </header>
         <main class="main">
             <section class="profile">
-                <img class="profile__avatar" src="./images/Avatar.jpg" alt="Фотография Жака-Ива Кусто" />
+                <img class="profile__avatar" src="<%=require('./images/Avatar.jpg')%>"
+                    alt="Фотография Жака-Ива Кусто" />
                 <div class="profile__info">
                     <div class="profile__bio">
                         <h1 class="profile__name">Жак-Ив Кусто</h1>

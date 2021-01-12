@@ -4,7 +4,7 @@
     "description": "LINK TO GITHUB: https://irina-abah.github.io/mesto/index.html",
     "main": "index.js",
     "scripts": {
-        "build": "rimraf dist && webpack --mode production",
+        "build": "webpack --mode production",
         "dev": "webpack serve"
     },
     "repository": {
@@ -19,8 +19,14 @@
     "homepage": "https://github.com/Irina-abah/mesto#readme",
     "devDependencies": {
         "@babel/core": "^7.12.10",
+        "autoprefixer": "^10.2.1",
         "babel-loader": "^8.2.2",
+        "clean-webpack-plugin": "^3.0.0",
+        "css-loader": "^5.0.1",
+        "cssnano": "^4.1.10",
         "html-webpack-plugin": "^4.5.1",
+        "mini-css-extract-plugin": "^1.3.3",
+        "postcss-loader": "^4.1.0",
         "webpack": "^5.13.0",
         "webpack-cli": "^4.3.1",
         "webpack-dev-server": "^3.11.1"
