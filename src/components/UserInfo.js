@@ -4,7 +4,7 @@ export class UserInfo {
         this._profileTitle = document.querySelector(profileTitleSelector);
     };
 
-    getUserInfo = () => {
+    getUserInfo() {
         const userData = {
             name: this._profileName.textContent,
             title: this._profileTitle.textContent
@@ -13,7 +13,7 @@ export class UserInfo {
         return userData;
     };
 
-    setUserInfo = ({ name, title }) => {
+    setUserInfo({ name, title }) {
         this._profileName.textContent = name;
         this._profileTitle.textContent = title;
     };

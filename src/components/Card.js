@@ -32,17 +32,17 @@ export class Card {
             .addEventListener("click", this._handleCardClick);
     };
 
-    _handleClickDeleteCard = (evt) => {
+    _handleClickDeleteCard(evt) {
         const deletedElement = evt.target.closest(".place");
         deletedElement.remove();
         this._element = null;
     };
 
-    _handleClickLikeCard = (evt) => {
+    _handleClickLikeCard(evt) {
         evt.target.classList.toggle("place__like_active");
     };
 
-    generateCard = () => {
+    generateCard() {
         this._element = this._getTemplate();
         this._setEventListeners();
 
