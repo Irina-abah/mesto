@@ -5,7 +5,7 @@ export class Card {
         this._alt = alt;
         this._templateSelector = templateSelector;
         this._handleCardClick = handleCardClick;
-    };
+    }
 
     _getTemplate() {
         const cardElement = document
@@ -18,7 +18,7 @@ export class Card {
         cardElement.querySelector(".place__image").alt = this._alt;
 
         return cardElement;
-    };
+    }
 
     _setEventListeners() {
         this._element
@@ -30,23 +30,23 @@ export class Card {
         this._element
             .querySelector(".place__image")
             .addEventListener("click", this._handleCardClick);
-    };
+    }
 
     _handleClickDeleteCard(evt) {
         const deletedElement = evt.target.closest(".place");
         deletedElement.remove();
         this._element = null;
-    };
+    }
 
     _handleClickLikeCard(evt) {
         evt.target.classList.toggle("place__like_active");
-    };
+    }
 
     generateCard() {
         this._element = this._getTemplate();
         this._setEventListeners();
 
         return this._element;
-    };
+    }
 
-};
+}

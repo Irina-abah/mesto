@@ -8,8 +8,6 @@ import { UserInfo } from "../components/UserInfo.js";
 import './index.css';
 
 import {
-    popupEditButton,
-    popupAddButton,
     editFormElement,
     addFormElement,
     placeInputTitle,
@@ -20,6 +18,9 @@ import {
     validationConfig,
     initialCards
 } from "../utils/constants.js";
+
+const popupAddButton = document.querySelector(".button_type_add");
+const popupEditButton = document.querySelector(".button_type_edit");
 
 // валидация
 
@@ -44,9 +45,11 @@ const userInfo = new UserInfo({
 const profilePopup = new PopupWithForm({
     popupSelector: ".popup_type_edit",
     handleSubmitForm: (formData) => {
-        formData.name = inputName.value;
-        formData.title = inputTitle.value;
-        userInfo.setUserInfo(formData);
+        userInfo.setUserInfo({
+            name: formData['profile-name'], 
+            title: formData['profile-title']
+        });
+        profilePopup.close();
     }
 });
 
@@ -81,11 +84,13 @@ allCards.renderItems();
 const submitCardPopup = new PopupWithForm({
     popupSelector: ".popup_type_add",
     handleSubmitForm: (card) => {
-        card.image = placeInputLink.value;
-        card.name = placeInputTitle.value;
-        card.alt = placeInputTitle.value;
-        const cardElement = createCard(card);
+        const cardElement = createCard({
+            image: card['place-image'],
+            name: card['place-title'],
+            alt: card['place-image']
+        });
         allCards.addNewItem(cardElement);
+        submitCardPopup.close();
     }
 });
 

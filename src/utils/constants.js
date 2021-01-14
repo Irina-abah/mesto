@@ -1,5 +1,3 @@
-export { popupEditButton, popupAddButton, editFormElement, addFormElement, placeInputTitle, placeInputLink, inputName, inputTitle, cards, ESCAPE_KEY, validationConfig, initialCards }
-
 // картинки
 const greatBarrier = new URL("../images/grid-great-barrier-reef-australia.jpg", import.meta.url);
 const budva = new URL("../images/grid-budva-montenegro.jpg", import.meta.url);
@@ -7,10 +5,6 @@ const chamonix = new URL("../images/grid-chamonix-france.jpg", import.meta.url);
 const kotor = new URL("../images/grid-kotor-montenegro.jpg", import.meta.url);
 const seljalandsfoss = new URL("../images/grid-seljalandsfoss-iceland.jpg", import.meta.url);
 const twelveApostles = new URL("../images/grid-twelve-apostles-australia.jpg", import.meta.url);
-
-// кнопки попапов
-const popupEditButton = document.querySelector(".button_type_edit");
-const popupAddButton = document.querySelector(".button_type_add");
 
 // поля попапов
 const editFormElement = document.querySelector(".popup__input-container_type_edit");
@@ -68,3 +62,5 @@ const initialCards = [
         alt: "Пляж Двенадцать Апостолов в Австралии",
     },
 ];
+
+export { editFormElement, addFormElement, placeInputTitle, placeInputLink, inputName, inputTitle, cards, ESCAPE_KEY, validationConfig, initialCards }
