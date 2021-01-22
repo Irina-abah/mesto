@@ -1,8 +1,7 @@
 .profile__avatar-info {
-    /* border-radius: 50%; */
-    margin-right: 30px;
     display: flex;
     margin: auto;
+    position: relative;
 }
 
 @media (max-width: 1054px) {
