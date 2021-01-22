@@ -4,6 +4,7 @@ import { PopupWithImage } from "../components/PopupWithImage.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { Section } from "../components/Section.js";
 import { UserInfo } from "../components/UserInfo.js";
+import { Api } from "../components/Api.js";
 
 import './index.css';
 
@@ -21,6 +22,14 @@ import {
 
 const popupAddButton = document.querySelector(".button_type_add");
 const popupEditButton = document.querySelector(".button_type_edit");
+
+const api = new Api({
+    baseUrl: "https://mesto.nomoreparties.co/v1/cohort-19",
+    headers: {
+      authorization: "56edb7fc-fa8b-4fc3-a429-04b774323c5f",
+      "Content-Type": "application/json"
+    }
+  });
 
 // валидация
 
