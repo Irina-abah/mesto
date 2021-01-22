@@ -1,0 +1,14 @@
+.button_type_avatar-edit {
+    /* background: url(../../../images/edit-icon.svg) center; */
+    cursor: pointer;
+    background: none;
+}
+
+ .button_type_avatar-edit:hover {
+    background: url(../../../images/edit-icon.svg) center;
+    cursor: pointer;
+    opacity: 0.2;
+    transition: all 0.7s ease;
+    width: 26px;
+    height: 26px;
+ } 
