@@ -83,6 +83,29 @@
                 <h2 class="popup__image-title"></h2>
             </div>
         </div>
+        <div class="popup popup_type_confirm">
+            <div class="popup__container">
+                <button type="button" class="button button_type_close" aria-label="close"></button>
+                <h2 class="popup__title">Вы уверены?</h2>
+                <button type="submit" class="button button_type_submit">Да
+                </button>
+            </div>
+        </div>
+        <div class="popup popup_opened popup_type_avatar">
+            <div class="popup__container">
+                <button type="button" class="button button_type_close" aria-label="close"></button>
+                <h2 class="popup__title">Обновить аватар</h2>
+                <form class="popup__input-container popup__input-container_type_avatar" name="popup-input-container-avatar"
+                    novalidate>
+                    <input type="url" class="popup__input popup__input_type_profile-avatar" id="profile-avatar"
+                        name="profile-avatar" placeholder="Ссылка на фото" title="Введите URL адрес фото." required />
+                    <span class="input-error" id="place-image-error"></span>
+                    <button type="submit" class="button button_type_submit">
+                        Сохранить
+                    </button>
+                </form>
+            </div>
+        </div>
         <template class="place-template">
             <li class="place">
                 <button class="button button_type_delete" aria-label="delete"></button>
