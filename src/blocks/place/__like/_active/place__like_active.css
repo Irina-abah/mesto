@@ -1,6 +1,5 @@
 .place__like_active {
     opacity: 1;
     background: url(../../../../images/like-icon-active.svg) center no-repeat;
-    width: 21px;
-    height: 18.69px;
+    width: 22px;
   }
