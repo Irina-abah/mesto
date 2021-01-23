@@ -6,6 +6,7 @@
     font-size: 18px;
     line-height: 1.21;
     font-weight: normal;
+    width: 100%;
 }
 
 .button_type_submit:hover {
