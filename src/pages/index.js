@@ -11,8 +11,6 @@ import './index.css';
 import {
     editFormElement,
     addFormElement,
-    placeInputTitle,
-    placeInputLink,
     inputName,
     inputTitle,
     cards,
@@ -46,9 +44,15 @@ imagePreviewPopup.setEventListeners();
 
 // пользователь
 
+// const userInfo = new UserInfo({
+//     profileNameSelector: ".profile__name",
+//     profileTitleSelector: ".profile__title",
+// });
+
 const userInfo = new UserInfo({
     profileNameSelector: ".profile__name",
-    profileTitleSelector: ".profile__title"
+    profileTitleSelector: ".profile__title",
+    avatarSelector: ".profile__avatar"
 });
 
 const profilePopup = new PopupWithForm({

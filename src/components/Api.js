@@ -20,6 +20,20 @@ export class Api {
     }
 
     addCard() {
-        
+
+    }
+
+    getUserInfo() {
+        return fetch(`${this._address}/users/me`, {
+            method: 'GET',
+            headers: this._headers
+        })
+        .then(res => {
+            if (res.ok) {
+                return res.json()
+            }
+
+            return Promise.reject(`Error ${res.status}`)
+        })
     }
 }
