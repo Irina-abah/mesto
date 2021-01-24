@@ -11,6 +11,7 @@ import './index.css';
 import {
     editFormElement,
     addFormElement,
+    editAvatarElement,
     inputName,
     inputTitle,
     cards,
@@ -20,6 +21,7 @@ import {
 
 const popupAddButton = document.querySelector(".button_type_add");
 const popupEditButton = document.querySelector(".button_type_edit");
+const popupEditAvatarButton = document.querySelector(".button_type_avatar-edit");
 
 const api = new Api({
     baseUrl: "https://mesto.nomoreparties.co/v1/cohort-19",
@@ -33,9 +35,11 @@ const api = new Api({
 
 const editCardValidation = new FormValidator(validationConfig, editFormElement);
 const addCardValidation = new FormValidator(validationConfig, addFormElement);
+const editAvatarValidation = new FormValidator(validationConfig, editAvatarElement)
 
 editCardValidation.enableValidation();
 addCardValidation.enableValidation();
+// editAvatarValidation.enableValidation();
 
 // попап с картинкой
 
@@ -44,29 +48,54 @@ imagePreviewPopup.setEventListeners();
 
 // пользователь
 
-// const userInfo = new UserInfo({
-//     profileNameSelector: ".profile__name",
-//     profileTitleSelector: ".profile__title",
-// });
-
 const userInfo = new UserInfo({
     profileNameSelector: ".profile__name",
     profileTitleSelector: ".profile__title",
     avatarSelector: ".profile__avatar"
 });
 
+// const profilePopup = new PopupWithForm({
+//     popupSelector: ".popup_type_edit",
+//     handleSubmitForm: (formData) => {
+//         userInfo.setUserInfo({
+//             name: formData['profile-name'], 
+//             title: formData['profile-title']
+//         });
+//         profilePopup.close();
+//     }
+// });
+
 const profilePopup = new PopupWithForm({
     popupSelector: ".popup_type_edit",
     handleSubmitForm: (formData) => {
-        userInfo.setUserInfo({
-            name: formData['profile-name'], 
-            title: formData['profile-title']
-        });
-        profilePopup.close();
+        api.setUserInfo(formData)
+        .then((res) => {
+            userInfo.setUserInfo({
+                name: res['profile-name'], 
+                about: res['profile-title']
+            });
+            profilePopup.close();
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+        .finally(() => {
+
+        })
     }
 });
 
 profilePopup.setEventListeners();
+
+const editAvatarPopup = new PopupWithForm({
+    popupSelector: ".popup_type_avatar",
+    handleSubmitForm: (formData) => {
+        userInfo.setUserAvatar(formData);
+        editAvatarPopup.close();
+    }
+})
+
+editAvatarPopup.setEventListeners();
 
 // карточки - рендеринг и добавление новой
 
@@ -123,7 +152,13 @@ popupEditButton.addEventListener("click", () => {
 
     const userProfile = userInfo.getUserInfo();
     inputName.value = userProfile.name;
-    inputTitle.value = userProfile.title;
+    inputTitle.value = userProfile.about;
 
     editCardValidation.resetForm();
 });
+
+popupEditAvatarButton.addEventListener("click", () => {
+    editAvatarPopup.open();
+
+    editAvatarValidation.resetForm();
+})

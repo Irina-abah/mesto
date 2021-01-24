@@ -9,6 +9,7 @@ const twelveApostles = new URL("../images/grid-twelve-apostles-australia.jpg", i
 // поля попапов
 const editFormElement = document.querySelector(".popup__input-container_type_edit");
 const addFormElement = document.querySelector(".popup__input-container_type_add");
+const editAvatarElement = document.querySelector(".popup__input-container_type_avatar");
 const placeInputTitle = addFormElement.querySelector(".popup__input_type_place-title");
 const placeInputLink = addFormElement.querySelector(".popup__input_type_place-image");
 
@@ -63,4 +64,4 @@ const initialCards = [
     },
 ];
 
-export { editFormElement, addFormElement, placeInputTitle, placeInputLink, inputName, inputTitle, cards, ESCAPE_KEY, validationConfig, initialCards }
+export { editFormElement, addFormElement, editAvatarElement, placeInputTitle, placeInputLink, inputName, inputTitle, cards, ESCAPE_KEY, validationConfig, initialCards }

@@ -1,26 +1,24 @@
 export class Api {
-    constructor({baseUrl, headers}) {
-        this._baseUrl = baseUrl;
+    constructor({address, headers}) {
+        this._address = address;
         this._headers = headers;
     }
 
-    getInitialCards() {
-        return fetch(`${this._address}`, {
-            headers: {
-                authorization: this._token
-            }
-        })
-        .then(res => {
-            if (res.ok) {
-                return res.json()
-            }
+    _checkResponse(res) {
+        if (res.ok) {
+            return res.json()
+        }
 
-            return Promise.reject(`Error ${res}`)
-        })
+        return Promise.reject(`Error ${res.status}`)
     }
 
-    addCard() {
-
+    getInitialCards() {
+        return fetch(`${this._address}/cards`, {
+            headers: this._headers
+        })
+        .then(res => {
+            return this._checkResponse(res)
+        })
     }
 
     getUserInfo() {
@@ -29,11 +27,39 @@ export class Api {
             headers: this._headers
         })
         .then(res => {
-            if (res.ok) {
-                return res.json()
-            }
-
-            return Promise.reject(`Error ${res.status}`)
+            return this._checkResponse(res)
         })
     }
+
+    changeUserInfo(formData) {
+        return fetch(`${this._address}/users/me`, {
+            method: 'PATCH',
+            headers: this._headers,
+            body: JSON.stringify({
+                name: formData.name,
+                about: formData.about
+            })
+        })
+        .then(res => {
+            return this._checkResponse(res)
+        })
+    }
+
+    addCard() {
+
+    }
+
+    likeCard() {
+
+    }
+
+    editAvatar() {
+
+    }
+
+    deleteCard() {
+
+    }
+
+    
 }
