@@ -1,10 +1,10 @@
 // картинки
-const greatBarrier = new URL("../images/grid-great-barrier-reef-australia.jpg", import.meta.url);
-const budva = new URL("../images/grid-budva-montenegro.jpg", import.meta.url);
-const chamonix = new URL("../images/grid-chamonix-france.jpg", import.meta.url);
-const kotor = new URL("../images/grid-kotor-montenegro.jpg", import.meta.url);
-const seljalandsfoss = new URL("../images/grid-seljalandsfoss-iceland.jpg", import.meta.url);
-const twelveApostles = new URL("../images/grid-twelve-apostles-australia.jpg", import.meta.url);
+// const greatBarrier = new URL("../images/grid-great-barrier-reef-australia.jpg", import.meta.url);
+// const budva = new URL("../images/grid-budva-montenegro.jpg", import.meta.url);
+// const chamonix = new URL("../images/grid-chamonix-france.jpg", import.meta.url);
+// const kotor = new URL("../images/grid-kotor-montenegro.jpg", import.meta.url);
+// const seljalandsfoss = new URL("../images/grid-seljalandsfoss-iceland.jpg", import.meta.url);
+// const twelveApostles = new URL("../images/grid-twelve-apostles-australia.jpg", import.meta.url);
 
 // поля попапов
 const editFormElement = document.querySelector(".popup__input-container_type_edit");
@@ -30,38 +30,4 @@ const validationConfig = {
     errorClass: ".input__error",
 };
 
-// карточки
-const initialCards = [
-    {
-        name: "Корраловый Риф",
-        image: greatBarrier,
-        alt: "Большой Корраловый Риф",
-    },
-    {
-        name: "Будва",
-        image: budva,
-        alt: "Вид моря в Будве",
-    },
-    {
-        name: "Шамони",
-        image: chamonix,
-        alt: "Заснеженные горы в Шамони",
-    },
-    {
-        name: "Котор",
-        image: kotor,
-        alt: "Вид сверху на бухту города Котор",
-    },
-    {
-        name: "Исландия",
-        image: seljalandsfoss,
-        alt: "Вид на водопад Селйяландсфосс",
-    },
-    {
-        name: "12 Апостолов",
-        image: twelveApostles,
-        alt: "Пляж Двенадцать Апостолов в Австралии",
-    },
-];
-
-export { editFormElement, addFormElement, editAvatarElement, placeInputTitle, placeInputLink, inputName, inputTitle, cards, ESCAPE_KEY, validationConfig, initialCards }
+export { editFormElement, addFormElement, editAvatarElement, placeInputTitle, placeInputLink, inputName, inputTitle, cards, ESCAPE_KEY, validationConfig }

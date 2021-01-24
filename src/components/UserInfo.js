@@ -14,11 +14,11 @@ export class UserInfo {
         return userData;
     }
 
-    setUserAvatar(userData) {
-        this._avatar.src = userData.avatar;
+    setUserAvatar(data) {
+        this._avatar.src = data.avatar;
     }
 
-    setUserInfo({ name, title }) {
+    setUserInfo({ name, about }) {
         this._profileName.textContent = name;
         this._profileTitle.textContent = about;
     }

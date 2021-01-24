@@ -21,7 +21,7 @@ export class Api {
         })
     }
 
-    getUserInfo() {
+    getUserData() {
         return fetch(`${this._address}/users/me`, {
             method: 'GET',
             headers: this._headers
@@ -31,13 +31,13 @@ export class Api {
         })
     }
 
-    changeUserInfo(formData) {
+    changeUserData(data) {
         return fetch(`${this._address}/users/me`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
-                name: formData.name,
-                about: formData.about
+                name: data.name,
+                about: data.about
             })
         })
         .then(res => {
@@ -45,21 +45,62 @@ export class Api {
         })
     }
 
-    addCard() {
+    addCard(data) {
+        return fetch(`${this._address}/cards`, {
+            method: 'POST',
+            headers: this._headers,
+            body: JSON.stringify({
+                name: data.name,
+                link: data.link
+            })
+        })
+        .then(res => {
+            return this._checkResponse(res)
+        })
+    }
+
+    addLikeCard(cardId) {
+        return fetch(`${this._address}/cards/likes${cardId}`, {
+            method: 'PUT',
+            headers: this._headers
+        })
+        .then(res => {
+            return this._checkResponse(res)
+        })
+    }
+
+    removeLikeCard(cardId) {
+        return fetch(`${this._address}/cards/likes${cardId}`, {
+            method: 'DELETE',
+            headers: this._headers
+        })
+        .then(res => {
+            return this._checkResponse(res)
+        })
+    }
+
+    deleteCard(cardId) {
+        return fetch(`${this._address}/cards/${cardId}`, {
+            method: 'DELETE',
+            headers: this._headers
+        })
+        .then(res => {
+            return this._checkResponse(res)
+        })
+    }
+
+    editAvatar(data) {
+        return fetch(`${this._address}/users/me/avatar`, {
+            method: 'PATCH',
+            headers: this._headers,
+            body: JSON.stringify({
+                avatar: data.avatar
+            })
+        })
+        .then(res => {
+            return this._checkResponse(res)
+        })
 
     }
 
-    likeCard() {
-
-    }
-
-    editAvatar() {
-
-    }
-
-    deleteCard() {
-
-    }
-
-    
 }
