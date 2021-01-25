@@ -63,19 +63,25 @@ export class Card {
         this._element = null;
     }
 
-    getCardId() {
-        return this._cardId;
-    }
+    // getCardId() {
+    //     return this._cardId;
+    // }
 
-    checkLikeState() {
+    isLiked() {
         return this._element
         .querySelector(".place__like")
         .contains("place__like_active")
     }
 
-    // setCardLikes(likes) {
-        
-    // }
+    setCardLikes(likes) {
+        const likeState = likes.some((user) => user._id === this._userId);
+
+        if (likeState !== -1) {
+            this._element.querySelector(".place__like").classList.add(".place__like_active")
+        } else {
+            this._element.querySelector(".place__like").classList.remove(".place__like_active")
+        }
+    }
 
     // _handleClickDeleteCard(evt) {
     //     const deletedElement = evt.target.closest(".place");
@@ -95,9 +101,10 @@ export class Card {
             this._element.querySelector(".button_type_delete").remove();
           }
 
-        if (this._likes.some((like) => like._id === this._userId)) {
-            this._element.querySelector(".place__like").classList.add(".place__like_active")
-        }
+        this.setCardLikes(this._likes)
+        // if (this._likes.some((like) => like._id === this._userId)) {
+        //     this._element.querySelector(".place__like").classList.add(".place__like_active")
+        // }
 
         return this._element;
     }

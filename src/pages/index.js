@@ -21,6 +21,7 @@ import {
 const popupAddButton = document.querySelector(".button_type_add");
 const popupEditButton = document.querySelector(".button_type_edit");
 const popupEditAvatarButton = document.querySelector(".button_type_avatar-edit");
+const popupDeleteButton = document.querySelector(".button_type_delete");
 
 const api = new Api({
     address: "https://mesto.nomoreparties.co/v1/cohort-19",
@@ -74,12 +75,10 @@ Promise.all([
 
 const profilePopup = new PopupWithForm({
     popupSelector: ".popup_type_edit",
-    handleSubmitForm: (formData) => {
-        api.changeUserData(formData)
+    handleSubmitForm: (data) => {
+        api.changeUserData(data)
         .then((res) => {
             userInfo.setUserInfo({
-                // name: res['profile-name'], 
-                // about: res['profile-title']
                 name: res.name, 
                 about: res.about
             });
@@ -117,20 +116,6 @@ editAvatarPopup.setEventListeners();
 
 // карточки - рендеринг и добавление новой
 
-// function createCard(card) {
-//     const cardElement = new Card({
-//         link: card.link,
-//         name: card.name,
-//         alt: card.alt
-//     },
-//         '.place-template',
-//         () => {
-//             imagePreviewPopup.open(card)
-//         }).generateCard();
-
-//     return cardElement;
-// };
-
 function createCard(card) {
     const cardElement = new Card({
         link: card.link,
@@ -143,6 +128,29 @@ function createCard(card) {
         '.place-template',
         () => {
             imagePreviewPopup.open(card)
+        },
+        (card) => {
+            if (card.isLiked()) {
+                api.removeLikeCard(card._id)
+                .then((res) => {
+                        card.setCardLikes(res.likes)
+                    })
+                .catch((err) => {
+                    console.log(err);
+                    })
+                } else {
+                    api.addLikeCard(card._id)
+                    .then((res) => {
+                        card.setCardLikes(res.likes)    
+                    })
+                .catch((err) => {
+                    console.log(err);
+                })
+                }
+            },
+        (evt) => {
+            const cardItem = evt.target.closest(".place");
+            confirmDeletePopup.open(cardItem);
         }).generateCard();
 
     return cardElement;
@@ -161,8 +169,8 @@ const submitCardPopup = new PopupWithForm({
         api.addCard(card)
         .then((res) => {
             // const cardElement = createCard({
-            //     name: res.name,
-            //     link: res.link
+            //     name: res[name],
+            //     link: res[link]
             // });
             const cardElement = createCard(res);
             allCards.addNewItem(cardElement);
@@ -181,23 +189,23 @@ submitCardPopup.setEventListeners();
 
 // удаление карточки попап
 
-const confirmDeletePopup = new PopupWithForm({
-    popupSelector: "popup_type_confirm",
-    handleSubmitForm: (card) => {
-        api.deleteCard(confirmDeletePopup.cardItem)
-        .then(() => {
-            confirmDeletePopup.cardItem.deleteCard();
-            confirmDeletePopup.close();
-        })
-        .catch((err) => {
-            console.log(err);
-        })
-        .finally(() => {
+    const confirmDeletePopup = new PopupWithForm({
+        popupSelector: "popup_type_confirm",
+        handleSubmitForm: () => {
+            api.deleteCard(confirmDeletePopup.cardItem)
+            .then(() => {
+                confirmDeletePopup.cardItem.deleteCard();
+                confirmDeletePopup.close();
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+            .finally(() => {
 
-        })  
-    }
+            })  
+        }
 
-})
+    })
 
 // слушатели
 
@@ -221,6 +229,12 @@ popupEditButton.addEventListener("click", () => {
 
 popupEditAvatarButton.addEventListener("click", () => {
     editAvatarPopup.open();
+
+    // editAvatarValidation.resetForm();
+})
+
+popupDeleteButton.addEventListener("click", () => {
+    confirmDeletePopup.open();
 
     // editAvatarValidation.resetForm();
 })

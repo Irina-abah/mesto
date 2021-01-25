@@ -16,7 +16,7 @@ export class Api {
         return fetch(`${this._address}/cards`, {
             headers: this._headers
         })
-        .then(res => {
+        .then((res) => {
             return this._checkResponse(res)
         })
     }
@@ -40,7 +40,7 @@ export class Api {
                 about: data.about
             })
         })
-        .then(res => {
+        .then((res) => {
             return this._checkResponse(res)
         })
     }
@@ -54,7 +54,7 @@ export class Api {
                 link: data.link
             })
         })
-        .then(res => {
+        .then((res) => {
             return this._checkResponse(res)
         })
     }
@@ -64,7 +64,7 @@ export class Api {
             method: 'PUT',
             headers: this._headers
         })
-        .then(res => {
+        .then((res) => {
             return this._checkResponse(res)
         })
     }
@@ -74,7 +74,7 @@ export class Api {
             method: 'DELETE',
             headers: this._headers
         })
-        .then(res => {
+        .then((res) => {
             return this._checkResponse(res)
         })
     }
@@ -84,7 +84,7 @@ export class Api {
             method: 'DELETE',
             headers: this._headers
         })
-        .then(res => {
+        .then((res) => {
             return this._checkResponse(res)
         })
     }
@@ -97,7 +97,7 @@ export class Api {
                 avatar: data.avatar
             })
         })
-        .then(res => {
+        .then((res) => {
             return this._checkResponse(res)
         })
 
