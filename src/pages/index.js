@@ -2,6 +2,7 @@ import { FormValidator } from "../components/FormValidator.js";
 import { Card } from "../components/Card.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
+import { PopupConfirm } from "../components/PopupConfirm.js";
 import { Section } from "../components/Section.js";
 import { UserInfo } from "../components/UserInfo.js";
 import { Api } from "../components/Api.js";
@@ -15,13 +16,17 @@ import {
     inputName,
     inputTitle,
     cards,
-    validationConfig
+    validationConfig,
+    popupSaveProfileButton, 
+    popupSaveCardButton, 
+    popupSaveAvatarButton,
+    confirmDeleteElement, 
+    popupConfirmDeleteButton
 } from "../utils/constants.js";
 
 const popupAddButton = document.querySelector(".button_type_add");
 const popupEditButton = document.querySelector(".button_type_edit");
 const popupEditAvatarButton = document.querySelector(".button_type_avatar-edit");
-const popupDeleteButton = document.querySelector(".button_type_delete");
 
 const api = new Api({
     address: "https://mesto.nomoreparties.co/v1/cohort-19",
@@ -54,7 +59,7 @@ const userInfo = new UserInfo({
     avatarSelector: ".profile__avatar"
 });
 
-let userId = "";
+let userId = ""
 
 Promise.all([
     api.getUserData(),
@@ -76,6 +81,7 @@ Promise.all([
 const profilePopup = new PopupWithForm({
     popupSelector: ".popup_type_edit",
     handleSubmitForm: (data) => {
+        popupSaveProfileButton.textContent = "Сохранение..."
         api.changeUserData(data)
         .then((res) => {
             userInfo.setUserInfo({
@@ -88,7 +94,7 @@ const profilePopup = new PopupWithForm({
             console.log(err);
         })
         .finally(() => {
-
+            popupSaveProfileButton.textContent = "Сохранить"   
         })
     }
 });
@@ -98,6 +104,7 @@ profilePopup.setEventListeners();
 const editAvatarPopup = new PopupWithForm({
     popupSelector: ".popup_type_avatar",
     handleSubmitForm: (formData) => {
+        popupSaveAvatarButton.textContent = "Сохранение..."
         api.editAvatar(formData)
         .then((res)=> {
             userInfo.setUserAvatar(res.avatar);
@@ -107,7 +114,7 @@ const editAvatarPopup = new PopupWithForm({
             console.log(err);
         })
         .finally(() => {
-
+            popupSaveAvatarButton.textContent = "Сохранение..."
         })
     }
 })
@@ -130,27 +137,27 @@ function createCard(card) {
             imagePreviewPopup.open(card)
         },
         (card) => {
-            if (card.isLiked()) {
+            if (card.checkIsLiked()) {
                 api.removeLikeCard(card._id)
                 .then((res) => {
-                        card.setCardLikes(res.likes)
-                    })
-                .catch((err) => {
-                    console.log(err);
-                    })
-                } else {
-                    api.addLikeCard(card._id)
-                    .then((res) => {
-                        card.setCardLikes(res.likes)    
-                    })
+                    card.setLikeCount(res.likes)    
+                })
                 .catch((err) => {
                     console.log(err);
                 })
-                }
-            },
-        (evt) => {
-            const cardItem = evt.target.closest(".place");
-            confirmDeletePopup.open(cardItem);
+
+            } else {
+                api.setCardLikes(card._id)
+                .then((res) => {
+                        card.setLikeCount(res.likes)
+                    })
+                .catch((err) => {
+                    console.log(err);
+                    })
+            }
+        },
+        (card, cardId) => {
+            confirmDeletePopup.open(card, card._id);
         }).generateCard();
 
     return cardElement;
@@ -166,12 +173,9 @@ const allCards = new Section({
 const submitCardPopup = new PopupWithForm({
     popupSelector: ".popup_type_add",
     handleSubmitForm: (card) => {
+        popupSaveCardButton.textContent = "Идет создание..."
         api.addCard(card)
         .then((res) => {
-            // const cardElement = createCard({
-            //     name: res[name],
-            //     link: res[link]
-            // });
             const cardElement = createCard(res);
             allCards.addNewItem(cardElement);
             submitCardPopup.close();
@@ -180,7 +184,7 @@ const submitCardPopup = new PopupWithForm({
             console.log(err);
         })
         .finally(() => {
-
+            popupSaveCardButton.textContent = "Создать"
         })  
     }
 });
@@ -189,23 +193,26 @@ submitCardPopup.setEventListeners();
 
 // удаление карточки попап
 
-    const confirmDeletePopup = new PopupWithForm({
+    const confirmDeletePopup = new PopupConfirm({
         popupSelector: "popup_type_confirm",
-        handleSubmitForm: () => {
-            api.deleteCard(confirmDeletePopup.cardItem)
+        handleSubmit: ({card, cardId}) => {
+            popupConfirmDeleteButton.textContent = "Удаление..."
+            api.deleteCard(cardId)
             .then(() => {
-                confirmDeletePopup.cardItem.deleteCard();
+                card.deleteCard();
                 confirmDeletePopup.close();
             })
             .catch((err) => {
                 console.log(err);
             })
             .finally(() => {
-
+            popupConfirmDeleteButton.textContent = "Да"
             })  
         }
 
     })
+
+    confirmDeletePopup.setEventListeners(); 
 
 // слушатели
 
@@ -229,12 +236,6 @@ popupEditButton.addEventListener("click", () => {
 
 popupEditAvatarButton.addEventListener("click", () => {
     editAvatarPopup.open();
-
-    // editAvatarValidation.resetForm();
-})
-
-popupDeleteButton.addEventListener("click", () => {
-    confirmDeletePopup.open();
 
     // editAvatarValidation.resetForm();
 })

@@ -48,14 +48,14 @@ export class Card {
 
     _setEventListeners() {
         this._element
-            .querySelector(".button_type_delete")
-            .addEventListener("click", this._handleClickDeleteCard);
-        this._element
-            .querySelector(".place__like")
-            .addEventListener("click", this._handleClickLikeCard);
-        this._element
             .querySelector(".place__image")
             .addEventListener("click", this._handleCardClick);
+        this._element
+            .querySelector(".place__like")
+            .addEventListener("click", () => this._handleLikeClick(this._cardId));
+        this._element
+            .querySelector(".button_type_delete")
+            .addEventListener("click", () => this._handleDeleteClick());
     }
 
     deleteCard() {
@@ -63,35 +63,43 @@ export class Card {
         this._element = null;
     }
 
-    // getCardId() {
+    // getId() {
     //     return this._cardId;
     // }
 
-    isLiked() {
+    checkIsLiked() {
         return this._element
         .querySelector(".place__like")
+        .classList
         .contains("place__like_active")
     }
 
-    setCardLikes(likes) {
-        const likeState = likes.some((user) => user._id === this._userId);
+    // _setCardLikes(likes) {
 
-        if (likeState !== -1) {
-            this._element.querySelector(".place__like").classList.add(".place__like_active")
+    //   return likes.some((like) => {
+    //         return like._id === this._userId.id 
+    //     })
+    // }
+
+    // _toggleLike(data) {
+    //     if (data === true) {
+    //         this._element.querySelector(".place__like").classList.add(".place__like_active");
+    //         this._isLiked = true;
+    //     } else {
+    //         this._element.querySelector(".place__like").classList.remove(".place__like_active");
+    //         this._isLiked = false;
+    //     }
+    // }
+
+
+    setLikeCount(likes) {
+        this._element.querySelector(".place__like-count").textContent = likes.length;
+        if (this.checkIsLiked()) {
+            this._element.querySelector(".place__like").classList.remove(".place__like_active");
         } else {
-            this._element.querySelector(".place__like").classList.remove(".place__like_active")
+            this._element.querySelector(".place__like").classList.add(".place__like_active");
         }
     }
-
-    // _handleClickDeleteCard(evt) {
-    //     const deletedElement = evt.target.closest(".place");
-    //     deletedElement.remove();
-    //     this._element = null;
-    // }
-
-    // _handleClickLikeCard(evt) {
-    //     evt.target.classList.toggle("place__like_active");
-    // }
 
     generateCard() {
         this._element = this._getTemplate();
@@ -99,12 +107,13 @@ export class Card {
 
         if (this._userId !== this._ownerId) {
             this._element.querySelector(".button_type_delete").remove();
-          }
+          };
 
-        this.setCardLikes(this._likes)
-        // if (this._likes.some((like) => like._id === this._userId)) {
-        //     this._element.querySelector(".place__like").classList.add(".place__like_active")
-        // }
+        if (this._likes.some((like) => {
+            like._id === this._userId
+        })) {
+            this._element.querySelector(".place__like").classList.add(".place__like_active");
+        }
 
         return this._element;
     }
