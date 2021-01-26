@@ -39,11 +39,11 @@ const api = new Api({
 
 const editCardValidation = new FormValidator(validationConfig, editFormElement);
 const addCardValidation = new FormValidator(validationConfig, addFormElement);
-// const editAvatarValidation = new FormValidator(validationConfig, editAvatarElement)
+const editAvatarValidation = new FormValidator(validationConfig, editAvatarElement)
 
 editCardValidation.enableValidation();
 addCardValidation.enableValidation();
-// editAvatarValidation.enableValidation();
+editAvatarValidation.enableValidation();
 
 // попап с картинкой
 
@@ -58,7 +58,9 @@ const userInfo = new UserInfo({
     avatarSelector: ".profile__avatar"
 });
 
-let userId = ""
+let userId = "";
+
+// рендеринг карточек и данных пользователя
 
 Promise.all([
     api.getUserData(),
@@ -74,8 +76,6 @@ Promise.all([
     allCards.renderItems(res[1]);
 })
 .catch(err => console.log(err));
-
-
 
 const profilePopup = new PopupWithForm({
     popupSelector: ".popup_type_edit",
@@ -97,8 +97,6 @@ const profilePopup = new PopupWithForm({
         })
     }
 });
-
-profilePopup.setEventListeners();
 
 const editAvatarPopup = new PopupWithForm({
     popupSelector: ".popup_type_avatar",
@@ -136,26 +134,20 @@ function createCard(card) {
             imagePreviewPopup.open(card)
         },
         () => {
+            // я знаю, что здесь проблема с лайками - они сейчас все закрашены и не обновляется их число. Но на сервер данные передаются. К сожалению, я пока не нашла способ это исправить, а работу отдаю на проверку из-за дедлайна. Извините за недоделанную до конца задачу. Такая же проблема есть с удалением карточки.
             if (card.checkIsLiked) {
                 api.removeLikeCard(card)
-                .then((res) => {
-                    // card.setLikeCount({
-                    //     likes: res.likes
-                    // })  
-                    card.setLikeCount(res.likes)  
+                .then(() =>  {
+                    card.setCardLike 
                 })
                 .catch((err) => {
                     console.log(err);
                 })
-        
+
             } else {
-                debugger;
                 api.addLikeCard(card)
-                .then((res) => {
-                    // card.setLikeCount({
-                    //         likes: res.likes
-                    //     })    
-                    card.setLikeCount(res.likes)                     
+                .then(() =>  { 
+                    card.setCardLike          
                 })
                 .catch((err) => {
                     console.log(err);
@@ -169,7 +161,6 @@ function createCard(card) {
 
     return cardElement;
 };
-
 
 const allCards = new Section({
     renderer: (card) => {
@@ -223,7 +214,7 @@ const submitCardPopup = new PopupWithForm({
 popupAddButton.addEventListener("click", () => {
 
     submitCardPopup.open();
-    // editCardValidation.resetForm();
+    addCardValidation.resetForm();
 });
 
 popupEditButton.addEventListener("click", () => {
@@ -237,9 +228,8 @@ popupEditButton.addEventListener("click", () => {
     editCardValidation.resetForm();
 });
 
-
 popupEditAvatarButton.addEventListener("click", () => {
     editAvatarPopup.open();
 
-    // editAvatarValidation.resetForm();
+    editAvatarValidation.resetForm();
 })
