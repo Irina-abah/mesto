@@ -136,24 +136,27 @@ function createCard(card) {
             imagePreviewPopup.open(card)
         },
         () => {
-            if (card.checkIsLiked()) {
+            if (card.checkIsLiked) {
                 api.removeLikeCard(card)
                 .then((res) => {
-                    card.setLikeCount({
-                        likes: res.likes
-                    })    
+                    // card.setLikeCount({
+                    //     likes: res.likes
+                    // })  
+                    card.setLikeCount(res.likes)  
                 })
                 .catch((err) => {
                     console.log(err);
                 })
         
             } else {
-                api.setCardLikes(card)
+                debugger;
+                api.addLikeCard(card)
                 .then((res) => {
-                        card.setLikeCount({
-                            likes: res.likes
-                        })    
-                    })
+                    // card.setLikeCount({
+                    //         likes: res.likes
+                    //     })    
+                    card.setLikeCount(res.likes)                     
+                })
                 .catch((err) => {
                     console.log(err);
                     })
