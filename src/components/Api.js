@@ -59,8 +59,8 @@ export class Api {
         })
     }
 
-    addLikeCard(cardId) {
-        return fetch(`${this._address}/cards/likes/${cardId}`, {
+    addLikeCard(card) {
+        return fetch(`${this._address}/cards/likes/${card._id}`, {
             method: 'PUT',
             headers: this._headers
         })
@@ -69,8 +69,8 @@ export class Api {
         })
     }
 
-    removeLikeCard(cardId) {
-        return fetch(`${this._address}/cards/likes/${cardId}`, {
+    removeLikeCard(card) {
+        return fetch(`${this._address}/cards/likes/${card._id}`, {
             method: 'DELETE',
             headers: this._headers
         })
@@ -79,8 +79,8 @@ export class Api {
         })
     }
 
-    deleteCard(cardId) {
-        return fetch(`${this._address}/cards/${cardId}`, {
+    deleteCard(card) {
+        return fetch(`${this._address}/cards/${card._id}`, {
             method: 'DELETE',
             headers: this._headers
         })

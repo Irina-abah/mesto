@@ -52,20 +52,20 @@ export class Card {
             .addEventListener("click", this._handleCardClick);
         this._element
             .querySelector(".place__like")
-            .addEventListener("click", () => this._handleLikeClick(this._cardId));
+            .addEventListener("click", () => this._handleLikeClick());
         this._element
             .querySelector(".button_type_delete")
-            .addEventListener("click", () => this._handleDeleteClick());
+            .addEventListener("click", () => this._handleDeleteClick(this));
     }
 
-    deleteCard() {
+    removeCard() {
         this._element.remove();
         this._element = null;
     }
 
-    // getId() {
-    //     return this._cardId;
-    // }
+    getId() {
+        return this._cardId;
+    }
 
     checkIsLiked() {
         return this._element

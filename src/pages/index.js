@@ -2,7 +2,6 @@ import { FormValidator } from "../components/FormValidator.js";
 import { Card } from "../components/Card.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
-import { PopupConfirm } from "../components/PopupConfirm.js";
 import { Section } from "../components/Section.js";
 import { UserInfo } from "../components/UserInfo.js";
 import { Api } from "../components/Api.js";
@@ -119,8 +118,6 @@ const editAvatarPopup = new PopupWithForm({
     }
 })
 
-editAvatarPopup.setEventListeners();
-
 // карточки - рендеринг и добавление новой
 
 function createCard(card) {
@@ -135,6 +132,7 @@ function createCard(card) {
         '.place-template',
         () => {
             imagePreviewPopup.open(card)
+            
         },
         (card) => {
             if (card.checkIsLiked()) {
@@ -156,8 +154,10 @@ function createCard(card) {
                     })
             }
         },
-        (card, cardId) => {
-            confirmDeletePopup.open(card, card._id);
+        () => {
+            confirmDeletePopup.card = card;
+            confirmDeletePopup.open(card);
+            console.log(card._id)
         }).generateCard();
 
     return cardElement;
@@ -173,7 +173,7 @@ const allCards = new Section({
 const submitCardPopup = new PopupWithForm({
     popupSelector: ".popup_type_add",
     handleSubmitForm: (card) => {
-        popupSaveCardButton.textContent = "Идет создание..."
+        popupSaveCardButton.textContent = "Идет создание...";
         api.addCard(card)
         .then((res) => {
             const cardElement = createCard(res);
@@ -189,18 +189,17 @@ const submitCardPopup = new PopupWithForm({
     }
 });
 
-submitCardPopup.setEventListeners();
-
 // удаление карточки попап
 
-    const confirmDeletePopup = new PopupConfirm({
-        popupSelector: "popup_type_confirm",
-        handleSubmit: ({card, cardId}) => {
-            popupConfirmDeleteButton.textContent = "Удаление..."
-            api.deleteCard(cardId)
+    const confirmDeletePopup = new PopupWithForm({
+        popupSelector: ".popup_type_confirm",
+        handleSubmitForm: () => {
+            popupConfirmDeleteButton.textContent = "Удаление...";
+            api.deleteCard(confirmDeletePopup.card)
             .then(() => {
-                card.deleteCard();
+                // confirmDeletePopup.card.removeCard();
                 confirmDeletePopup.close();
+                confirmDeletePopup.card = "";
             })
             .catch((err) => {
                 console.log(err);
@@ -210,9 +209,7 @@ submitCardPopup.setEventListeners();
             })  
         }
 
-    })
-
-    confirmDeletePopup.setEventListeners(); 
+    }) 
 
 // слушатели
 
