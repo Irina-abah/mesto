@@ -106,7 +106,9 @@ const editAvatarPopup = new PopupWithForm({
         popupSaveAvatarButton.textContent = "Сохранение..."
         api.editAvatar(formData)
         .then((res)=> {
-            userInfo.setUserAvatar(res.avatar);
+            userInfo.setUserAvatar({
+                avatar: res.avatar
+            });
             editAvatarPopup.close();
         })
         .catch((err) => {
@@ -132,22 +134,25 @@ function createCard(card) {
         '.place-template',
         () => {
             imagePreviewPopup.open(card)
-            
         },
-        (card) => {
+        () => {
             if (card.checkIsLiked()) {
-                api.removeLikeCard(card._id)
+                api.removeLikeCard(card)
                 .then((res) => {
-                    card.setLikeCount(res.likes)    
+                    card.setLikeCount({
+                        likes: res.likes
+                    })    
                 })
                 .catch((err) => {
                     console.log(err);
                 })
-
+        
             } else {
-                api.setCardLikes(card._id)
+                api.setCardLikes(card)
                 .then((res) => {
-                        card.setLikeCount(res.likes)
+                        card.setLikeCount({
+                            likes: res.likes
+                        })    
                     })
                 .catch((err) => {
                     console.log(err);
@@ -157,11 +162,11 @@ function createCard(card) {
         () => {
             confirmDeletePopup.card = card;
             confirmDeletePopup.open(card);
-            console.log(card._id)
         }).generateCard();
 
     return cardElement;
 };
+
 
 const allCards = new Section({
     renderer: (card) => {
@@ -197,9 +202,8 @@ const submitCardPopup = new PopupWithForm({
             popupConfirmDeleteButton.textContent = "Удаление...";
             api.deleteCard(confirmDeletePopup.card)
             .then(() => {
-                // confirmDeletePopup.card.removeCard();
+                confirmDeletePopup.card.removeCard();
                 confirmDeletePopup.close();
-                confirmDeletePopup.card = "";
             })
             .catch((err) => {
                 console.log(err);

@@ -52,10 +52,10 @@ export class Card {
             .addEventListener("click", this._handleCardClick);
         this._element
             .querySelector(".place__like")
-            .addEventListener("click", () => this._handleLikeClick());
+            .addEventListener("click", this._handleLikeClick);
         this._element
             .querySelector(".button_type_delete")
-            .addEventListener("click", () => this._handleDeleteClick(this));
+            .addEventListener("click", this._handleDeleteClick);
     }
 
     removeCard() {
@@ -63,9 +63,6 @@ export class Card {
         this._element = null;
     }
 
-    getId() {
-        return this._cardId;
-    }
 
     checkIsLiked() {
         return this._element
@@ -74,46 +71,26 @@ export class Card {
         .contains("place__like_active")
     }
 
-    // _setCardLikes(likes) {
-
-    //   return likes.some((like) => {
-    //         return like._id === this._userId.id 
-    //     })
-    // }
-
-    // _toggleLike(data) {
-    //     if (data === true) {
-    //         this._element.querySelector(".place__like").classList.add(".place__like_active");
-    //         this._isLiked = true;
-    //     } else {
-    //         this._element.querySelector(".place__like").classList.remove(".place__like_active");
-    //         this._isLiked = false;
-    //     }
-    // }
-
-
-    setLikeCount(likes) {
+    setCardLike(likes) {
         this._element.querySelector(".place__like-count").textContent = likes.length;
-        if (this.checkIsLiked()) {
-            this._element.querySelector(".place__like").classList.remove(".place__like_active");
-        } else {
+
+        const likeStatus = likes.findIndex((owner) => owner._id === this._userId);
+        
+        if (likeStatus !== -1) {
             this._element.querySelector(".place__like").classList.add(".place__like_active");
+        } else {
+            this._element.querySelector(".place__like").classList.remove(".place__like_active");
         }
     }
 
     generateCard() {
         this._element = this._getTemplate();
         this._setEventListeners();
+        this.setCardLike(this._likes);
 
         if (this._userId !== this._ownerId) {
             this._element.querySelector(".button_type_delete").remove();
           };
-
-        if (this._likes.some((like) => {
-            like._id === this._userId
-        })) {
-            this._element.querySelector(".place__like").classList.add(".place__like_active");
-        }
 
         return this._element;
     }
