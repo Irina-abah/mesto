@@ -16,6 +16,7 @@ import {
     inputTitle,
     cards,
     validationConfig,
+    cardTemplateData,
     popupSaveProfileButton, 
     popupSaveCardButton, 
     popupSaveAvatarButton,
@@ -68,11 +69,8 @@ Promise.all([
 ])
 .then((res) => {    
     userId = res[0]._id;
-    userInfo.setUserInfo({
-        name: res[0].name,
-        about: res[0].about
-    });
-    userInfo.setUserAvatar(res[0].avatar);
+    userInfo.setUserInfo(res[0]);
+    userInfo.setUserAvatar(res[0]);
     allCards.renderItems(res[1]);
 })
 .catch(err => console.log(err));
@@ -134,20 +132,25 @@ function createCard(card) {
             imagePreviewPopup.open(card)
         },
         () => {
-            // я знаю, что здесь проблема с лайками - они сейчас все закрашены и не обновляется их число. Но на сервер данные передаются. К сожалению, я пока не нашла способ это исправить, а работу отдаю на проверку из-за дедлайна. Извините за недоделанную до конца задачу. Такая же проблема есть с удалением карточки.
-            if (card.checkIsLiked) {
+            // debugger;
+            if (cardElement.checkIsLiked) {
                 api.removeLikeCard(card)
-                .then(() =>  {
-                    card.setCardLike 
+                .then((res) =>  {
+                    cardElement.setCardLike({
+                        likes: res.likes
+                    }) 
                 })
+
                 .catch((err) => {
                     console.log(err);
                 })
 
             } else {
                 api.addLikeCard(card)
-                .then(() =>  { 
-                    card.setCardLike          
+                .then((res) =>  { 
+                    cardElement.setCardLike({
+                        likes: res.likes
+                    })         
                 })
                 .catch((err) => {
                     console.log(err);
@@ -155,12 +158,82 @@ function createCard(card) {
             }
         },
         () => {
-            confirmDeletePopup.card = card;
-            confirmDeletePopup.open(card);
-        }).generateCard();
+            confirmDeletePopup.card = cardElement;
+            confirmDeletePopup.open(cardElement);
+        });
 
-    return cardElement;
+    return cardElement.generateCard();
 };
+
+// function handleCardClick(card) {
+//         if (cardElement.checkIsLiked) {
+//             api.removeLikeCard(card)
+//             .then(() =>  {
+//                 cardElement.setCardLike() 
+//             })
+
+//             .catch((err) => {
+//                 console.log(err);
+//             })
+
+//         } else {
+//             api.addLikeCard(card)
+//             .then(() =>  { 
+//                 cardElement.setCardLike()        
+//             })
+//             .catch((err) => {
+//                 console.log(err);
+//                 })
+//     }
+// }
+
+
+
+// function createCard(card) {
+//     const cardElement = new Card({
+//             link: card.link,
+//             name: card.name,
+//             likes: card.likes,
+//             cardId: card._id,
+//             userId,
+//             ownerId: card.owner._id
+//         },
+//         '.place-template',
+//         () => {
+//             imagePreviewPopup.open(card)
+//         },
+//         (card) => {
+//             if (card.checkIsLiked()) {
+//                 debugger;
+//                 api.removeLikeCard(card)
+//                     .then((res) => {
+//                         card.setCardLike({
+//                             likes: res.likes
+//                         })
+//                     })
+//                     .catch((err) => {
+//                         console.log(err);
+//                     })
+
+//             } else {
+//                 api.addLikeCard(card)
+//                     .then((res) => {
+//                         card.setCardLike({
+//                             likes: res.likes
+//                         })
+//                     })
+//                     .catch((err) => {
+//                         console.log(err);
+//                     })
+//             }
+//         },
+//         () => {
+//             confirmDeletePopup.card = card;
+//             confirmDeletePopup.open(card);
+//         });
+
+//     return cardElement.getElemCard();
+// };
 
 const allCards = new Section({
     renderer: (card) => {

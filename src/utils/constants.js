@@ -1,11 +1,3 @@
-// картинки
-// const greatBarrier = new URL("../images/grid-great-barrier-reef-australia.jpg", import.meta.url);
-// const budva = new URL("../images/grid-budva-montenegro.jpg", import.meta.url);
-// const chamonix = new URL("../images/grid-chamonix-france.jpg", import.meta.url);
-// const kotor = new URL("../images/grid-kotor-montenegro.jpg", import.meta.url);
-// const seljalandsfoss = new URL("../images/grid-seljalandsfoss-iceland.jpg", import.meta.url);
-// const twelveApostles = new URL("../images/grid-twelve-apostles-australia.jpg", import.meta.url);
-
 // поля попапов
 const editFormElement = document.querySelector(".popup__input-container_type_edit");
 const addFormElement = document.querySelector(".popup__input-container_type_add");
@@ -34,7 +26,17 @@ const validationConfig = {
     inputErrorClass: "popup__input_state_invalid",
     submitButtonSelector: ".button_type_submit",
     inactiveButtonClass: "button_type_submit-disabled",
-    errorClass: ".input__error",
+    errorClass: ".input__error"
 };
 
-export { editFormElement, addFormElement, editAvatarElement, placeInputTitle, placeInputLink, inputName, inputTitle, cards, ESCAPE_KEY, validationConfig, popupSaveProfileButton, popupSaveCardButton, popupSaveAvatarButton, confirmDeleteElement, popupConfirmDeleteButton }
+const cardTemplateData = {
+    cardSelector: ".place",
+    deleteButtonSelector: ".button_type_delete",
+    cardImage: "place__image",
+    cardName: ".place__title",
+    cardLikeInactive: "place__like",
+    cardLikeActive: ".place__like_active",
+    cardLikeCounter: ".place__like-count"
+}
+
+export { editFormElement, addFormElement, editAvatarElement, placeInputTitle, placeInputLink, inputName, inputTitle, cards, ESCAPE_KEY, validationConfig, cardTemplateData, popupSaveProfileButton, popupSaveCardButton, popupSaveAvatarButton, confirmDeleteElement, popupConfirmDeleteButton }
