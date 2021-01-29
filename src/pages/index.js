@@ -136,10 +136,8 @@ function createCard(card) {
             if (cardElement.checkIsLiked()) {
                 api.removeLikeCard(card)
                 .then((res) =>  {
-                    cardElement.setCardLike({
-                        likes: res.likes
-                    }) 
-                    console.log(res)
+                    cardElement.setCardLike(res.likes);
+                    console.log(card._id)
                 })
                 .catch((err) => {
                     console.log(err);
@@ -148,9 +146,7 @@ function createCard(card) {
             } else {
                 api.addLikeCard(card)
                 .then((res) =>  { 
-                    cardElement.setCardLike({
-                        likes: res.likes
-                    })         
+                    cardElement.setCardLike(res.likes)       
                 })
                 .catch((err) => {
                     console.log(err);

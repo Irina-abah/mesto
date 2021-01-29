@@ -52,32 +52,36 @@ export class Card {
         .contains("place__like_active")
     }
 
-    setCardLike(likes) {
-
-        // let elem = this._element;
-        // if (this._element.childNodes.length === 0) {
-        //     elem = document.getElementById(this._cardId);
-        // }
-        // elem.querySelector(".place__like-count").textContent = likes.length;
-
-        // this._likeCount.textContent = this._likes.length;
-
-        if (likes.length === 0) {
-            this._likeCount.textContent = ""
-        }  
+    setCardLike(likes) { 
+        this._likes = likes;
         
-        const likeStatus = this._likes.findIndex((owner) => owner._id === this._userId);
+        const likeStatus = likes.some((owner) => {
+            return owner._id === this._userId
+        });
 
         if (likeStatus !== -1) {
             this._likeButton.classList.toggle("place__like_active");
-            this._likeCount.textContent = likes.length;
+            this._likeCount.textContent = likes.length || "";
         }
+        
     }
 
+    _setLikeStatus(likes) {
+        this._likes = likes;
+
+        likes.forEach((like) => {
+            if (like._id === this._userId) {
+                this._likeButton.classList.add("place__like_active");
+            }
+        })
+    }
+
+
     generateCard() {
-        
         this._setEventListeners();
-        this.setCardLike(this._likes);
+        this._setLikeStatus(this._likes)
+
+        this._likeCount.textContent = this._likes.length;
 
         this._cardImage.src = this._link;
         this._cardTitle.textContent = this._name;
@@ -86,6 +90,12 @@ export class Card {
         if (this._userId !== this._ownerId) {
             this._element.querySelector(".button_type_delete").remove();
           };
+
+        
+
+        if (this._likes.length === 0) {
+            this._likeCount.textContent = "";
+        } 
 
         return this._element;
     }
