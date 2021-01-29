@@ -133,7 +133,7 @@ function createCard(card) {
         },
         () => {
             // debugger;
-            if (cardElement.checkIsLiked) {
+            if (cardElement.checkIsLiked()) {
                 api.removeLikeCard(card)
                 .then((res) =>  {
                     cardElement.setCardLike({
@@ -164,76 +164,6 @@ function createCard(card) {
 
     return cardElement.generateCard();
 };
-
-// function handleCardClick(card) {
-//         if (cardElement.checkIsLiked) {
-//             api.removeLikeCard(card)
-//             .then(() =>  {
-//                 cardElement.setCardLike() 
-//             })
-
-//             .catch((err) => {
-//                 console.log(err);
-//             })
-
-//         } else {
-//             api.addLikeCard(card)
-//             .then(() =>  { 
-//                 cardElement.setCardLike()        
-//             })
-//             .catch((err) => {
-//                 console.log(err);
-//                 })
-//     }
-// }
-
-
-
-// function createCard(card) {
-//     const cardElement = new Card({
-//             link: card.link,
-//             name: card.name,
-//             likes: card.likes,
-//             cardId: card._id,
-//             userId,
-//             ownerId: card.owner._id
-//         },
-//         '.place-template',
-//         () => {
-//             imagePreviewPopup.open(card)
-//         },
-//         (card) => {
-//             if (card.checkIsLiked()) {
-//                 debugger;
-//                 api.removeLikeCard(card)
-//                     .then((res) => {
-//                         card.setCardLike({
-//                             likes: res.likes
-//                         })
-//                     })
-//                     .catch((err) => {
-//                         console.log(err);
-//                     })
-
-//             } else {
-//                 api.addLikeCard(card)
-//                     .then((res) => {
-//                         card.setCardLike({
-//                             likes: res.likes
-//                         })
-//                     })
-//                     .catch((err) => {
-//                         console.log(err);
-//                     })
-//             }
-//         },
-//         () => {
-//             confirmDeletePopup.card = card;
-//             confirmDeletePopup.open(card);
-//         });
-
-//     return cardElement.getElemCard();
-// };
 
 const allCards = new Section({
     renderer: (card) => {

@@ -18,6 +18,7 @@ export class Card {
         this._cardTitle = this._element.querySelector(".place__title");
         this._cardAlt = this._element.querySelector(".place__image");
         this._cardElementId = this._element.querySelector(".place");
+        this._deleteButton = this._element.querySelector(".button_type_delete");
     }
 
     _getTemplate() {
@@ -26,23 +27,15 @@ export class Card {
             .content
             .cloneNode(true);
 
-        // this._cardImage.src = this._link;
-        // this._cardTitle.textContent = this._name;
-        // this._cardAlt.alt = this._alt;
-        // this._likeCount.textContent = `${this._likes.length}`;
-
         return cardElement;
     }
 
     _setEventListeners() {
-        this._element
-            .querySelector(".place__image")
+        this._cardImage
             .addEventListener("click", this._handleCardClick);
-        this._element
-            .querySelector(".place__like")
-            .addEventListener("click", this._handleLikeClick(this));
-        this._element
-            .querySelector(".button_type_delete")
+        this._likeButton
+            .addEventListener("click", this._handleLikeClick);
+        this._deleteButton
             .addEventListener("click", this._handleDeleteClick);
     }
 
@@ -53,49 +46,39 @@ export class Card {
 
 
     checkIsLiked() {
-        return this._element
-        .querySelector(".place__like")
+        return this._likeButton
         .classList
         .contains("place__like_active")
     }
 
     setCardLike(likes) {
 
-        let elem = this._element;
-        if (this._element.childNodes.length === 0) {
-            elem = document.getElementById(this._cardId);
-        }
+        // let elem = this._element;
+        // if (this._element.childNodes.length === 0) {
+        //     elem = document.getElementById(this._cardId);
+        // }
         this._likeCount.textContent = likes.length;
 
         if (likes.length === 0) {
             this._likeCount.textContent = ""
         }  
         
-        const likeStatus = this._likes.findIndex((item) => item._id === this._userId);
+        const likeStatus = this._likes.findIndex((owner) => owner._id === this._userId);
 
         if (likeStatus !== -1) {
-            this._likeButton.classList.add("place__like_active");
-        } else {
-            this._likeButton.classList.remove("place__like_active");
+            this._likeButton.classList.toggle("place__like_active");
+            // this._likeCount.textContent = this._likes.length;
         }
     }
 
     generateCard() {
-        // this._element = this._getTemplate(); 
-        // this._likeButton = this._element.querySelector(".place__like");
-        // this._likeCount = this._element.querySelector(".place__like-count");
-        // this._cardImage = this._element.querySelector(".place__image");
-        // this._cardTitle = this._element.querySelector(".place__title");
-        // this._cardAlt = this._element.querySelector(".place__image");
-        // this._cardElementId = this._element.querySelector(".place");
-
+        
         this._setEventListeners();
         this.setCardLike(this._likes);
 
         this._cardImage.src = this._link;
         this._cardTitle.textContent = this._name;
         this._cardAlt.alt = this._alt;
-        this._cardElementId.id = this._cardId;
 
         if (this._userId !== this._ownerId) {
             this._element.querySelector(".button_type_delete").remove();
@@ -105,6 +88,8 @@ export class Card {
     }
 
 }
+
+// капитанский код
 
 // export class Card {
 //     constructor({
