@@ -11,7 +11,6 @@ const inputTitle = document.querySelector("#profile-title");
 
 const cards = document.querySelector(".places__list");
 
-const popupDeleteButton = document.querySelector(".button_type_delete");
 const popupSaveProfileButton = editFormElement.querySelector(".button_type_submit");
 const popupSaveCardButton = addFormElement.querySelector(".button_type_submit");
 const popupSaveAvatarButton = editAvatarElement.querySelector(".button_type_submit");

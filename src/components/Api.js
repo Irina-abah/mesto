@@ -100,7 +100,6 @@ export class Api {
         .then((res) => {
             return this._checkResponse(res)
         })
-
     }
 
 }

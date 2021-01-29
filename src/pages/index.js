@@ -19,8 +19,7 @@ import {
     cardTemplateData,
     popupSaveProfileButton, 
     popupSaveCardButton, 
-    popupSaveAvatarButton,
-    confirmDeleteElement, 
+    popupSaveAvatarButton, 
     popupConfirmDeleteButton
 } from "../utils/constants.js";
 
@@ -75,6 +74,8 @@ Promise.all([
 })
 .catch(err => console.log(err));
 
+// попапы редактирования профиля и аватара
+
 const profilePopup = new PopupWithForm({
     popupSelector: ".popup_type_edit",
     handleSubmitForm: (data) => {
@@ -116,7 +117,7 @@ const editAvatarPopup = new PopupWithForm({
     }
 })
 
-// карточки - рендеринг и добавление новой
+// создание карточки, ее редактирование
 
 function createCard(card) {
     const cardElement = new Card({
