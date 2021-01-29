@@ -41,8 +41,10 @@ export class Card {
     }
 
     removeCard() {
-        this._element.remove();
-        this._element = null;
+        if (this._ownerId === this._userId) {
+            this._element.remove();
+            this._element = null;
+        }
     }
 
 

@@ -137,7 +137,6 @@ function createCard(card) {
                 api.removeLikeCard(card)
                 .then((res) =>  {
                     cardElement.setCardLike(res.likes);
-                    console.log(card._id)
                 })
                 .catch((err) => {
                     console.log(err);
@@ -155,7 +154,8 @@ function createCard(card) {
         },
         () => {
             confirmDeletePopup.card = cardElement;
-            confirmDeletePopup.open(cardElement);
+            cardElement._id = card._id;
+            confirmDeletePopup.open();
         });
 
     return cardElement.generateCard();
@@ -198,6 +198,7 @@ const submitCardPopup = new PopupWithForm({
                 confirmDeletePopup.card.removeCard();
                 confirmDeletePopup.close();
             })
+            
             .catch((err) => {
                 console.log(err);
             })
