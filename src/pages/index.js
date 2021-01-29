@@ -132,7 +132,6 @@ function createCard(card) {
             imagePreviewPopup.open(card)
         },
         () => {
-            // debugger;
             if (cardElement.checkIsLiked()) {
                 api.removeLikeCard(card)
                 .then((res) =>  {
