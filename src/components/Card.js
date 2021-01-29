@@ -25,6 +25,7 @@ export class Card {
         const cardElement = document
             .querySelector(this._templateSelector)
             .content
+            .querySelector(".place")
             .cloneNode(true);
 
         return cardElement;
@@ -57,7 +58,9 @@ export class Card {
         // if (this._element.childNodes.length === 0) {
         //     elem = document.getElementById(this._cardId);
         // }
-        this._likeCount.textContent = likes.length;
+        // elem.querySelector(".place__like-count").textContent = likes.length;
+
+        // this._likeCount.textContent = this._likes.length;
 
         if (likes.length === 0) {
             this._likeCount.textContent = ""
@@ -67,7 +70,7 @@ export class Card {
 
         if (likeStatus !== -1) {
             this._likeButton.classList.toggle("place__like_active");
-            // this._likeCount.textContent = this._likes.length;
+            this._likeCount.textContent = likes.length;
         }
     }
 

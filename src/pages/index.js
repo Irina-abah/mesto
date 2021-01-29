@@ -139,8 +139,8 @@ function createCard(card) {
                     cardElement.setCardLike({
                         likes: res.likes
                     }) 
+                    console.log(res)
                 })
-
                 .catch((err) => {
                     console.log(err);
                 })
