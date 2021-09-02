@@ -1,16 +1,15 @@
 # Projects 4-7: Mesto
 
 LINK TO GITHUB: https://irina-abah.github.io/mesto/index.html
-
-**Intro**
-
-This is Sprints 4-7 learning project from **Yandex Praktikum**, created to practice primarily pure JavaScript but also adaptive and responsive behaivour of elements. Represented as interactive page where users can add photos of places, view them, delete and like/dislike. Fully done by a stydent Iryna Abah.
-
 ### Overview
 * Intro
 * Technologies
 * Files structure and naming
 * Future plans for development
+
+**Intro**
+
+This is Sprints 4-7 learning project from **Yandex Praktikum**, created to practice primarily pure JavaScript but also adaptive and responsive behaivour of elements. Represented as interactive page where users can add photos of places, view them, delete and like/dislike. Fully done by a stydent Iryna Abah.
 
 **Technologies**
 
